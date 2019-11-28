@@ -34,6 +34,7 @@ public class ProductOverviewPane extends TableView {
 
     public ProductOverviewPane() {
         artikelDB = new ArtikelDB();
+        artikelDB.load("src\\bestanden\\artikel.txt");
         List<Artikel> list = new ArrayList<Artikel>(artikelDB.getArtikelHashMap().values());
         table.setItems(FXCollections.observableList(list));
         
