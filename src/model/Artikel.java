@@ -15,7 +15,6 @@ public class Artikel implements Comparable<Artikel>{
         setOmschrijving(omschrijving);
         setVerkoopprijs(verkoopprijs);
         setStock(stock);
-
     }
 
     public String getCode() {
@@ -74,5 +73,9 @@ public class Artikel implements Comparable<Artikel>{
     @Override
     public int compareTo(Artikel o) {
         return this.getNaam().compareTo(o.getNaam());
+    }
+
+    public void verkoop(int aantal){
+        this.stock = this.stock-aantal;
     }
 }
