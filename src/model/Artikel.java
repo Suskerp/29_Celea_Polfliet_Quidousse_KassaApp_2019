@@ -1,6 +1,8 @@
 package model;
-
-public class Artikel {
+/**
+ * @author Luca Celea
+ */
+public class Artikel implements Comparable<Artikel>{
     private String code;
     private String naam;
     private String omschrijving;
@@ -31,7 +33,7 @@ public class Artikel {
     }
 
     public void setOmschrijving(String omschrijving) {
-        if (omschrijving != null && omschrijving.trim().isEmpty()) {
+        if (omschrijving != null && !omschrijving.trim().isEmpty()) {
             this.omschrijving = omschrijving;
         } else throw new IllegalArgumentException("Ongeldige omschrijving");
     }
@@ -69,5 +71,10 @@ public class Artikel {
     @Override
     public String toString(){
         return this.getCode() + "," + this.getNaam() + "," + this.getOmschrijving() + "," + this.getVerkoopprijs() + "," + this.getStock();
+    }
+
+    @Override
+    public int compareTo(Artikel o) {
+        return this.getNaam().compareTo(o.getNaam());
     }
 }
