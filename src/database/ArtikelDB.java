@@ -13,6 +13,15 @@ public class ArtikelDB {
         artikelHashMap = new HashMap<>();
     }
 
+    public ArtikelDB(ArrayList<Artikel> artikels){
+        this.artikelHashMap = new HashMap<>();
+        for (Artikel a: artikels
+        ) {
+            this.artikelHashMap.put(a.getCode(),a);
+        }
+    }
+
+
     public HashMap<String, Artikel> getArtikelHashMap() {
         return artikelHashMap;
     }
@@ -34,11 +43,11 @@ public class ArtikelDB {
     }
 
     public void load(String filename){
-        artikelHashMap.clear();
+        this.artikelHashMap.clear();
         ArtikelTekstLoadSave artikelTekstLoadSave = new ArtikelTekstLoadSave(filename);
         for (Artikel a: artikelTekstLoadSave.load()
              ) {
-            artikelHashMap.put(a.getCode(),a);
+            this.artikelHashMap.put(a.getCode(),a);
         }
     }
 }
