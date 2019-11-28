@@ -31,7 +31,7 @@ public class Artikel {
     }
 
     public void setOmschrijving(String omschrijving) {
-        if (omschrijving != null && omschrijving.trim().isEmpty()) {
+        if (omschrijving != null && !omschrijving.trim().isEmpty()) {
             this.omschrijving = omschrijving;
         } else throw new IllegalArgumentException("Ongeldige omschrijving");
     }
