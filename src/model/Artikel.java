@@ -53,9 +53,7 @@ public class Artikel implements Comparable<Artikel>{
     }
 
     public void setStock(int stock) {
-        if (stock >= 0){
-        this.stock =stock;
-        } else throw new IllegalArgumentException("Ongeldige stock");
+        this.stock =stock; /* stock mag negatief */
     }
 
     public String getNaam() {

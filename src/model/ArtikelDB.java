@@ -30,4 +30,9 @@ public class ArtikelDB {
         Collections.sort(list);
         return list;
     }
+
+    public void load(String filename){
+        ArtikelTekstLoadSave artikelTekstLoadSave = new ArtikelTekstLoadSave(filename);
+        artikelTekstLoadSave.load();
+    }
 }
