@@ -1,4 +1,8 @@
-package model;
+package database;
+
+import database.ArtikelTekstLoadSave;
+import model.Artikel;
+
 /**
  * @author Luca Celea
  */

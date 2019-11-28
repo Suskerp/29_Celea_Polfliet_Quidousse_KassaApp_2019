@@ -1,4 +1,7 @@
-package model;
+package database;
+
+import database.ArtikelTekstLoadSave;
+import model.Artikel;
 
 import java.util.ArrayList;
 /**

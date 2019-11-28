@@ -1,4 +1,6 @@
-package model;
+package database;
+
+import model.Artikel;
 
 import java.io.*;
 import java.util.ArrayList;

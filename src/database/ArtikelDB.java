@@ -1,11 +1,13 @@
-package model;
+package database;
+
+import model.Artikel;
 
 import java.util.*;
 /**
  * @author Luca Celea
  */
 public class ArtikelDB {
-    private HashMap<String,Artikel> artikelHashMap;
+    private HashMap<String, Artikel> artikelHashMap;
 
     public ArtikelDB(){
         artikelHashMap = new HashMap<>();
