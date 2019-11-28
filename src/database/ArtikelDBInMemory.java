@@ -3,10 +3,9 @@ package database;
 import model.Artikel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class ArtikelDBInMemory implements  ArtikelDBContext {
+public class ArtikelDBInMemory implements ArtikelDBStrategy {
 
     private LoadSaveStrategy loadSaveStrategy;
 
