@@ -1,10 +1,10 @@
 package view;
 
+import database.*;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Artikel;
-import database.ArtikelDB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +46,9 @@ public class ProductOverviewPane extends TableView {
         
         table.getColumns().addAll(colCode,colNaam,colOmschrijving,colVerkoopprijs,colStock);
     }
+
+
+
 
     public TableView<Artikel> getTable() {
         return table;
