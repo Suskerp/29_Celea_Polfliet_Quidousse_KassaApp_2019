@@ -26,6 +26,7 @@ import java.util.Observable;
 /**
  * @author Rafael Polfliet - Jef Quidousse
  */
+
 public class ProductOverviewPane extends TableView {
 
     private TableView<Artikel> table = new TableView<>();
