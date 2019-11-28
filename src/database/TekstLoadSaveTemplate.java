@@ -6,16 +6,16 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Objects;
 
 /**
  * @author Luca Celea
  */
-public abstract class TekstLoadSaveTemplate {
+public abstract class TekstLoadSaveTemplate implements LoadSaveStrategy {
     private String fileNaam;
 
     public abstract ArrayList<Artikel> load();
-    public void save(ArrayList<Object> objects){
+    public void save(ArrayList<Objects> objects){
         try {
             FileWriter fileWriter = new FileWriter(fileNaam);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
