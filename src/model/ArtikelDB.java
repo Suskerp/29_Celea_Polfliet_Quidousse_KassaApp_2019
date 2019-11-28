@@ -32,7 +32,11 @@ public class ArtikelDB {
     }
 
     public void load(String filename){
+        artikelHashMap.clear();
         ArtikelTekstLoadSave artikelTekstLoadSave = new ArtikelTekstLoadSave(filename);
-        artikelTekstLoadSave.load();
+        for (Artikel a: artikelTekstLoadSave.load()
+             ) {
+            artikelHashMap.put(a.getCode(),a);
+        }
     }
 }
