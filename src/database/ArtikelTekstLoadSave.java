@@ -25,7 +25,7 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     }
 
     @Override
-    ArrayList<Artikel> load() {
+    public ArrayList<Artikel> load() {
         ArrayList<Artikel> artikels = new ArrayList<>();
 
         while (scanner.hasNextLine()){
@@ -36,7 +36,7 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     }
 
     @Override
-    void save(ArrayList<Artikel> artikels) {
+    public void save(ArrayList<Artikel> artikels) {
         try {
             FileWriter fileWriter = new FileWriter(fileNaam);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
