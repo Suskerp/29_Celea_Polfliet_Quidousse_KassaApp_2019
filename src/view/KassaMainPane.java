@@ -6,7 +6,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 
-
+/**
+ * @author Rafael Polfliet - Jef Quidousse
+ */
 public class KassaMainPane extends BorderPane {
 	public KassaMainPane(){
 		

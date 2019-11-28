@@ -26,6 +26,7 @@ import java.util.Observable;
 /**
  * @author Rafael Polfliet - Jef Quidousse
  */
+
 public class ProductOverviewPane extends TableView {
 
     private TableView<Artikel> table = new TableView<>();
@@ -37,23 +38,23 @@ public class ProductOverviewPane extends TableView {
         table.setItems(FXCollections.observableList(list));
         
         TableColumn<Artikel,String> colCode = new TableColumn<>("Code");
-        colCode.setCellValueFactory(new PropertyValueFactory<Artikel, String>("Code") );
+        colCode.setCellValueFactory(new PropertyValueFactory<>("Code") );
         colCode.setMinWidth(50);
         
         TableColumn<Artikel,String> colNaam = new TableColumn<>("Naam");
-        colNaam.setCellValueFactory(new PropertyValueFactory<Artikel, String>("Naam") );
+        colNaam.setCellValueFactory(new PropertyValueFactory<>("Naam") );
         colNaam.setMinWidth(50);
 
         TableColumn<Artikel,String> colOmschrijving = new TableColumn<>("Omschrijving");
-        colOmschrijving.setCellValueFactory(new PropertyValueFactory<Artikel, String>("Omschrijving") );
+        colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("Omschrijving") );
         colOmschrijving.setMinWidth(50);
 
         TableColumn<Artikel,Double> colVerkoopprijs = new TableColumn<>("Verkoopprijs");
-        colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<Artikel, Double>("Verkoopprijs") );
+        colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<>("Verkoopprijs") );
         colVerkoopprijs.setMinWidth(50);
 
         TableColumn<Artikel,Integer> colStock = new TableColumn<>("Stock");
-        colStock.setCellValueFactory(new PropertyValueFactory<Artikel, Integer>("Stock") );
+        colStock.setCellValueFactory(new PropertyValueFactory<>("Stock") );
         colStock.setMinWidth(50);
         
         table.getColumns().addAll(colCode,colNaam,colOmschrijving,colVerkoopprijs,colStock);
