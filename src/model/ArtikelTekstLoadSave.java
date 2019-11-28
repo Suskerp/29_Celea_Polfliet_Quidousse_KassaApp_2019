@@ -3,7 +3,9 @@ package model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * @author Luca Celea
+ */
 public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     private Scanner scanner;
     private String[] tekst;

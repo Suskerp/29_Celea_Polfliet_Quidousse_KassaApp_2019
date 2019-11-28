@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
-
+/**
+ * @author Luca Celea
+ */
 public class SaveDemo {
     public static void main(String[] args) {
         ArrayList<Artikel> artikels = new ArrayList<>();
