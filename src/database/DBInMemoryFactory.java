@@ -1,5 +1,8 @@
 package database;
 
+/**
+ * @author Rafael Polfliet
+ */
 public class DBInMemoryFactory {
     public static LoadSaveStrategy createStrategy(String strategyCode){
         LoadSaveEnum loadSaveEnum = LoadSaveEnum.valueOf(strategyCode);

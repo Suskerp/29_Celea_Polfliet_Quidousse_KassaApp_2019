@@ -1,5 +1,8 @@
 package database;
 
+/**
+ * @author Rafael Polfliet
+ */
 public enum ArtikelDBEnum {
     ARTIKEL_DB_MEM("InMemory","database.ArtikelDBInMemory"),
     ARTIKEL_DB_MYSQL("MySQL","database.ArtikelDBMySQL");

@@ -4,6 +4,9 @@ import model.Artikel;
 
 import java.util.ArrayList;
 
+/**
+ * @author Rafael Polfliet
+ */
 public class ArtikelDBMySQL implements ArtikelDBStrategy{
 
     @Override

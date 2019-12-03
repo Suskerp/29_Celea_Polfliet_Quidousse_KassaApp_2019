@@ -5,6 +5,10 @@ import model.Artikel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Rafael Polfliet
+ */
+
 public class ArtikelDBContext implements ArtikelDBStrategy{
     private ArtikelDBStrategy artikelDBStrategy;
 
