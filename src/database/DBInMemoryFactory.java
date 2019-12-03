@@ -1,6 +1,6 @@
 package database;
 
-public class LoadAndSaveFactory {
+public class DBInMemoryFactory {
     public static LoadSaveStrategy createStrategy(String strategyCode){
         LoadSaveEnum loadSaveEnum = LoadSaveEnum.valueOf(strategyCode);
         String klasseNaam = loadSaveEnum.getKlassenaam();
@@ -10,8 +10,8 @@ public class LoadAndSaveFactory {
             Object dbObject = dbClass.newInstance();
             loadSaveStrategy = (LoadSaveStrategy) dbObject;
         }catch (Exception e){
+            System.out.println(e);
         }
-
         return loadSaveStrategy;
     }
 }

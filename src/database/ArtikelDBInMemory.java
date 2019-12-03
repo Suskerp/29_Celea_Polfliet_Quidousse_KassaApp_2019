@@ -5,9 +5,28 @@ import model.Artikel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Rafael
+ */
+
 public class ArtikelDBInMemory implements ArtikelDBStrategy {
 
     private LoadSaveStrategy loadSaveStrategy;
+
+
+    public void setLoadSaveStrategy(LoadSaveStrategy loadSaveStrategy) {
+        this.loadSaveStrategy = loadSaveStrategy;
+    }
+
+    public List<String> getContexts() {
+        List<String> contextLijst = new ArrayList<>();
+
+        for (LoadSaveEnum loadSaveEnum:LoadSaveEnum.values()){
+            contextLijst.add(loadSaveEnum.toString());
+        }
+
+        return contextLijst;
+    }
 
     @Override
     public ArrayList<Artikel> load() {
@@ -19,19 +38,4 @@ public class ArtikelDBInMemory implements ArtikelDBStrategy {
         loadSaveStrategy.save(artikels);
     }
 
-    @Override
-    public void setLoadSaveStrategy(LoadSaveStrategy loadSaveStrategy) {
-        this.loadSaveStrategy = loadSaveStrategy;
-    }
-
-    @Override
-    public List<String> getContexts() {
-        List<String> contextLijst = new ArrayList<>();
-
-        for (LoadSaveEnum loadSaveEnum:LoadSaveEnum.values()){
-            contextLijst.add(loadSaveEnum.toString());
-        }
-
-        return contextLijst;
-    }
 }
