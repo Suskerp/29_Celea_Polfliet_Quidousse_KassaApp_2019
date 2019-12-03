@@ -7,5 +7,5 @@ import java.util.Objects;
 
 public interface LoadSaveStrategy {
     ArrayList<Artikel> load();
-    void save(ArrayList<Objects> Objects);
+    void save(ArrayList<Object> Objects);
 }

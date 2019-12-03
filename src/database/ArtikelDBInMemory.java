@@ -15,7 +15,7 @@ public class ArtikelDBInMemory implements ArtikelDBStrategy {
     }
 
     @Override
-    public void save(ArrayList<Artikel> artikels) {
+    public void save(ArrayList<Object> artikels) {
         loadSaveStrategy.save(artikels);
     }
 

@@ -15,7 +15,7 @@ public abstract class TekstLoadSaveTemplate implements LoadSaveStrategy {
     private String fileNaam;
 
     public abstract ArrayList<Artikel> load();
-    public void save(ArrayList<Objects> objects){
+    public void save(ArrayList<Object> objects){
         try {
             FileWriter fileWriter = new FileWriter(fileNaam);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

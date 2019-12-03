@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class SaveDemo {
     public static void main(String[] args) {
-        ArrayList<Artikel> artikels = new ArrayList<>();
+       /* ArrayList<Artikel> artikels = new ArrayList<>();
         Artikel artikel1 = new Artikel("1","artikel1","gr1",12.5,10);
         Artikel artikel2 = new Artikel("2","artikel2","gr1",12.5,10);
         Artikel artikel3 = new Artikel("3","artikel3","gr1",12.5,10);
@@ -27,5 +27,6 @@ public class SaveDemo {
         }
         ArtikelTekstLoadSave artikelTekstLoadSave = new ArtikelTekstLoadSave("src\\bestanden\\TESTARTIKELS.txt");
         artikelTekstLoadSave.save(artikels);
+        */
     }
 }

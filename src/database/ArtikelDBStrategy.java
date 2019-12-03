@@ -12,7 +12,7 @@ public interface ArtikelDBStrategy {
     public void setLoadSaveStrategy(LoadSaveStrategy loadSaveStrategy);
 
     public ArrayList<Artikel> load();
-    public void save(ArrayList<Artikel> artikels);
+    public void save(ArrayList<Object> artikels);
 
     public List<String> getContexts();
 }
