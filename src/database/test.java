@@ -2,16 +2,15 @@ package database;
 
 import model.Artikel;
 
+import java.util.ArrayList;
+
 public class test {
     public static void main(String[] args) {
-        ArtikelDBContext artikelDBContext = new ArtikelDBContext();
 
-        artikelDBContext.setArtikelDBStrategy(ArtikelDBFactory.artikelDBStrategy("ARTIKEL_DB_MEM"));
-
-        ArtikelDBInMemory artikelDBInMemory = (ArtikelDBInMemory) artikelDBContext.getArtikelDBStrategy();
+        ArtikelDBInMemory artikelDBInMemory = new ArtikelDBInMemory();
         artikelDBInMemory.setLoadSaveStrategy(DBInMemoryFactory.createStrategy("TEKST"));
 
-
+        ArrayList<Artikel> artikels = artikelDBInMemory.load();
         for (Artikel artikel: artikelDBInMemory.load()) {
             System.out.println(artikel.toString());
         }
