@@ -13,6 +13,7 @@ public class ArtikelDBFactory {
             Object dbObject = dbClass.newInstance();
             artikelDBStrategy = (ArtikelDBStrategy) dbObject;
         }catch (Exception e){
+            throw new DatabaseException(e);
         }
 
         return artikelDBStrategy;

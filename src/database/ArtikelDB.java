@@ -29,7 +29,7 @@ public class ArtikelDB {
     public void setArtikelHashMap(HashMap<String, Artikel> artikelHashMap) {
         if(artikelHashMap != null) {
             this.artikelHashMap = artikelHashMap;
-        } else throw new IllegalArgumentException("Hashmap cannot be empty");
+        } else throw new DatabaseException("Hashmap cannot be empty");
     }
 
     public void addArtikel(Artikel artikel){

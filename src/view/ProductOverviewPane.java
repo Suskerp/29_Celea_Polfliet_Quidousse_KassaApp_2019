@@ -50,7 +50,7 @@ public class ProductOverviewPane extends TableView {
 
 
 
-    public TableView<Artikel> getTable() {
+    public TableView<Artikel> getLayout() {
         return table;
     }
 }

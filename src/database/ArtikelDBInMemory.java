@@ -18,7 +18,7 @@ public class ArtikelDBInMemory implements ArtikelDBStrategy {
         this.loadSaveStrategy = loadSaveStrategy;
     }
 
-    public List<String> getContexts() {
+    public static List<String> getContexts() {
         List<String> contextLijst = new ArrayList<>();
 
         for (LoadSaveEnum loadSaveEnum:LoadSaveEnum.values()){

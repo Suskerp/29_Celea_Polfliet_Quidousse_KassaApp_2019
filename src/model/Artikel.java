@@ -1,4 +1,7 @@
 package model;
+
+import database.DatabaseException;
+
 /**
  * @author Luca Celea
  */
@@ -24,7 +27,7 @@ public class Artikel implements Comparable<Artikel>{
     public void setCode(String code) {
         if (code != null && !code.trim().isEmpty()) {
             this.code = code;
-        } else throw new IllegalArgumentException("Ogeldige code");
+        } else throw new DatabaseException("Ogeldige code");
     }
 
     public String getOmschrijving() {
@@ -34,7 +37,7 @@ public class Artikel implements Comparable<Artikel>{
     public void setOmschrijving(String omschrijving) {
         if (omschrijving != null && !omschrijving.trim().isEmpty()) {
             this.omschrijving = omschrijving;
-        } else throw new IllegalArgumentException("Ongeldige omschrijving");
+        } else throw new DatabaseException("Ongeldige omschrijving");
     }
 
     public Double getVerkoopprijs() {
@@ -44,7 +47,7 @@ public class Artikel implements Comparable<Artikel>{
     public void setVerkoopprijs(Double verkoopprijs) {
         if (verkoopprijs != null) {
             this.verkoopprijs = verkoopprijs;
-        } else throw new IllegalArgumentException("Ongeldige verkoopprijs");
+        } else throw new DatabaseException("Ongeldige verkoopprijs");
     }
 
     public int getStock() {
@@ -62,7 +65,7 @@ public class Artikel implements Comparable<Artikel>{
     public void setNaam(String naam) {
         if(naam != null && !naam.trim().isEmpty()){
             this.naam = naam;
-        } else throw new IllegalArgumentException("Ongeldige naam");
+        } else throw new DatabaseException("Ongeldige naam");
     }
 
     @Override

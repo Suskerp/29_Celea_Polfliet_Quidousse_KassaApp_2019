@@ -23,7 +23,7 @@ public class ArtikelDBContext implements ArtikelDBStrategy{
         return artikelDBStrategy;
     }
 
-    public List<String> getContexts() {
+    public static List<String> getContexts() {
         List<String> contextLijst = new ArrayList<>();
 
         for (ArtikelDBEnum ArtikelDBEnum:ArtikelDBEnum.values()){
