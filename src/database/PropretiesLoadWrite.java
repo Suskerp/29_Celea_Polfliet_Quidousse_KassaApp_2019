@@ -49,21 +49,25 @@ public class PropretiesLoadWrite {
     }
 
     public static void write(String artikelDBContext,String loadSave,String file){
-        Properties properties = new Properties();
-        try {
-            properties.setProperty("ArtikelDBContext",artikelDBContext);
-            properties.setProperty("LoadSave",loadSave);
-            properties.setProperty("File",file);
+            if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
 
-            properties.store(new FileOutputStream("src\\bestanden\\config.propreties"),null);
+            Properties properties = new Properties();
+            try {
+                properties.setProperty("ArtikelDBContext", artikelDBContext);
+                properties.setProperty("LoadSave", loadSave);
+                properties.setProperty("File", file);
 
-        }catch (IOException e) {
-            throw new DatabaseException(e);
-        }
+                properties.store(new FileOutputStream("src\\bestanden\\config.propreties"), null);
+
+            } catch (IOException e) {
+                throw new DatabaseException(e);
+            }
 
 
     }
     public static void write(String artikelDBContext){
+        if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
+
         Properties properties = new Properties();
         try {
             properties.setProperty("ArtikelDBContext",artikelDBContext);

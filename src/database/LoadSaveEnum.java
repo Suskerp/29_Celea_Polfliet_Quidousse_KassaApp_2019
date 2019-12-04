@@ -4,8 +4,8 @@ package database;
  * @author Rafael Polfliet
  */
 public enum LoadSaveEnum {
-    TEKST("Tekst","database.ArtikelTekstLoadSave"),
-    EXCEL("Excel","database.ArtikelXLLoadSave");
+    TEKST("src\\bestanden\\artikel.txt","database.ArtikelTekstLoadSave"),
+    EXCEL("src\\bestanden\\artikel.xls","database.ArtikelXLLoadSave");
 
     private final String omschrijving;
     private final String Klassenaam;

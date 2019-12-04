@@ -2,6 +2,7 @@ package application;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
+import view.InstellingPane;
 import view.KassaView;
 import view.KlantView;
 
@@ -16,9 +17,4 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	@Override
-	public void stop(){
-		System.out.println("Stage is closing");
-		// Save file
-	}
 }
