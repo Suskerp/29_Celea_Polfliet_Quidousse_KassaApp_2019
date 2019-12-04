@@ -16,12 +16,9 @@ import java.util.List;
 public class ProductOverviewPane extends TableView {
 
     private TableView<Artikel> table = new TableView<>();
-    private ArtikelDB artikelDB;
 
     public ProductOverviewPane() {
-        artikelDB = new ArtikelDB();
-        artikelDB.load("src\\bestanden\\artikel.txt");
-        List<Artikel> list = new ArrayList<Artikel>(artikelDB.getGesorteerdeLijst());
+        List<Artikel> list = PropretiesLoadWrite.read().load();
         table.setItems(FXCollections.observableList(list));
         
         TableColumn<Artikel,String> colCode = new TableColumn<>("Code");

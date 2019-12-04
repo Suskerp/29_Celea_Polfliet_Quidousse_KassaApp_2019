@@ -2,16 +2,12 @@ package database;
 
 import model.Artikel;
 
-import java.util.ArrayList;
-
 public class test {
     public static void main(String[] args) {
 
-        ArtikelDBInMemory artikelDBInMemory = new ArtikelDBInMemory();
-        artikelDBInMemory.setLoadSaveStrategy(DBInMemoryFactory.createStrategy("TEKST","src\\bestanden\\artikel.txt"));
+        ArtikelXLLoadSave artikelXLLoadSave = new ArtikelXLLoadSave("src\\bestanden\\artikel.xls");
 
-       ArrayList<Artikel> artikels = artikelDBInMemory.load();
-        for (Artikel artikel: artikelDBInMemory.load()) {
+        for (Artikel artikel: artikelXLLoadSave.load()){
             System.out.println(artikel.toString());
         }
 

@@ -4,6 +4,7 @@ import model.Artikel;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 /**
  * @author Luca Celea
@@ -30,9 +31,11 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
                 tekst = scanner.nextLine().split(",");
                 artikels.add(new Artikel(tekst[0], tekst[1], tekst[2], Double.parseDouble(tekst[3]), Integer.parseInt(tekst[4])));
             }
+            Collections.sort(artikels);
             return artikels;
         }catch (FileNotFoundException e){
             throw new DatabaseException(e);
         }
     }
+
 }

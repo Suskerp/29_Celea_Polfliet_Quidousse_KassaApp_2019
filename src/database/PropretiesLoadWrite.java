@@ -1,0 +1,82 @@
+package database;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+/**
+ * @author Rafael Polfliet
+ */
+public class PropretiesLoadWrite {
+    public static ArtikelDBStrategy read(){
+        Properties properties = new Properties();
+
+        try {
+            properties.load(new FileInputStream("src\\bestanden\\config.propreties"));
+            String artikelDBContext= properties.getProperty("ArtikelDBContext");
+            String loadSave= properties.getProperty("LoadSave");
+            String file = properties.getProperty("File");
+
+            ArtikelDBContext context = new ArtikelDBContext();
+
+            try {
+                context.setArtikelDBStrategy(ArtikelDBFactory.artikelDBStrategy(artikelDBContext));
+
+            }catch (IllegalArgumentException e){
+                throw new DatabaseException("Wrong context, not defined in Enum - ArtikelDBEnum");
+            }
+
+            if (artikelDBContext.equals(ArtikelDBEnum.ARTIKEL_DB_MEM.toString())){
+                if (loadSave.trim().isEmpty() || file.trim().isEmpty()) throw new DatabaseException("Error in configfile trying to create DBINMEM without file or loadsave strategy");
+                ArtikelDBInMemory artikelDBInMemory = new ArtikelDBInMemory();
+
+                try {
+                    artikelDBInMemory.setLoadSaveStrategy(DBInMemoryFactory.createStrategy(loadSave,file));
+                }catch (IllegalArgumentException e){
+                    throw new DatabaseException("Wrong context, not defined in Enum - LoadSaveEnum");
+                }
+
+                return artikelDBInMemory;
+            }
+
+            return context;
+        }catch (IOException e){
+            throw new DatabaseException(e);
+        }
+
+    }
+
+    public static void write(String artikelDBContext,String loadSave,String file){
+        Properties properties = new Properties();
+        try {
+            properties.setProperty("ArtikelDBContext",artikelDBContext);
+            properties.setProperty("LoadSave",loadSave);
+            properties.setProperty("File",file);
+
+            properties.store(new FileOutputStream("src\\bestanden\\config.propreties"),null);
+
+        }catch (IOException e) {
+            throw new DatabaseException(e);
+        }
+
+
+    }
+    public static void write(String artikelDBContext){
+        Properties properties = new Properties();
+        try {
+            properties.setProperty("ArtikelDBContext",artikelDBContext);
+            properties.setProperty("LoadSave","");
+            properties.setProperty("File","");
+
+            properties.store(new FileOutputStream("src\\bestanden\\config.propreties"),null);
+
+        }catch (IOException e) {
+            throw new DatabaseException(e);
+        }
+
+
+    }
+
+}

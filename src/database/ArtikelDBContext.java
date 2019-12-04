@@ -13,8 +13,6 @@ public class ArtikelDBContext implements ArtikelDBStrategy{
     private ArtikelDBStrategy artikelDBStrategy;
 
 
-
-
     public void setArtikelDBStrategy(ArtikelDBStrategy artikelDBStrategy) {
         this.artikelDBStrategy = artikelDBStrategy;
     }

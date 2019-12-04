@@ -4,6 +4,9 @@ package database;
  * @author Rafael Polfliet
  */
 public class ArtikelDBFactory {
+    private ArtikelDBFactory() {
+    }
+
     public static ArtikelDBStrategy artikelDBStrategy(String strategyCode){
         ArtikelDBEnum artikelDBEnum = ArtikelDBEnum.valueOf(strategyCode);
         String klasseNaam = artikelDBEnum.getKlassenaam();

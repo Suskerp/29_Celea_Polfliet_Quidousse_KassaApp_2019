@@ -9,6 +9,6 @@ import java.util.ArrayList;
  */
 public interface LoadSaveStrategy {
     ArrayList<Artikel> load();
-    void save(ArrayList<Object> Objects);
+    void save(ArrayList<Object> objects);
 
 }
