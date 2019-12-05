@@ -50,6 +50,7 @@ public class PropretiesLoadWrite {
 
     public static void write(String artikelDBContext,String loadSave,String file){
             if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
+            if (loadSave == null || loadSave.trim().isEmpty() ||file == null|| file.trim().isEmpty()) throw new DatabaseException("Please select an option in each menu");
 
             Properties properties = new Properties();
             try {

@@ -60,6 +60,9 @@ public class InstellingPane extends GridPane {
            }catch (DatabaseException e){
                JOptionPane.showMessageDialog(null, e.getMessage(),
                        "Error", JOptionPane.ERROR_MESSAGE);
+           }catch (NullPointerException e){
+               JOptionPane.showMessageDialog(null, "Please fill out each menu",
+                       "Error", JOptionPane.ERROR_MESSAGE);
            }
         });
     }
