@@ -1,9 +1,10 @@
 package database;
 
+import database.Strategy.ArtikelDBStrategy;
+import database.Strategy.LoadSaveStrategy;
 import model.Artikel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Rafael

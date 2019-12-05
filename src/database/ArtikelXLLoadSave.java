@@ -1,9 +1,9 @@
 package database;
 
+import database.Strategy.LoadSaveStrategy;
 import excel.ExcelPlugin;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
 import model.Artikel;
 
 import java.io.File;

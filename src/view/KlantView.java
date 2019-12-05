@@ -57,6 +57,7 @@ public class KlantView implements Observer {
 		TableColumn<Artikel, Integer> colAantal = new TableColumn<>("Aantal");
 
 
+
 		table.getColumns().addAll(colOmschrijving,colVerkoopprijs, colAantal);
 
 		root.getChildren().add(gridPane);

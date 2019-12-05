@@ -1,5 +1,6 @@
 package database;
 
+import database.Strategy.ArtikelDBStrategy;
 import model.Artikel;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 /**
  * @author Rafael Polfliet
  */
-public class ArtikelDBMySQL implements ArtikelDBStrategy{
+public class ArtikelDBMySQL implements ArtikelDBStrategy {
 
     @Override
     public ArrayList<Artikel> load() {

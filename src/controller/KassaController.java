@@ -1,12 +1,14 @@
 package controller;
 
 import database.*;
+import database.Enum.ArtikelDBEnum;
+import database.Enum.LoadSaveEnum;
+import database.Strategy.ArtikelDBStrategy;
 import model.Artikel;
 import view.Observer;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public class KassaController implements Subject{
     public static List<String> getContexts() {
         List<String> contextLijst = new ArrayList<>();
 
-        for (database.ArtikelDBEnum ArtikelDBEnum:ArtikelDBEnum.values()){
+        for (database.Enum.ArtikelDBEnum ArtikelDBEnum: ArtikelDBEnum.values()){
             contextLijst.add(ArtikelDBEnum.toString());
         }
 

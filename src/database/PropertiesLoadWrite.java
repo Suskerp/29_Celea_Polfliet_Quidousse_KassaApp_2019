@@ -1,5 +1,10 @@
 package database;
 
+import database.Enum.ArtikelDBEnum;
+import database.Factory.ArtikelDBFactory;
+import database.Factory.DBInMemoryFactory;
+import database.Strategy.ArtikelDBStrategy;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

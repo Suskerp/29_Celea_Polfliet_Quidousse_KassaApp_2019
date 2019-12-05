@@ -1,6 +1,8 @@
 package view;
 
 import database.*;
+import database.Enum.ArtikelDBEnum;
+import database.Enum.LoadSaveEnum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;

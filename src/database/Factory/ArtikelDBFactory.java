@@ -1,4 +1,8 @@
-package database;
+package database.Factory;
+
+import database.Enum.ArtikelDBEnum;
+import database.DatabaseException;
+import database.Strategy.ArtikelDBStrategy;
 
 /**
  * @author Rafael Polfliet

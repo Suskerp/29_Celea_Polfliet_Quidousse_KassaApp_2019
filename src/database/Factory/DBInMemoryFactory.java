@@ -1,4 +1,8 @@
-package database;
+package database.Factory;
+
+import database.DatabaseException;
+import database.Enum.LoadSaveEnum;
+import database.Strategy.LoadSaveStrategy;
 
 /**
  * @author Rafael Polfliet

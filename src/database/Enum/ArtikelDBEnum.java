@@ -1,16 +1,16 @@
-package database;
+package database.Enum;
 
 /**
  * @author Rafael Polfliet
  */
-public enum LoadSaveEnum {
-    TEKST("src\\bestanden\\artikel.txt","database.ArtikelTekstLoadSave"),
-    EXCEL("src\\bestanden\\artikel.xls","database.ArtikelXLLoadSave");
+public enum ArtikelDBEnum {
+    ARTIKEL_DB_MEM("InMemory","database.ArtikelDBInMemory"),
+    ARTIKEL_DB_MYSQL("MySQL","database.ArtikelDBMySQL");
 
     private final String omschrijving;
     private final String Klassenaam;
 
-    LoadSaveEnum(String omschrijving, String klassenaam) {
+    ArtikelDBEnum(String omschrijving, String klassenaam) {
         this.omschrijving = omschrijving;
         Klassenaam = klassenaam;
     }
@@ -22,4 +22,6 @@ public enum LoadSaveEnum {
     public String getKlassenaam() {
         return Klassenaam;
     }
+
+
 }

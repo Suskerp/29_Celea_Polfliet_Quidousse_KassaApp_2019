@@ -1,12 +1,12 @@
 package database;
 
+import database.Strategy.LoadSaveStrategy;
 import model.Artikel;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * @author Luca Celea
