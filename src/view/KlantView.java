@@ -13,11 +13,18 @@ import model.Artikel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+/**
+ * @author Jef Quidousse & Luca Celea
+ * */
 
 public class KlantView {
-	private Stage stage = new Stage();		
+	private Stage stage = new Stage();
+	ArrayList<Artikel> artikels = new ArrayList<>();
 		
-	public KlantView(){			
+	public KlantView(){
 		stage.setTitle("KLANT VIEW");
 		stage.setResizable(false);		
 		stage.setX(775);
@@ -26,6 +33,8 @@ public class KlantView {
 		Scene scene = new Scene(root, 500, 500);
 
 		TableView<Artikel> table = new TableView();
+
+		table.setItems(FXCollections.observableList(artikels));
 
 		TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
 		colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("Omschrijving"));
@@ -44,5 +53,21 @@ public class KlantView {
 		stage.setScene(scene);
 		stage.sizeToScene();
 		stage.show();		
+	}
+
+
+
+	private String getSum(){
+		double sum = 0;
+
+		for (Artikel artikel:artikels){
+			sum += artikel.getVerkoopprijs();
+		}
+		return "Total: €"+sum;
+	}
+
+	public void update(Object arg) {
+		Artikel a = (Artikel) arg;
+		artikels.add(a);
 	}
 }

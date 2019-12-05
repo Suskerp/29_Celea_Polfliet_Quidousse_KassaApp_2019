@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KassaPane {
+
+    private ArrayList<KlantView> observers = new ArrayList<>();
+    private Object a;
     private GridPane gridPane = new GridPane();
     private TableView<Artikel> table = new TableView();
     private TextField textField;
@@ -46,10 +49,11 @@ public class KassaPane {
         textField.setOnAction((entered) ->{
             try {
                 if (textField.getText() != null) {
-                    artikelDBStrategy.scan(textField.getText());
+                    this.a = artikelDBStrategy.scan(textField.getText());
                     table.setItems(FXCollections.observableList(artikelDBStrategy.getScanItems()));
                     sum.setText(getSum());
                     textField.clear();
+
                 }
             }catch (DatabaseException e){
                 JOptionPane.showMessageDialog(null, e.getMessage(),
@@ -85,6 +89,21 @@ public class KassaPane {
             sum += artikel.getVerkoopprijs();
         }
         return "Total: €"+String.format("%.2f", sum);
+    }
+
+    public void voegObserverToe(KlantView k){
+        observers.add(k);
+    }
+
+    public void verwijderObserver(KlantView k){
+        observers.remove(k);
+    }
+
+    private void setArtikel(){
+
+        for(KlantView k : observers){
+            k.update(a);
+        }
     }
 
 
