@@ -1,4 +1,4 @@
-1;artikel1;Bread Crumbs - Japanese Style;45.45;89
+1;AAAArtikel1tekst;Bread Crumbs - Japanese Style;45.45;89
 2;artikel2;Trout - Rainbow, Fresh;29.42;47
 3;artikel3;Jolt Cola - Electric Blue;10.96;53
 4;artikel4;Pumpkin - Seed;44.94;27

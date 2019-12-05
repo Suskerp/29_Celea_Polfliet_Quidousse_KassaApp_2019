@@ -35,7 +35,7 @@ public class KassaMainPane extends BorderPane {
 
 
         TextField textField = new TextField();
-        textField.setPromptText("Search here!");
+        textField.setPromptText("Scan here!");
 
         gridPane.getChildren().add(textField);
 

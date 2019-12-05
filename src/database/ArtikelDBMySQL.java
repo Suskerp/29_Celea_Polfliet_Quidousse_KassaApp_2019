@@ -20,12 +20,12 @@ public class ArtikelDBMySQL implements ArtikelDBStrategy{
     }
 
     @Override
-    public ArrayList<Artikel> search(String id) {
+    public Artikel scan(String id) {
         return null;
     }
 
     @Override
-    public ArrayList<Artikel> getSearchItems() {
+    public ArrayList<Artikel> getScanItems() {
         return null;
     }
 }

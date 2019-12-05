@@ -32,8 +32,8 @@ public class ArtikelDBContext implements ArtikelDBStrategy{
     }
 
     @Override
-    public ArrayList<Artikel> search(String id) {
-        return artikelDBStrategy.search(id);
+    public Artikel scan(String id) {
+        return artikelDBStrategy.scan(id);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class ArtikelDBContext implements ArtikelDBStrategy{
     }
 
     @Override
-    public ArrayList<Artikel> getSearchItems() {
-        return artikelDBStrategy.getSearchItems();
+    public ArrayList<Artikel> getScanItems() {
+        return artikelDBStrategy.getScanItems();
     }
 
     @Override

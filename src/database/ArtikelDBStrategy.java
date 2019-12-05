@@ -10,6 +10,6 @@ import java.util.ArrayList;
 public interface ArtikelDBStrategy {
     ArrayList<Artikel> load();
     void save(ArrayList<Object> artikels);
-    ArrayList<Artikel> search(String id);
-    ArrayList<Artikel> getSearchItems();
+    Artikel scan(String id);
+    ArrayList<Artikel> getScanItems();
 }

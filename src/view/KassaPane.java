@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import model.Artikel;
 
@@ -25,6 +26,12 @@ public class KassaPane {
     private Label sum;
     private ArtikelDBStrategy artikelDBStrategy;
     public KassaPane(){
+
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(100);
+        gridPane.getColumnConstraints().addAll(col1);
+
+
         artikelDBStrategy = PropertiesLoadWrite.read();
 
         textField = new TextField();
@@ -39,8 +46,8 @@ public class KassaPane {
         textField.setOnAction((entered) ->{
             try {
                 if (textField.getText() != null) {
-                    List<Artikel> artikels = artikelDBStrategy.search(textField.getText());
-                    table.setItems(FXCollections.observableList(artikels));
+                    artikelDBStrategy.scan(textField.getText());
+                    table.setItems(FXCollections.observableList(artikelDBStrategy.getScanItems()));
                     sum.setText(getSum());
                     textField.clear();
                 }
@@ -55,7 +62,7 @@ public class KassaPane {
 
         TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
         colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
-        colOmschrijving.setMinWidth(50);
+        colOmschrijving.setMinWidth(200);
 
         TableColumn<Artikel,Double> colVerkoopprijs = new TableColumn<>("Verkoopprijs");
         colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<>("verkoopprijs") );
@@ -74,9 +81,11 @@ public class KassaPane {
     private String getSum(){
         double sum = 0;
 
-        for (Artikel artikel:artikelDBStrategy.getSearchItems()){
+        for (Artikel artikel:artikelDBStrategy.getScanItems()){
             sum += artikel.getVerkoopprijs();
         }
-        return "Total: €"+sum;
+        return "Total: €"+String.format("%.2f", sum);
     }
+
+
 }

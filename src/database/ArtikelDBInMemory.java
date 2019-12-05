@@ -30,13 +30,13 @@ public class ArtikelDBInMemory implements ArtikelDBStrategy {
     }
 
     @Override
-    public ArrayList<Artikel> search(String id) {
-        return loadSaveStrategy.search(id);
+    public Artikel scan(String id) {
+        return loadSaveStrategy.scan(id);
     }
 
     @Override
-    public ArrayList<Artikel> getSearchItems() {
-        return loadSaveStrategy.getSearchItems();
+    public ArrayList<Artikel> getScanItems() {
+        return loadSaveStrategy.getScanItems();
     }
 
     @Override

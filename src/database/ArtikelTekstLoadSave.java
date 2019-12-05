@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     private String[] tekst;
     private File file;
-    private ArrayList<Artikel> searchedItems = new ArrayList<>();
+    private ArrayList<Artikel> scannedItems = new ArrayList<>();
 
     public ArtikelTekstLoadSave(String fileNaam){
         this.file =  new File(fileNaam);
@@ -40,20 +40,20 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     }
 
     @Override
-    public ArrayList<Artikel> search(String id) {
+    public Artikel scan(String id) {
         ArrayList<Artikel> artikels = load();
 
         for (Artikel artikel:artikels){
             if (artikel.getCode().equalsIgnoreCase(id)){
-                searchedItems.add(artikel);
-                return searchedItems;
+                scannedItems.add(artikel);
+                return artikel;
             }
         }
         throw new DatabaseException("This code is not available");
     }
     @Override
-    public ArrayList<Artikel> getSearchItems() {
-        return searchedItems;
+    public ArrayList<Artikel> getScanItems() {
+        return scannedItems;
     }
 
 }

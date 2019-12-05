@@ -11,6 +11,6 @@ import java.util.ArrayList;
 public interface LoadSaveStrategy {
     ArrayList<Artikel> load();
     void save(ArrayList<Object> objects);
-    ArrayList<Artikel> search(String id);
-    ArrayList<Artikel> getSearchItems();
+    Artikel scan(String id);
+    ArrayList<Artikel> getScanItems();
 }

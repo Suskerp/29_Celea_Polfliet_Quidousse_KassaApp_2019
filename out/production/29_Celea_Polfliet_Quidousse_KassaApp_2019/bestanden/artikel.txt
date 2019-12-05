@@ -1,4 +1,4 @@
-1;artikel1;Bread Crumbs - Japanese Style;45.45;89
+1;AAAArtikel1tekst;Bread Crumbs - Japanese Style;45.45;89
 2;artikel2;Trout - Rainbow, Fresh;29.42;47
 3;artikel3;Jolt Cola - Electric Blue;10.96;53
 4;artikel4;Pumpkin - Seed;44.94;27
@@ -73,11 +73,11 @@
 73;bartikel73;Lettuce - Lolla Rosa;49.87;33
 74;bartikel74;Bok Choy - Baby;34.68;36
 75;bartikel75;Steam Pan Full Lid;28.89;11
-76;bartikel76;Sobe - Cranberry Grapefruit;26.42;57
-77;bartikel77;Wine - White, Concha Y Toro;4.4;50
-78;bartikel78;Asparagus - Mexican;10.24;58
-79;zartikel79;Petit Baguette;37.6;38
-80;zartikel80;Chips Potato Reg 43g;21.62;49
+76;dartikel76;Sobe - Cranberry Grapefruit;26.42;57
+77;dartikel77;Wine - White, Concha Y Toro;4.4;50
+78;dartikel78;Asparagus - Mexican;10.24;58
+79;dartikel79;Petit Baguette;37.6;38
+80;dartikel80;Chips Potato Reg 43g;21.62;49
 81;zartikel81;Squash - Pattypan, Yellow;30.25;90
 82;zartikel82;Remy Red;29.33;83
 83;zartikel83;Melon - Watermelon, Seedless;43.97;52
