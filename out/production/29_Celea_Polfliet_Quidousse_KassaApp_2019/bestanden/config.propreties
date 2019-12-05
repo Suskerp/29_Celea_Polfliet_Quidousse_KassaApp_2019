@@ -1,0 +1,4 @@
+#Wed Dec 04 20:14:53 CET 2019
+LoadSave=TEKST
+ArtikelDBContext=ARTIKEL_DB_MEM
+File=src\\bestanden\\artikel.txt
