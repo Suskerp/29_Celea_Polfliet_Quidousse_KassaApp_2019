@@ -56,4 +56,9 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
         return scannedItems;
     }
 
+    @Override
+    public void verwijder() {
+
+    }
+
 }

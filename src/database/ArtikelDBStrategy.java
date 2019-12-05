@@ -12,4 +12,5 @@ public interface ArtikelDBStrategy {
     void save(ArrayList<Object> artikels);
     Artikel scan(String id);
     ArrayList<Artikel> getScanItems();
+    void verwijder();
 }

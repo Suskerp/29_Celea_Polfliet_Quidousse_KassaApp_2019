@@ -49,4 +49,9 @@ public class ArtikelDBInMemory implements ArtikelDBStrategy {
         loadSaveStrategy.save(artikels);
     }
 
+    @Override
+    public void verwijder() {
+
+    }
+
 }

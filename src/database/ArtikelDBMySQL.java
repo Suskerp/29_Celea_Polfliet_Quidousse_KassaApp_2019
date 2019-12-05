@@ -28,4 +28,9 @@ public class ArtikelDBMySQL implements ArtikelDBStrategy{
     public ArrayList<Artikel> getScanItems() {
         return null;
     }
+
+    @Override
+    public void verwijder() {
+
+    }
 }

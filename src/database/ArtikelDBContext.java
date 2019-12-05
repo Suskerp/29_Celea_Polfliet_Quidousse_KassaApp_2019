@@ -47,6 +47,11 @@ public class ArtikelDBContext implements ArtikelDBStrategy{
     }
 
     @Override
+    public void verwijder() {
+
+    }
+
+    @Override
     public void save(ArrayList<Object> artikels) {
         artikelDBStrategy.save(artikels);
     }

@@ -77,4 +77,9 @@ public class ArtikelXLLoadSave implements LoadSaveStrategy {
     public ArrayList<Artikel> getScanItems() {
         return scannedItems;
     }
+
+    @Override
+    public void verwijder() {
+
+    }
 }
