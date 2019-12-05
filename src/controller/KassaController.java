@@ -4,11 +4,14 @@ import database.*;
 import database.Enum.ArtikelDBEnum;
 import database.Enum.LoadSaveEnum;
 import database.Strategy.ArtikelDBStrategy;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
 import model.Artikel;
 import view.Observer;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class KassaController implements Subject{
     private ArrayList<Artikel> artikels;
     private ArrayList<Artikel> scannedItems;
     private ArrayList<Observer> observers;
+    private LinkedHashMap<Artikel,Integer> klantMap;
 
 
     public KassaController() {
@@ -28,6 +32,7 @@ public class KassaController implements Subject{
         artikels = artikelDBStrategy.load();
         scannedItems = new ArrayList<>();
         observers = new ArrayList<>();
+        klantMap = new LinkedHashMap<>();
     }
 
     public ArtikelDBStrategy getArtikelDBStrategy() {
@@ -78,17 +83,10 @@ public class KassaController implements Subject{
     }
 
     public LinkedHashMap<Artikel,Integer> getScannedForKlant(){
-        LinkedHashMap<Artikel,Integer> output = new LinkedHashMap<>();
-
-
         for (Artikel artikel:scannedItems){
-            if (output.containsValue(artikel)){
-                output.put(artikel, output.get(artikel) + 1);
-            }else {
-                output.put(artikel,1);
-            }
-        }
-        return output;
+            klantMap.put(artikel, Collections.frequency(scannedItems,artikel));
+                 }
+        return klantMap;
     }
 
     private ArrayList<Artikel> load() {
@@ -114,7 +112,7 @@ public class KassaController implements Subject{
     @Override
     public void notifyObservers() {
         for (Observer observer:observers){
-            observer.update(getScannedItems());
+            observer.update(getScannedForKlant());
         }
     }
 }
