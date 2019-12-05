@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ArtikelDBInMemory implements ArtikelDBStrategy {
 
+
     private LoadSaveStrategy loadSaveStrategy;
 
 
@@ -26,6 +27,11 @@ public class ArtikelDBInMemory implements ArtikelDBStrategy {
         }
 
         return contextLijst;
+    }
+
+    @Override
+    public Artikel search(String id) {
+        return loadSaveStrategy.search(id);
     }
 
     @Override

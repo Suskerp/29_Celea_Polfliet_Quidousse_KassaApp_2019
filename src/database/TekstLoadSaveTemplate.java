@@ -30,4 +30,5 @@ public abstract class TekstLoadSaveTemplate implements LoadSaveStrategy {
             System.out.println("Kan geen bestand aanmaken");
         }
     }
+
 }

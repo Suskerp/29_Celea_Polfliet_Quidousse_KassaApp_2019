@@ -32,6 +32,11 @@ public class ArtikelDBContext implements ArtikelDBStrategy{
     }
 
     @Override
+    public Artikel search(String id) {
+        return artikelDBStrategy.search(id);
+    }
+
+    @Override
     public ArrayList<Artikel> load() {
         return artikelDBStrategy.load();
     }

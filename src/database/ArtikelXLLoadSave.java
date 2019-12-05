@@ -58,4 +58,14 @@ public class ArtikelXLLoadSave implements LoadSaveStrategy {
         }
 
     }
+
+    @Override
+    public Artikel search(String id) {
+        ArrayList<Artikel> artikels = load();
+
+        for (Artikel artikel:artikels){
+            if (artikel.getCode().equalsIgnoreCase(id)) return artikel;
+        }
+        return null;
+    }
 }
