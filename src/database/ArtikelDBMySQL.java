@@ -18,4 +18,9 @@ public class ArtikelDBMySQL implements ArtikelDBStrategy{
     public void save(ArrayList<Object> artikels) {
 
     }
+
+    @Override
+    public Artikel search(String id) {
+        return null;
+    }
 }
