@@ -1,4 +1,4 @@
-#Thu Dec 05 13:14:26 CET 2019
-LoadSave=EXCEL
-File=src\\bestanden\\artikel.xls
+#Thu Dec 05 14:28:43 CET 2019
+LoadSave=TEKST
+File=src\\bestanden\\artikel.txt
 ArtikelDBContext=ARTIKEL_DB_MEM
