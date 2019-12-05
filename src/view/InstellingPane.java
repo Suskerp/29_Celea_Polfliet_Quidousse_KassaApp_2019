@@ -40,7 +40,7 @@ public class InstellingPane extends GridPane {
         gridPane.add(button,2,0);
 
         comboBox1.setOnAction((optionselected)  ->{
-            if (comboBox1.getSelectionModel().getSelectedItem().equals("ARTIKEL_DB_MEM")){
+            if (comboBox1.getSelectionModel().getSelectedItem().toString().equals(ArtikelDBEnum.ARTIKEL_DB_MEM.toString())){
                 ObservableList<String> loadSaveContext = FXCollections.observableList(ArtikelDBInMemory.getContexts());
                 comboBox2 = new ComboBox();
                 comboBox2.setItems(loadSaveContext);
