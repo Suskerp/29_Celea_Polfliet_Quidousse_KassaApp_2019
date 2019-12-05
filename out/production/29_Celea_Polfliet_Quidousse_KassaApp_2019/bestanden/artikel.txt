@@ -1,100 +1,100 @@
-1;True - Vue Containers;Bosnia and Herzegovina;25.13;32
-2;Lettuce - Romaine, Heart;Bulgaria;9.42;28
-3;Red Currants;Brazil;27.45;20
-4;Wine - Delicato Merlot;Guatemala;41.74;37
-5;Beef - Salted;Macedonia;13.04;13
-6;Mushroom - Chanterelle, Dry;South Africa;26.45;49
-7;Bouillion - Fish;Japan;2.38;29
-8;Longos - Grilled Chicken With;Bahamas;43.77;10
-9;Cauliflower;Indonesia;20.73;41
-10;Spice - Montreal Steak Spice;Portugal;43.79;25
-11;Orange - Tangerine;China;14.43;50
-12;Doilies - 5, Paper;Albania;24.57;33
-13;Pepsi - Diet, 355 Ml;China;35.83;17
-14;Quail - Whole, Bone - In;China;5.81;16
-15;Sloe Gin - Mcguinness;Canada;22.33;49
-16;Pheasants - Whole;Peru;17.42;41
-17;Shrimp - Baby, Cold Water;Tanzania;6.61;13
-18;Peach - Fresh;China;43.62;35
-19;Tray - 16in Rnd Blk;Brazil;43.32;33
-20;Jam - Blackberry, 20 Ml Jar;China;23.95;15
-21;Bread - Malt;China;21.9;30
-22;Grapes - Green;Mongolia;21.08;32
-23;Muffin Hinge Container 6;Brazil;15.5;2
-24;Thyme - Lemon, Fresh;Ethiopia;40.98;22
-25;Skirt - 29 Foot;Armenia;44.48;32
-26;Nut - Hazelnut, Ground, Natural;Sierra Leone;14.18;30
-27;Muffin Batt - Blueberry Passion;Brazil;12.58;43
-28;Skirt - 24 Foot;Poland;25.91;35
-29;Loaf Pan - 2 Lb, Foil;Indonesia;12.83;40
-30;Soup - French Onion, Dry;China;19.98;13
-31;Kiwano;China;31.69;34
-32;Corn Kernels - Frozen;Sweden;23.58;6
-33;Veal - Brisket, Provimi, Bone - In;Philippines;5.3;44
-34;Dehydrated Kelp Kombo;Ecuador;2.87;12
-35;Halibut - Whole, Fresh;Lithuania;38.39;46
-36;Chicken - Diced, Cooked;Rwanda;29.8;1
-37;Bread - Roll, Calabrese;Malaysia;13.05;48
-38;Beer - Upper Canada Lager;Philippines;1.28;32
-39;Soup - Campbells, Beef Barley;United States;24.44;33
-40;Calypso - Pineapple Passion;Brazil;36.3;7
-41;Juice - Orange, 341 Ml;Poland;19.54;47
-42;Milk 2% 500 Ml;Cuba;32.09;19
-43;Smoked Paprika;Portugal;3.69;17
-44;Pie Filling - Pumpkin;Venezuela;5.05;2
-45;Sauce Bbq Smokey;Croatia;42.55;48
-46;Lambcasing;United States;10.13;1
-47;Almonds Ground Blanched;Poland;32.53;17
-48;Syrup - Pancake;Japan;20.34;44
-49;Ham Black Forest;France;44.56;18
-50;Butter - Pod;Sweden;39.41;5
-51;Durian Fruit;Canada;25.95;50
-52;Cassis;Indonesia;19.81;21
-53;Tortillas - Flour, 8;Indonesia;24.33;11
-54;Chilli Paste, Sambal Oelek;France;39.43;12
-55;Table Cloth 54x72 White;Canada;12.01;37
-56;Potatoes - Parissienne;Ukraine;15.6;44
-57;Cod - Salted, Boneless;Japan;38.95;8
-58;Juice - Apple, 500 Ml;Azerbaijan;34.0;16
-59;Sauce - Alfredo;Albania;1.5;32
-60;Food Colouring - Orange;China;35.03;13
-61;Beans - Green;Czech Republic;42.21;49
-62;Bread - Pita, Mini;Philippines;27.4;3
-63;Anchovy Paste - 56 G Tube;China;9.39;12
-64;Sobe - Cranberry Grapefruit;France;49.96;9
-65;Onions Granulated;Japan;28.44;28
-66;Easy Off Oven Cleaner;China;0.02;10
-67;Tamarillo;China;15.93;34
-68;Soup - Campbells Mushroom;Tunisia;19.0;4
-69;Poppy Seed;Myanmar;19.67;49
-70;Sauce - Rosee;Mexico;20.32;3
-71;Pepper - Chili Powder;Russia;49.74;23
-72;Cheese - Gouda Smoked;Iran;25.28;47
-73;Latex Rubber Gloves Size 9;Ukraine;18.78;44
-74;Pepper - Green Thai;Indonesia;47.84;23
-75;Tea - English Breakfast;Papua New Guinea;34.51;8
-76;Beef - Ox Tail, Frozen;China;20.21;41
-77;Wine - Sauvignon Blanc Oyster;Poland;16.38;15
-78;Pork - Backs - Boneless;Russia;8.86;45
-79;Mustard - Seed;China;43.06;3
-80;Chips - Assorted;Thailand;13.72;37
-81;Pickerel - Fillets;South Africa;35.75;1
-82;Tea - Herbal - 6 Asst;China;33.2;39
-83;Lettuce - Curly Endive;Croatia;4.52;35
-84;Creamers - 10%;Nepal;27.36;2
-85;Snapple Lemon Tea;France;18.58;16
-86;Cream - 10%;China;29.11;48
-87;Flour - Bran, Red;China;24.25;39
-88;Split Peas - Green, Dry;Ireland;27.88;37
-89;Sauce - Hoisin;Argentina;46.86;19
-90;Oysters - Smoked;China;31.45;43
-91;Beer - Camerons Auburn;Peru;28.61;5
-92;Lamb Shoulder Boneless Nz;Bulgaria;42.75;42
-93;Muffin - Banana Nut Individual;China;36.82;37
-94;Apricots - Dried;Belgium;38.51;6
-95;Bagel - Everything;Colombia;47.86;47
-96;Blueberries - Frozen;Portugal;48.25;23
-97;Salami - Genova;France;19.73;29
-98;Oil - Truffle, Black;Colombia;1.63;11
-99;Edible Flower - Mixed;China;3.7;4
-100;Wine - Casablanca Valley;Brazil;5.93;6
+1;artikel1;Bread Crumbs - Japanese Style;45.45;89
+2;artikel2;Trout - Rainbow, Fresh;29.42;47
+3;artikel3;Jolt Cola - Electric Blue;10.96;53
+4;artikel4;Pumpkin - Seed;44.94;27
+5;artikel5;Pernod;46.09;84
+6;artikel6;Cheese - Comte;20.46;73
+7;artikel7;Veal - Nuckle;23.33;39
+8;artikel8;Yogurt - Peach, 175 Gr;44.33;79
+9;artikel9;Wine - Jackson Triggs Okonagan;39.53;22
+10;artikel10;Pails With Lids;38.92;26
+11;artikel11;Wine - Pinot Grigio Collavini;41.87;83
+12;artikel12;Soup - Knorr, Chicken Noodle;43.08;31
+13;artikel13;Tea - Herbal - 6 Asst;28.26;24
+14;artikel14;Appetizer - Southwestern;6.27;13
+15;artikel15;Lemon Balm - Fresh;18.1;27
+16;artikel16;Sponge Cake Mix - Vanilla;43.24;14
+17;artikel17;Onions - Cippolini;35.7;82
+18;artikel18;Everfresh Products;34.4;4
+19;artikel19;Melon - Watermelon Yellow;15.69;3
+20;artikel20;Cheese - St. Paulin;13.38;12
+21;artikel21;Chicken - Base;16.59;71
+22;artikel22;Yams;37.94;64
+23;artikel23;Beets - Mini Golden;29.4;28
+24;artikel24;Ice Cream Bar - Rolo Cone;47.7;4
+25;artikel25;Potatoes - Fingerling 4 Oz;40.69;4
+26;artikel26;Radish;49.97;18
+27;artikel27;Wine - German Riesling;13.6;11
+28;artikel28;Cheese - Goat;2.8;6
+29;artikel29;Cod - Salted, Boneless;39.82;29
+30;artikel30;Chicken Breast Wing On;4.22;76
+31;artikel31;Chicken - Whole;1.54;33
+32;artikel32;Clam - Cherrystone;40.73;45
+33;artikel33;Bread - Sour Sticks With Onion;8.11;93
+34;artikel34;Tomatoes Tear Drop;49.87;25
+35;artikel35;Shrimp - 100 / 200 Cold Water;1.77;64
+36;artikel36;Cranberries - Dry;12.95;14
+37;artikel37;Bread - Flat Bread;42.35;3
+38;artikel38;Lentils - Green, Dry;39.38;57
+39;artikel39;Table Cloth 53x69 White;6.46;93
+40;artikel40;Quail Eggs - Canned;2.88;62
+41;artikel41;Potatoes - Mini White 3 Oz;16.52;13
+42;artikel42;Shopper Bag - S - 4;47.92;3
+43;artikel43;Wine - Rioja Campo Viejo;8.6;10
+44;artikel44;Soupcontfoam16oz 116con;2.38;47
+45;bartikel45;Turkey - Ground. Lean;13.76;76
+46;bartikel46;Pork Loin Bine - In Frenched;31.84;85
+47;bartikel47;Bread - Raisin Walnut Oval;22.1;42
+48;bartikel48;Lamb - Rack;27.08;60
+49;bartikel49;Tart Shells - Barquettes, Savory;47.14;91
+50;bartikel50;Nut - Peanut, Roasted;2.93;65
+51;bartikel51;Cheese - Augre Des Champs;36.21;94
+52;bartikel52;Danishes - Mini Cheese;21.19;13
+53;bartikel53;Cinnamon - Ground;3;59
+54;bartikel54;Compound - Pear;19.53;58
+55;bartikel55;Mace Ground;19.21;94
+56;bartikel56;Bread - Triangle White;49.9;71
+57;bartikel57;Wine - Savigny - Les - Beaune;25.94;5
+58;bartikel58;Chocolate - Semi Sweet;45.95;28
+59;bartikel59;Cake - Box Window 10x10x2.5;49.7;18
+60;bartikel60;Squid Ink;42.91;95
+61;bartikel61;Puree - Mocha;2.14;88
+62;bartikel62;Mix Pina Colada;35.18;55
+63;bartikel63;Peas Snow;43.62;70
+64;bartikel64;Bread - Burger;27.25;9
+65;bartikel65;Chicken - Diced, Cooked;39.25;52
+66;bartikel66;Ecolab - Balanced Fusion;16.71;7
+67;bartikel67;Nantuket Peach Orange;12.49;72
+68;bartikel68;Cake - Pancake;12.24;6
+69;bartikel69;Beer - Molson Excel;6.69;73
+70;bartikel70;Cake - Cheese Cake 9 Inch;13.22;1
+71;bartikel71;Banana;35.88;31
+72;bartikel72;Flour - Strong;21.02;61
+73;bartikel73;Lettuce - Lolla Rosa;49.87;33
+74;bartikel74;Bok Choy - Baby;34.68;36
+75;bartikel75;Steam Pan Full Lid;28.89;11
+76;bartikel76;Sobe - Cranberry Grapefruit;26.42;57
+77;bartikel77;Wine - White, Concha Y Toro;4.4;50
+78;bartikel78;Asparagus - Mexican;10.24;58
+79;zartikel79;Petit Baguette;37.6;38
+80;zartikel80;Chips Potato Reg 43g;21.62;49
+81;zartikel81;Squash - Pattypan, Yellow;30.25;90
+82;zartikel82;Remy Red;29.33;83
+83;zartikel83;Melon - Watermelon, Seedless;43.97;52
+84;zartikel84;Oil - Sunflower;12.61;3
+85;zartikel85;Red Cod Fillets - 225g;17.49;55
+86;zartikel86;Rambutan;23.61;7
+87;zartikel87;Squid - Breaded;45.83;6
+88;zartikel88;Muffin Batt - Blueberry Passion;16.41;19
+89;zartikel89;Pepper - Scotch Bonnet;2.76;30
+90;zartikel90;Table Cloth 90x90 White;5.34;79
+91;zartikel91;Olives - Morracan Dired;31.98;79
+92;zartikel92;Chocolate - Semi Sweet;46.11;63
+93;zartikel93;The Pop Shoppe - Lime Rickey;11.7;5
+94;zartikel94;Bay Leaf Ground;39.87;73
+95;dartikel95;Rootbeer;38.81;72
+96;zartikel96;Milk - Homo;41.71;86
+97;zartikel97;Lamb - Leg, Diced;22.3;1
+98;zartikel98;Snapple Lemon Tea;2.85;55
+99;zartikel99;Towel Dispenser;28.79;67
+100;zartikel100;Coffee - Irish Cream;46.1;83
