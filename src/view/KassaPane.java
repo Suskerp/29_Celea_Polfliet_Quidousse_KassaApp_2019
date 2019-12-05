@@ -42,6 +42,7 @@ public class KassaPane {
                     List<Artikel> artikels = artikelDBStrategy.search(textField.getText());
                     table.setItems(FXCollections.observableList(artikels));
                     sum.setText(getSum());
+                    textField.clear();
                 }
             }catch (DatabaseException e){
                 JOptionPane.showMessageDialog(null, e.getMessage(),
