@@ -13,29 +13,28 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import model.Artikel;
-import model.Kassa;
+import controller.KassaController;
 
 import javax.swing.*;
-import java.security.PrivateKey;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * @author Jef Quidousse
  */
 
-public class KassaPane {
+public class KassaPane{
 
-    private ArrayList<KlantView> observers = new ArrayList<>();
-    private Object a;
     private GridPane gridPane = new GridPane();
     private TableView<Artikel> table = new TableView();
     private TextField textField;
     private Label sum;
-    private Kassa kassa;
-    public KassaPane(Kassa kassa){
+    private KassaController kassaController;
 
-        this.kassa = kassa;
+
+    public KassaPane(KassaController kassaController){
+
+        this.kassaController = kassaController;
+
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(100);
         gridPane.getColumnConstraints().addAll(col1);
@@ -55,11 +54,11 @@ public class KassaPane {
         textField.setOnAction((entered) ->{
             try {
                 if (textField.getText() != null) {
-                    this.a = kassa.scan(textField.getText());
-                    table.setItems(FXCollections.observableList(kassa.getScannedItems()));
+                    kassaController.scan(textField.getText());
+                    table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
                     sum.setText(getSum());
                     textField.clear();
-
+                    kassaController.notifyObservers();
                 }
             }catch (DatabaseException e){
                 JOptionPane.showMessageDialog(null, e.getMessage(),
@@ -91,25 +90,10 @@ public class KassaPane {
     private String getSum(){
         double sum = 0;
 
-        for (Artikel artikel:kassa.getScannedItems()){
+        for (Artikel artikel: kassaController.getScannedItems()){
             sum += artikel.getVerkoopprijs();
         }
         return "Total: €"+String.format("%.2f", sum);
-    }
-
-    public void voegObserverToe(KlantView k){
-        observers.add(k);
-    }
-
-    public void verwijderObserver(KlantView k){
-        observers.remove(k);
-    }
-
-    private void setArtikel(){
-
-        for(KlantView k : observers){
-            k.update(a);
-        }
     }
 
 

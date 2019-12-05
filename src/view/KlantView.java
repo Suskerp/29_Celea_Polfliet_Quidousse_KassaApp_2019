@@ -8,22 +8,27 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Artikel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * @author Jef Quidousse & Luca Celea
  * */
 
-public class KlantView {
+public class KlantView implements Observer {
 	private Stage stage = new Stage();
-	ArrayList<Artikel> artikels = new ArrayList<>();
-		
+	private ArrayList<Artikel> artikels = new ArrayList<>();
+	private TableView<Artikel> table;
+	private Label sum;
+	private GridPane gridPane = new GridPane();
+
+
 	public KlantView(){
 		stage.setTitle("KLANT VIEW");
 		stage.setResizable(false);		
@@ -32,13 +37,18 @@ public class KlantView {
 		Group root = new Group();
 		Scene scene = new Scene(root, 500, 500);
 
-		TableView<Artikel> table = new TableView();
+
+		sum = new Label();
+		gridPane.add(sum,0,1);
+
+		table = new TableView();
+		gridPane.add(table,0,0);
 
 		table.setItems(FXCollections.observableList(artikels));
 
 		TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
 		colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("Omschrijving"));
-		colOmschrijving.setMinWidth(50);
+		colOmschrijving.setMinWidth(200);
 
 		TableColumn<Artikel,Double> colVerkoopprijs = new TableColumn<>("Verkoopprijs");
 		colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<>("Verkoopprijs") );
@@ -49,7 +59,7 @@ public class KlantView {
 
 		table.getColumns().addAll(colOmschrijving,colVerkoopprijs, colAantal);
 
-		root.getChildren().add(table);
+		root.getChildren().add(gridPane);
 		stage.setScene(scene);
 		stage.sizeToScene();
 		stage.show();		
@@ -63,11 +73,13 @@ public class KlantView {
 		for (Artikel artikel:artikels){
 			sum += artikel.getVerkoopprijs();
 		}
-		return "Total: €"+sum;
+		return "Total: €"+ String.format("%.2f", sum);
 	}
 
 	public void update(Object arg) {
-		Artikel a = (Artikel) arg;
-		artikels.add(a);
+		ArrayList<Artikel> a = (ArrayList<Artikel>) arg;
+		this.artikels =a;
+		table.setItems(FXCollections.observableList(artikels));
+		sum.setText(getSum());
 	}
 }

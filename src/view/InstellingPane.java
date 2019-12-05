@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import model.Kassa;
+import controller.KassaController;
 
 import javax.swing.*;
 
@@ -30,7 +30,7 @@ public class InstellingPane extends GridPane {
         col3.setPercentWidth(25);
         gridPane.getColumnConstraints().addAll(col1,col2,col3);
         
-        ObservableList<String> artikelDBContexts = FXCollections.observableList(Kassa.getContexts());
+        ObservableList<String> artikelDBContexts = FXCollections.observableList(KassaController.getContexts());
         comboBox1 = new ComboBox();
         comboBox1.setItems(artikelDBContexts);
 
@@ -41,7 +41,7 @@ public class InstellingPane extends GridPane {
 
         comboBox1.setOnAction((optionselected)  ->{
             if (comboBox1.getSelectionModel().getSelectedItem().toString().equals(ArtikelDBEnum.ARTIKEL_DB_MEM.toString())){
-                ObservableList<String> loadSaveContext = FXCollections.observableList(Kassa.getContextsInMem());
+                ObservableList<String> loadSaveContext = FXCollections.observableList(KassaController.getContextsInMem());
                 comboBox2 = new ComboBox();
                 comboBox2.setItems(loadSaveContext);
                 gridPane.add(comboBox2,1,0);

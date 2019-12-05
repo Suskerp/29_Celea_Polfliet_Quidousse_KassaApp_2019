@@ -28,7 +28,7 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
             ArrayList<Artikel> artikels = new ArrayList<>();
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                tekst = scanner.nextLine().split(";");
+                tekst = scanner.nextLine().split(",");
                 artikels.add(new Artikel(tekst[0], tekst[1], tekst[2], Double.parseDouble(tekst[3]), Integer.parseInt(tekst[4])));
             }
             Collections.sort(artikels);

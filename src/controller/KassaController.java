@@ -1,24 +1,31 @@
-package model;
+package controller;
 
 import database.*;
+import model.Artikel;
+import view.Observer;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
  * @author Rafael Polfliet
  */
 
-public class Kassa {
+public class KassaController implements Subject{
     private ArtikelDBStrategy artikelDBStrategy;
     private ArrayList<Artikel> artikels;
     private ArrayList<Artikel> scannedItems;
+    private ArrayList<Observer> observers;
 
-    public Kassa() {
+
+    public KassaController() {
         this.artikelDBStrategy = PropertiesLoadWrite.read();
         artikels = artikelDBStrategy.load();
         scannedItems = new ArrayList<>();
+        observers = new ArrayList<>();
     }
 
     public ArtikelDBStrategy getArtikelDBStrategy() {
@@ -68,6 +75,19 @@ public class Kassa {
         }
     }
 
+    public LinkedHashMap<Artikel,Integer> getScannedForKlant(){
+        LinkedHashMap<Artikel,Integer> output = new LinkedHashMap<>();
+
+
+        for (Artikel artikel:scannedItems){
+            if (output.containsValue(artikel)){
+                output.put(artikel, output.get(artikel) + 1);
+            }else {
+                output.put(artikel,1);
+            }
+        }
+        return output;
+    }
 
     private ArrayList<Artikel> load() {
         return artikelDBStrategy.load();
@@ -76,5 +96,23 @@ public class Kassa {
 
     private void save(ArrayList<Object> artikels) {
         artikelDBStrategy.save(artikels);
+    }
+
+
+    @Override
+    public void registerObserver(Observer e) {
+        observers.add(e);
+    }
+
+    @Override
+    public void removeObserver(Observer e) {
+        observers.remove(e);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer:observers){
+            observer.update(getScannedItems());
+        }
     }
 }
