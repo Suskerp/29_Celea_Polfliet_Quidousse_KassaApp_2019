@@ -10,7 +10,4 @@ import java.util.ArrayList;
 public interface ArtikelDBStrategy {
     ArrayList<Artikel> load();
     void save(ArrayList<Object> artikels);
-    Artikel scan(String id);
-    ArrayList<Artikel> getScanItems();
-    void verwijder();
 }

@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import model.Artikel;
+import model.Kassa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,14 @@ import java.util.List;
  * @author Rafael Polfliet - Jef Quidousse
  */
 public class KassaMainPane extends BorderPane {
+    private Kassa kassa;
 	public KassaMainPane(){
-		
+		kassa = new Kassa();
+
 	    TabPane tabPane = new TabPane();
-	    KassaPane kassaPane = new KassaPane();
+	    KassaPane kassaPane = new KassaPane(kassa);
         Tab kassaTab = new Tab("Kassa", kassaPane.getLayout());
-        ProductOverviewPane productOverviewPane = new ProductOverviewPane();
+        ProductOverviewPane productOverviewPane = new ProductOverviewPane(kassa);
         Tab artikelTab = new Tab("Artikelen",productOverviewPane.getLayout());
         InstellingPane instellingPane = new InstellingPane();
         Tab instellingTab = new Tab("Instellingen",instellingPane.getLayout());

@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Artikel;
+import model.Kassa;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ import java.util.List;
 public class ProductOverviewPane extends TableView {
 
     private TableView<Artikel> table = new TableView<>();
+    private Kassa kassa;
 
-    public ProductOverviewPane() {
-        List<Artikel> list = PropertiesLoadWrite.read().load();
-        table.setItems(FXCollections.observableList(list));
+    public ProductOverviewPane(Kassa kassa) {
+        this.kassa= kassa;
+
+        table.setItems(FXCollections.observableList(kassa.getArtikels()));
         
         TableColumn<Artikel,String> colCode = new TableColumn<>("Code");
         colCode.setCellValueFactory(new PropertyValueFactory<>("Code") );

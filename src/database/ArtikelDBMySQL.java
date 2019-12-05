@@ -19,18 +19,5 @@ public class ArtikelDBMySQL implements ArtikelDBStrategy{
 
     }
 
-    @Override
-    public Artikel scan(String id) {
-        return null;
-    }
 
-    @Override
-    public ArrayList<Artikel> getScanItems() {
-        return null;
-    }
-
-    @Override
-    public void verwijder() {
-
-    }
 }

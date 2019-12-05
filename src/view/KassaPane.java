@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import model.Artikel;
+import model.Kassa;
 
 import javax.swing.*;
 import java.security.PrivateKey;
@@ -28,14 +29,16 @@ public class KassaPane {
     private TextField textField;
     private Label sum;
     private ArtikelDBStrategy artikelDBStrategy;
-    public KassaPane(){
+    private Kassa kassa;
+    public KassaPane(Kassa kassa){
 
+        this.kassa = kassa;
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(100);
         gridPane.getColumnConstraints().addAll(col1);
 
 
-        artikelDBStrategy = PropertiesLoadWrite.read();
+
 
         textField = new TextField();
         textField.setPromptText("Search here!");
@@ -49,8 +52,8 @@ public class KassaPane {
         textField.setOnAction((entered) ->{
             try {
                 if (textField.getText() != null) {
-                    this.a = artikelDBStrategy.scan(textField.getText());
-                    table.setItems(FXCollections.observableList(artikelDBStrategy.getScanItems()));
+                    this.a = kassa.scan(textField.getText());
+                    table.setItems(FXCollections.observableList(kassa.getScannedItems()));
                     sum.setText(getSum());
                     textField.clear();
 
@@ -85,7 +88,7 @@ public class KassaPane {
     private String getSum(){
         double sum = 0;
 
-        for (Artikel artikel:artikelDBStrategy.getScanItems()){
+        for (Artikel artikel:kassa.getScannedItems()){
             sum += artikel.getVerkoopprijs();
         }
         return "Total: €"+String.format("%.2f", sum);

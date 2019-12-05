@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     private String[] tekst;
     private File file;
-    private ArrayList<Artikel> scannedItems = new ArrayList<>();
 
     public ArtikelTekstLoadSave(String fileNaam){
         this.file =  new File(fileNaam);
@@ -39,26 +38,6 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
         }
     }
 
-    @Override
-    public Artikel scan(String id) {
-        ArrayList<Artikel> artikels = load();
 
-        for (Artikel artikel:artikels){
-            if (artikel.getCode().equalsIgnoreCase(id)){
-                scannedItems.add(artikel);
-                return artikel;
-            }
-        }
-        throw new DatabaseException("This code is not available");
-    }
-    @Override
-    public ArrayList<Artikel> getScanItems() {
-        return scannedItems;
-    }
-
-    @Override
-    public void verwijder() {
-
-    }
 
 }

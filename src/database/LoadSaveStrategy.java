@@ -11,7 +11,4 @@ import java.util.ArrayList;
 public interface LoadSaveStrategy {
     ArrayList<Artikel> load();
     void save(ArrayList<Object> objects);
-    Artikel scan(String id);
-    ArrayList<Artikel> getScanItems();
-    void verwijder();
 }

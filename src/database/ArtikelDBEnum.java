@@ -22,4 +22,6 @@ public enum ArtikelDBEnum {
     public String getKlassenaam() {
         return Klassenaam;
     }
+
+
 }

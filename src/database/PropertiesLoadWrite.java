@@ -1,5 +1,7 @@
 package database;
 
+import model.Kassa;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,14 +17,14 @@ public class PropertiesLoadWrite {
 
         try {
             properties.load(new FileInputStream("src\\bestanden\\config.propreties"));
-            String artikelDBContext= properties.getProperty("ArtikelDBContext");
+            String artikelDBContext= properties.getProperty("Kassa");
             String loadSave= properties.getProperty("LoadSave");
             String file = properties.getProperty("File");
 
-            ArtikelDBContext context = new ArtikelDBContext();
+            ArtikelDBStrategy artikelDBStrategy;
 
             try {
-                context.setArtikelDBStrategy(ArtikelDBFactory.artikelDBStrategy(artikelDBContext));
+                artikelDBStrategy =  ArtikelDBFactory.artikelDBStrategy(artikelDBContext);
 
             }catch (IllegalArgumentException e){
                 throw new DatabaseException("Wrong context, not defined in Enum - ArtikelDBEnum");
@@ -41,7 +43,7 @@ public class PropertiesLoadWrite {
                 return artikelDBInMemory;
             }
 
-            return context;
+            return artikelDBStrategy;
         }catch (IOException e){
             throw new DatabaseException(e);
         }
@@ -54,7 +56,7 @@ public class PropertiesLoadWrite {
 
             Properties properties = new Properties();
             try {
-                properties.setProperty("ArtikelDBContext", artikelDBContext);
+                properties.setProperty("Kassa", artikelDBContext);
                 properties.setProperty("LoadSave", loadSave);
                 properties.setProperty("File", file);
 
@@ -71,7 +73,7 @@ public class PropertiesLoadWrite {
 
         Properties properties = new Properties();
         try {
-            properties.setProperty("ArtikelDBContext",artikelDBContext);
+            properties.setProperty("Kassa",artikelDBContext);
             properties.setProperty("LoadSave","");
             properties.setProperty("File","");
 

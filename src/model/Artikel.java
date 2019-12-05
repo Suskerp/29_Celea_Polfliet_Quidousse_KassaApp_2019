@@ -2,6 +2,8 @@ package model;
 
 import database.DatabaseException;
 
+import java.util.Objects;
+
 /**
  * @author Luca Celea
  */
@@ -80,5 +82,18 @@ public class Artikel implements Comparable<Artikel>{
 
     public void verkoop(int aantal){
         this.stock = this.stock-aantal;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artikel artikel = (Artikel) o;
+        return code.equals(artikel.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code);
     }
 }
