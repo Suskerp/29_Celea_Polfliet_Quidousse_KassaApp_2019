@@ -9,7 +9,7 @@ import java.util.Properties;
 /**
  * @author Rafael Polfliet
  */
-public class PropretiesLoadWrite {
+public class PropertiesLoadWrite {
     public static ArtikelDBStrategy read(){
         Properties properties = new Properties();
 

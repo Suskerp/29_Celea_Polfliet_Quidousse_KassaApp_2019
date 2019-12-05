@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     private String[] tekst;
     private File file;
+    private ArrayList<Artikel> searchedItems = new ArrayList<>();
 
     public ArtikelTekstLoadSave(String fileNaam){
         this.file =  new File(fileNaam);
@@ -39,13 +40,20 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     }
 
     @Override
-    public Artikel search(String id) {
+    public ArrayList<Artikel> search(String id) {
         ArrayList<Artikel> artikels = load();
 
         for (Artikel artikel:artikels){
-            if (artikel.getCode().equalsIgnoreCase(id)) return artikel;
+            if (artikel.getCode().equalsIgnoreCase(id)){
+                searchedItems.add(artikel);
+                return searchedItems;
+            }
         }
-        return null;
+        throw new DatabaseException("This code is not available");
+    }
+    @Override
+    public ArrayList<Artikel> getSearchItems() {
+        return searchedItems;
     }
 
 }

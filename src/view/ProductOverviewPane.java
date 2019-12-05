@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Artikel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ public class ProductOverviewPane extends TableView {
     private TableView<Artikel> table = new TableView<>();
 
     public ProductOverviewPane() {
-        List<Artikel> list = PropretiesLoadWrite.read().load();
+        List<Artikel> list = PropertiesLoadWrite.read().load();
         table.setItems(FXCollections.observableList(list));
         
         TableColumn<Artikel,String> colCode = new TableColumn<>("Code");

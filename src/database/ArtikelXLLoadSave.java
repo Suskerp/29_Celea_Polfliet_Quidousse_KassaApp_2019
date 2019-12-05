@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class ArtikelXLLoadSave implements LoadSaveStrategy {
     private ExcelPlugin excelPlugin = new ExcelPlugin();
     private File file;
+    private ArrayList<Artikel> searchedItems = new ArrayList<>();
 
     public ArtikelXLLoadSave(String fileName) {
         this.file = new File(fileName);
@@ -60,12 +61,20 @@ public class ArtikelXLLoadSave implements LoadSaveStrategy {
     }
 
     @Override
-    public Artikel search(String id) {
+    public ArrayList<Artikel> search(String id) {
         ArrayList<Artikel> artikels = load();
 
         for (Artikel artikel:artikels){
-            if (artikel.getCode().equalsIgnoreCase(id)) return artikel;
+            if (artikel.getCode().equalsIgnoreCase(id)) {
+                searchedItems.add(artikel);
+                return searchedItems;
+            }
         }
-        return null;
+        throw new DatabaseException("This code is not available");
+    }
+
+    @Override
+    public ArrayList<Artikel> getSearchItems() {
+        return searchedItems;
     }
 }

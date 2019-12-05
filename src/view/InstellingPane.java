@@ -3,11 +3,8 @@ package view;
 import database.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
@@ -53,9 +50,9 @@ public class InstellingPane extends GridPane {
         button.setOnAction((Save) ->{
            try {
                if (gridPane.getChildren().contains(comboBox2)) {
-                   PropretiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString(), comboBox2.getSelectionModel().getSelectedItem().toString(), LoadSaveEnum.valueOf(comboBox2.getSelectionModel().getSelectedItem().toString()).getOmschrijving());
+                   PropertiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString(), comboBox2.getSelectionModel().getSelectedItem().toString(), LoadSaveEnum.valueOf(comboBox2.getSelectionModel().getSelectedItem().toString()).getOmschrijving());
                } else {
-                   PropretiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString());
+                   PropertiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString());
                }
            }catch (DatabaseException e){
                JOptionPane.showMessageDialog(null, e.getMessage(),
