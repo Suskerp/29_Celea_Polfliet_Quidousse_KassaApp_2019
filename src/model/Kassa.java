@@ -6,6 +6,10 @@ import database.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Rafael Polfliet
+ */
+
 public class Kassa {
     private ArtikelDBStrategy artikelDBStrategy;
     private ArrayList<Artikel> artikels;
@@ -58,8 +62,10 @@ public class Kassa {
         return scannedItems;
     }
 
-    public void verwijder(String id) {
-        artikels.remove(scan(id));
+    public void verwijderFromScannedItems(String id) {
+        for (Artikel artikel:scannedItems){
+            if (artikel.getCode().equalsIgnoreCase(id)) scannedItems.remove(artikel);
+        }
     }
 
 
@@ -68,7 +74,7 @@ public class Kassa {
     }
 
 
-    public void save(ArrayList<Object> artikels) {
+    private void save(ArrayList<Object> artikels) {
         artikelDBStrategy.save(artikels);
     }
 }

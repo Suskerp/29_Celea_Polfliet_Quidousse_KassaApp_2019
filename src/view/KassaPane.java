@@ -20,6 +20,10 @@ import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Jef Quidousse
+ */
+
 public class KassaPane {
 
     private ArrayList<KlantView> observers = new ArrayList<>();
