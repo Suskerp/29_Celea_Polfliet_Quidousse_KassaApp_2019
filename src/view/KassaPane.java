@@ -32,7 +32,6 @@ public class KassaPane {
     private TableView<Artikel> table = new TableView();
     private TextField textField;
     private Label sum;
-    private ArtikelDBStrategy artikelDBStrategy;
     private Kassa kassa;
     public KassaPane(Kassa kassa){
 

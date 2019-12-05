@@ -21,7 +21,6 @@ public class KassaView {
 		root.getChildren().add(borderPane);
 		stage.setScene(scene);
 		stage.sizeToScene();			
-		stage.show();		
+		stage.show();
 	}
-
 }
