@@ -77,17 +77,24 @@ public class KassaController implements Subject{
     }
 
     public void verwijderFromScannedItems(String id) {
+        Artikel artikelTBRemoved = null;
         for (Artikel artikel:scannedItems){
-            if (artikel.getCode().equalsIgnoreCase(id)) scannedItems.remove(artikel);
+            if (artikel.getCode().equalsIgnoreCase(id))  artikelTBRemoved = artikel;
+        }
+        if (artikelTBRemoved !=null) {
+            scannedItems.remove(artikelTBRemoved);
+            klantMap.clear();
+            notifyObservers();
         }
     }
 
     public LinkedHashMap<Artikel,Integer> getScannedForKlant(){
         for (Artikel artikel:scannedItems){
             klantMap.put(artikel, Collections.frequency(scannedItems,artikel));
-                 }
+        }
         return klantMap;
     }
+
 
     private ArrayList<Artikel> load() {
         return artikelDBStrategy.load();

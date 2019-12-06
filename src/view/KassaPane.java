@@ -28,6 +28,7 @@ public class KassaPane{
     private TableView<Artikel> table = new TableView();
     private TextField textField;
     private Label sum;
+    private TextField remove;
     private KassaController kassaController;
 
 
@@ -36,8 +37,10 @@ public class KassaPane{
         this.kassaController = kassaController;
 
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(100);
-        gridPane.getColumnConstraints().addAll(col1);
+        col1.setPercentWidth(50);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(50);
+        gridPane.getColumnConstraints().addAll(col1,col2);
 
 
 
@@ -79,7 +82,20 @@ public class KassaPane{
 
         table.getColumns().addAll(colOmschrijving,colVerkoopprijs);
 
-        gridPane.add(table,0, 1);
+        gridPane.add(table,0, 1,2,1);
+
+        remove = new TextField();
+        remove.setPromptText("Remove a single product");
+        gridPane.add(remove,1,0);
+
+        remove.setOnAction((removeItem) ->{
+            if (!remove.getText().trim().isEmpty()) {
+                kassaController.verwijderFromScannedItems(remove.getText());
+                table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
+                remove.clear();
+
+            }
+        });
 
     }
 
