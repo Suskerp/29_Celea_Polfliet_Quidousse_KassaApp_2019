@@ -9,6 +9,7 @@ import model.Artikel;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author Rafael Polfliet
@@ -31,6 +32,7 @@ public class ArtikelXLLoadSave implements LoadSaveStrategy {
                 Artikel artikel = new Artikel(line.get(0),line.get(1),line.get(2),Double.parseDouble(line.get(3)),Integer.parseInt(line.get(4)));
                 output.add(artikel);
             }
+            Collections.sort(output);
             return output;
         }catch (IOException | BiffException e){
             throw new DatabaseException(e);
