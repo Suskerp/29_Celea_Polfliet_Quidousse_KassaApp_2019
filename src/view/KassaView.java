@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -23,5 +24,11 @@ public class KassaView {
 		stage.setScene(scene);
 		stage.sizeToScene();			
 		stage.show();
+
+		stage.setOnHiding((event) -> {
+			Platform.exit();
+		} );
+
 	}
+
 }

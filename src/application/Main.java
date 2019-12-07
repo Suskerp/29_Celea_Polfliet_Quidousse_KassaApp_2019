@@ -14,10 +14,12 @@ public class Main extends Application {
 		kassaController.registerObserver(klantView);
 		KassaView kassaView = new KassaView(kassaController);
 
+
 	}
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 
 }

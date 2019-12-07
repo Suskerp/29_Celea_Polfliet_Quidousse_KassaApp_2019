@@ -25,6 +25,7 @@ public class KassaController implements Subject{
     private ArrayList<Artikel> scannedItems;
     private ArrayList<Observer> observers;
     private LinkedHashMap<Artikel,Integer> klantMap;
+    private ArrayList<Artikel> hold;
 
 
     public KassaController() {
@@ -33,6 +34,7 @@ public class KassaController implements Subject{
         scannedItems = new ArrayList<>();
         observers = new ArrayList<>();
         klantMap = new LinkedHashMap<>();
+        hold = new ArrayList<>();
     }
 
     public ArtikelDBStrategy getArtikelDBStrategy() {
@@ -88,7 +90,7 @@ public class KassaController implements Subject{
         }
     }
 
-    public LinkedHashMap<Artikel,Integer> getScannedForKlant(){
+    private LinkedHashMap<Artikel,Integer> getScannedForKlant(){
         for (Artikel artikel:scannedItems){
             klantMap.put(artikel, Collections.frequency(scannedItems,artikel));
         }
@@ -121,5 +123,23 @@ public class KassaController implements Subject{
         for (Observer observer:observers){
             observer.update(getScannedForKlant());
         }
+    }
+
+
+    public void placeOnHold(){
+        if (scannedItems.size() == 0) throw new ControllerException("Can't place an empty cart on hold");
+        if (hold.size() != 0) throw new ControllerException("Already a cart on hold");
+        hold.addAll(scannedItems);
+        scannedItems.clear();
+        klantMap.clear();
+        notifyObservers();
+    }
+
+    public void returnFromHold(){
+        if (scannedItems.size() != 0) throw new ControllerException("Current shopping cart has to be empty before returning cart on hold");
+        if (hold.size() == 0) throw new ControllerException("There is no cart on hold that can be returned");
+        scannedItems.addAll(hold);
+        hold.clear();
+        notifyObservers();
     }
 }

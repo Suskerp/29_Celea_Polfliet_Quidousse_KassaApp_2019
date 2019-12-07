@@ -1,6 +1,7 @@
 package view;
 
 import database.ArtikelDBInMemory;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -65,7 +66,12 @@ public class KlantView implements Observer {
 		root.getChildren().add(gridPane);
 		stage.setScene(scene);
 		stage.sizeToScene();
-		stage.show();		
+		stage.show();
+
+
+		stage.setOnHiding((event) -> {
+			Platform.exit();
+		} );
 	}
 
 
