@@ -3,6 +3,7 @@ package view;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import controller.KassaController;
@@ -25,6 +26,7 @@ public class KassaView {
 		stage.sizeToScene();			
 		stage.show();
 
+		stage.getIcons().add(new Image("bestanden/icon.png"));
 		stage.setOnHiding((event) -> {
 			Platform.exit();
 		} );
