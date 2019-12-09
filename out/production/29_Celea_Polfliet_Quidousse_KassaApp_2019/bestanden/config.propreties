@@ -1,4 +1,4 @@
-#Sat Dec 07 18:51:03 CET 2019
-LoadSave=TEKST
-File=src\\bestanden\\artikel.txt
+#Sun Dec 08 18:45:33 CET 2019
+LoadSave=EXCEL
+File=src\\bestanden\\artikel.xls
 Kassa=ARTIKEL_DB_MEM

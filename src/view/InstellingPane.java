@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import controller.KassaController;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 /**
  * @author Rafael Polfliet
@@ -32,7 +33,7 @@ public class InstellingPane extends GridPane {
         col3.setPercentWidth(25);
         gridPane.getColumnConstraints().addAll(col1,col2,col3);
         
-        ObservableList<String> artikelDBContexts = FXCollections.observableList(KassaController.getContexts());
+        ObservableList<String> artikelDBContexts = FXCollections.observableList(ArtikelDBEnum.valuesToString());
         comboBox1 = new ComboBox();
         comboBox1.setItems(artikelDBContexts);
 
@@ -42,34 +43,42 @@ public class InstellingPane extends GridPane {
         gridPane.add(button,2,0);
 
         comboBox1.setOnAction((optionselected)  ->{
-            if (comboBox1.getSelectionModel().getSelectedItem().toString().equals(ArtikelDBEnum.ARTIKEL_DB_MEM.toString())){
-                ObservableList<String> loadSaveContext = FXCollections.observableList(KassaController.getContextsInMem());
-                comboBox2 = new ComboBox();
-                comboBox2.setItems(loadSaveContext);
-                gridPane.add(comboBox2,1,0);
-            }else{
-                gridPane.getChildren().remove(comboBox2);
-            }
+           comboBox1Selected();
         });
 
         button.setOnAction((Save) ->{
-           try {
-               if (gridPane.getChildren().contains(comboBox2)) {
-                   PropertiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString(), comboBox2.getSelectionModel().getSelectedItem().toString(), LoadSaveEnum.valueOf(comboBox2.getSelectionModel().getSelectedItem().toString()).getOmschrijving());
-               } else {
-                   PropertiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString());
-               }
-           }catch (DatabaseException e){
-               JOptionPane.showMessageDialog(null, e.getMessage(),
-                       "Error", JOptionPane.ERROR_MESSAGE);
-           }catch (NullPointerException e){
-               JOptionPane.showMessageDialog(null, "Please fill out each menu",
-                       "Error", JOptionPane.ERROR_MESSAGE);
-           }
+           savePreferences();
         });
     }
 
     public GridPane getLayout() {
         return gridPane;
+    }
+
+    private void comboBox1Selected(){
+        if (comboBox1.getSelectionModel().getSelectedItem().toString().equals(ArtikelDBEnum.ARTIKEL_DB_MEM.toString())){
+            ObservableList<String> loadSaveContext = FXCollections.observableList(LoadSaveEnum.valuesToString());
+            comboBox2 = new ComboBox();
+            comboBox2.setItems(loadSaveContext);
+            gridPane.add(comboBox2,1,0);
+        }else{
+            gridPane.getChildren().remove(comboBox2);
+        }
+    }
+
+    private void savePreferences(){
+        try {
+            if (gridPane.getChildren().contains(comboBox2)) {
+                PropertiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString(), comboBox2.getSelectionModel().getSelectedItem().toString(), LoadSaveEnum.valueOf(comboBox2.getSelectionModel().getSelectedItem().toString()).getOmschrijving());
+            } else {
+                PropertiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString());
+            }
+        }catch (DatabaseException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Please fill out each menu",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

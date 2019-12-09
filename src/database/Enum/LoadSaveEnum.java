@@ -1,5 +1,8 @@
 package database.Enum;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Rafael Polfliet
  */
@@ -14,7 +17,13 @@ public enum LoadSaveEnum {
         this.omschrijving = omschrijving;
         Klassenaam = klassenaam;
     }
-
+    public static List<String> valuesToString(){
+        List<String> out = new ArrayList<>();
+        for (LoadSaveEnum loadSaveEnum:LoadSaveEnum.values()){
+            out.add(loadSaveEnum.toString());
+        }
+        return out;
+    }
     public String getOmschrijving() {
         return omschrijving;
     }

@@ -41,24 +41,7 @@ public class KassaController implements Subject{
         return artikelDBStrategy;
     }
 
-    public static List<String> getContexts() {
-        List<String> contextLijst = new ArrayList<>();
 
-        for (database.Enum.ArtikelDBEnum ArtikelDBEnum: ArtikelDBEnum.values()){
-            contextLijst.add(ArtikelDBEnum.toString());
-        }
-
-        return contextLijst;
-    }
-    public static List<String> getContextsInMem() {
-        List<String> contextLijst = new ArrayList<>();
-
-        for (LoadSaveEnum loadSaveEnum:LoadSaveEnum.values()){
-            contextLijst.add(loadSaveEnum.toString());
-        }
-
-        return contextLijst;
-    }
 
     public ArrayList<Artikel> getArtikels() {
         return artikels;

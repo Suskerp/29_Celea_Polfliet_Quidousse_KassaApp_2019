@@ -74,9 +74,7 @@ public class KlantView implements Observer {
 
 	public void update(Object arg) {
 		map = (LinkedHashMap<Artikel,Integer>) arg;;
-
 		items = FXCollections.observableArrayList(map.entrySet());
-
 		table.setItems(items);
 		table.refresh();
 		sum.setText(getSum());

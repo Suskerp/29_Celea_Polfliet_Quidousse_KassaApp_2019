@@ -1,5 +1,10 @@
 package database.Enum;
 
+import model.Artikel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Rafael Polfliet
  */
@@ -13,6 +18,14 @@ public enum ArtikelDBEnum {
     ArtikelDBEnum(String omschrijving, String klassenaam) {
         this.omschrijving = omschrijving;
         Klassenaam = klassenaam;
+    }
+
+    public static List<String> valuesToString(){
+        List<String> out = new ArrayList<>();
+        for (ArtikelDBEnum artikelDBEnum:ArtikelDBEnum.values()){
+            out.add(artikelDBEnum.toString());
+        }
+        return out;
     }
 
     public String getOmschrijving() {
