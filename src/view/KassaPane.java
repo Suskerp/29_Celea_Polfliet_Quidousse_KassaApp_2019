@@ -3,7 +3,7 @@ package view;
  * @author Jef Quidousse
  * */
 
-import controller.ControllerException;
+import controller.ModelException;
 import database.*;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
@@ -90,7 +90,7 @@ public class KassaPane{
     private void scan(){
         try {
             if (searchText.getText() != null) {
-                kassaController.scan(searchText.getText());
+                kassaController.scanItem(searchText.getText());
                 table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
                 getSum();
                 searchText.clear();
@@ -104,7 +104,7 @@ public class KassaPane{
 
     private void remove(){
         if (!remove.getText().trim().isEmpty()) {
-            kassaController.verwijderFromScannedItems(remove.getText());
+            kassaController.verwijder(remove.getText());
             table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
             remove.clear();
             getSum();
@@ -126,7 +126,7 @@ public class KassaPane{
                 table.refresh();
                 getSum();
             }
-        }catch (ControllerException e){
+        }catch (ModelException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }

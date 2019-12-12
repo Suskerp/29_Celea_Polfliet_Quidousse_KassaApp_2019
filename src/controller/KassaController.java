@@ -7,6 +7,9 @@ import database.Strategy.ArtikelDBStrategy;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import model.Artikel;
+import model.Kassa;
+import view.KassaView;
+import view.KlantView;
 import view.Observer;
 
 
@@ -20,76 +23,60 @@ import java.util.List;
  */
 
 public class KassaController implements Subject{
-    private ArtikelDBStrategy artikelDBStrategy;
-    private ArrayList<Artikel> artikels;
-    private ArrayList<Artikel> scannedItems;
+
+    private KlantView klantView;
+    private KassaView kassaView;
+    private Kassa kassa;
+
     private ArrayList<Observer> observers;
-    private LinkedHashMap<Artikel,Integer> klantMap;
-    private ArrayList<Artikel> hold;
+
 
 
     public KassaController() {
-        this.artikelDBStrategy = PropertiesLoadWrite.read();
-        artikels = artikelDBStrategy.load();
-        scannedItems = new ArrayList<>();
+
+        kassa = new Kassa(PropertiesLoadWrite.read().load());
+
+        kassaView = new KassaView(this);
+        klantView = new KlantView();
+
         observers = new ArrayList<>();
-        klantMap = new LinkedHashMap<>();
-        hold = new ArrayList<>();
-    }
 
-    public ArtikelDBStrategy getArtikelDBStrategy() {
-        return artikelDBStrategy;
+
+        registerObserver(klantView);
     }
 
 
-
-    public ArrayList<Artikel> getArtikels() {
-        return artikels;
+    public void scanItem(String id){
+        kassa.scan(id);
+        notifyObservers();
     }
 
-    public Artikel scan(String id) {
-        for (Artikel artikel:artikels){
-            if (artikel.getCode().equalsIgnoreCase(id)){
-                scannedItems.add(artikel);
-                return artikel;
-            }
-        }
-        throw new DatabaseException("This item id doesn't exist");
+    public void verwijder(String id){
+        kassa.verwijderFromScannedItems(id);
+        notifyObservers();
     }
 
-    public ArrayList<Artikel> getScannedItems() {
-        return scannedItems;
+    public ArrayList<Artikel> getScannedItems(){
+        return kassa.getScannedItems();
     }
 
-    public void verwijderFromScannedItems(String id) {
-        Artikel artikelTBRemoved = null;
-        for (Artikel artikel:scannedItems){
-            if (artikel.getCode().equalsIgnoreCase(id))  artikelTBRemoved = artikel;
-        }
-        if (artikelTBRemoved !=null) {
-            scannedItems.remove(artikelTBRemoved);
-            klantMap.clear();
-            notifyObservers();
-        }
+    public void placeOnHold(){
+        kassa.placeOnHold();
+        notifyObservers();
     }
 
-    private LinkedHashMap<Artikel,Integer> getScannedForKlant(){
-        for (Artikel artikel:scannedItems){
-            klantMap.put(artikel, Collections.frequency(scannedItems,artikel));
-        }
-        return klantMap;
+    public void returnFromHold(){
+        kassa.returnFromHold();
+        notifyObservers();
     }
 
-
-    private ArrayList<Artikel> load() {
-        return artikelDBStrategy.load();
+    public String getSum(){
+        return kassa.getSum();
     }
 
-
-    private void save(ArrayList<Object> artikels) {
-        artikelDBStrategy.save(artikels);
+    public ArrayList<Artikel> getArtikels(){
+       return kassa.getArtikels();
     }
-
 
     @Override
     public void registerObserver(Observer e) {
@@ -104,37 +91,8 @@ public class KassaController implements Subject{
     @Override
     public void notifyObservers() {
         for (Observer observer:observers){
-            observer.update(getScannedForKlant(),getSum());
+            observer.update(kassa.getScannedForKlant(),kassa.getSum());
         }
-    }
-
-
-    public void placeOnHold(){
-        if (scannedItems.size() == 0) throw new ControllerException("Can't place an empty cart on hold");
-        if (hold.size() != 0) throw new ControllerException("Already a cart on hold");
-        hold.addAll(scannedItems);
-        scannedItems.clear();
-        klantMap.clear();
-        notifyObservers();
-    }
-
-    public void returnFromHold(){
-        if (scannedItems.size() != 0) throw new ControllerException("Current shopping cart has to be empty before returning cart on hold");
-        if (hold.size() == 0) throw new ControllerException("There is no cart on hold that can be returned");
-        scannedItems.addAll(hold);
-        hold.clear();
-        notifyObservers();
-    }
-
-
-    public String getSum(){
-        double total = 0;
-
-        for (Artikel artikel: getScannedItems()){
-            total += artikel.getVerkoopprijs();
-        }
-
-        return "Total: €"+String.format("%.2f", total);
     }
 
 }

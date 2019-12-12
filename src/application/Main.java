@@ -10,11 +10,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		KassaController kassaController = new KassaController();
-		KlantView klantView = new KlantView();
-		kassaController.registerObserver(klantView);
-		KassaView kassaView = new KassaView(kassaController);
-
-
 	}
 	
 	public static void main(String[] args) {
