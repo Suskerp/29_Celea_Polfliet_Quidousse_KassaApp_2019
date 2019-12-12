@@ -1,22 +1,22 @@
 package controller;
 
-public class ModelException extends RuntimeException {
-    public ModelException() {
+public class ControllerException extends RuntimeException {
+    public ControllerException() {
     }
 
-    public ModelException(String message) {
+    public ControllerException(String message) {
         super(message);
     }
 
-    public ModelException(String message, Throwable cause) {
+    public ControllerException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ModelException(Throwable cause) {
+    public ControllerException(Throwable cause) {
         super(cause);
     }
 
-    public ModelException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public ControllerException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }
