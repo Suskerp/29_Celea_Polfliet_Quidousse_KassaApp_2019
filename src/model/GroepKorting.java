@@ -4,18 +4,16 @@ package model;
  * @author Jef Quidousse
  */
 
-import model.Discount.KortingInterface;
+import model.Discount.KortingStrategy;
 
 import java.util.ArrayList;
 
-public class GroepKorting implements KortingInterface {
-    private ArrayList<Artikel> artikels;
-    private int procent;
+public class GroepKorting implements KortingStrategy {
+    private double procent;
     private String groep;
 
 
-    public GroepKorting(int procent, String groep){
-        this.artikels = artikels;
+    public GroepKorting(double procent, String groep){
         setProcent(procent);
         setGroep(groep);
     }
@@ -24,7 +22,7 @@ public class GroepKorting implements KortingInterface {
         this.groep = groep;
     }
 
-    private void setProcent(int p){
+    private void setProcent(double p){
         this.procent = p;
     }
 
@@ -33,7 +31,7 @@ public class GroepKorting implements KortingInterface {
         double r = procent/100;
         double totaal = 0;
         for (Artikel a : artikels){
-            if(a.getOmschrijving() == this.groep){
+            if(a.getOmschrijving().equalsIgnoreCase(groep)){
                 totaal += a.getVerkoopprijs()*r;
             }
         }

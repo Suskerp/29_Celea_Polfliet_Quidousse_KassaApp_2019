@@ -4,20 +4,18 @@ package model;
  * @author Jef Quidousse
  */
 
-import model.Discount.KortingInterface;
+import model.Discount.KortingStrategy;
 
 import java.util.ArrayList;
 
-public class DuursteKorting implements KortingInterface {
-    private int procent;
-    private ArrayList<Artikel> artikels;
+public class DuursteKorting implements KortingStrategy {
+    private double procent;
 
-    public DuursteKorting(int procent){
+    public DuursteKorting(double procent){
         setProcent(procent);
-        this.artikels = artikels;
     }
 
-    private void setProcent(int x){
+    private void setProcent(double x){
         this.procent = x;
     }
 

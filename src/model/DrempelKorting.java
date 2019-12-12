@@ -4,22 +4,22 @@ package model;
  * @author Jef Quidousse
  */
 
-import model.Discount.KortingInterface;
+import model.Discount.KortingStrategy;
 
 import java.util.ArrayList;
 
-public class DrempelKorting implements KortingInterface {
+public class DrempelKorting implements KortingStrategy {
     private double drempelWaarde;
-    private int procent;
+    private double procent;
     private ArrayList<Artikel> artikels;
 
-    public DrempelKorting(double drempelWaarde, int procent){
+    public DrempelKorting(double procent,double drempelWaarde){
         setDrempelWaarde(drempelWaarde);
         setProcent(procent);
         setArtikels(artikels);
     }
 
-    private void setProcent(int p){
+    private void setProcent(double p){
         this.procent = p;
     }
 

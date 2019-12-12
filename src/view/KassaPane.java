@@ -27,6 +27,8 @@ public class KassaPane{
     private Button holdButton;
     private Label holdstatus;
     private Button afsluiten;
+    private Label kortingLabel;
+    private Label finalSumLabel;
 
 
     public KassaPane(KassaController kassaController){
@@ -51,6 +53,9 @@ public class KassaPane{
         remove.setPromptText("Remove a single product");
         holdButton = new Button("Place cart on hold");
         holdstatus = new Label("No cart on hold");
+        afsluiten = new Button("Verkoop afsluiten");
+        kortingLabel = new Label();
+        finalSumLabel = new Label();
 
         tableInit();
 
@@ -60,7 +65,9 @@ public class KassaPane{
         gridPane.add(holdButton,2,0);
         gridPane.add(holdstatus,3,0);
         gridPane.add(searchText,0,0);
-
+        gridPane.add(afsluiten,3,2);
+        gridPane.add(kortingLabel,1,2);
+        gridPane.add(finalSumLabel,2,2);
 
 
         searchText.setOnAction((entered) ->{
@@ -74,6 +81,9 @@ public class KassaPane{
         holdButton.setOnAction((pressed) ->{
             hold();
         });
+        afsluiten.setOnAction((pressed) ->{
+            close();
+        });
 
 
 
@@ -84,7 +94,7 @@ public class KassaPane{
     }
 
     private void getSum(){
-       sum.setText(kassaController.getSum());
+       sum.setText("Korting: €"+String.format("%.2f",kassaController.getSum()));
     }
 
 
@@ -143,6 +153,11 @@ public class KassaPane{
         colVerkoopprijs.setMinWidth(50);
 
         table.getColumns().addAll(colOmschrijving,colVerkoopprijs);
+    }
+
+    private void close(){
+        kortingLabel.setText("Korting: €"+String.format("%.2f", kassaController.getKorting()));
+        finalSumLabel.setText("Eind bedrag: €"+String.format("%.2f", kassaController.getFinalSum()));
     }
 
 }

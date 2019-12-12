@@ -4,6 +4,9 @@ import database.Enum.ArtikelDBEnum;
 import database.Factory.ArtikelDBFactory;
 import database.Factory.DBInMemoryFactory;
 import database.Strategy.ArtikelDBStrategy;
+import model.Discount.KortingFactory;
+import model.Discount.KortingStrategy;
+import model.ModelException;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,11 +17,11 @@ import java.util.Properties;
  * @author Rafael Polfliet
  */
 public class PropertiesLoadWrite {
-    public static ArtikelDBStrategy read(){
+    public static ArtikelDBStrategy readDBContext(){
         Properties properties = new Properties();
 
         try {
-            properties.load(new FileInputStream("src\\bestanden\\config.propreties"));
+            properties.load(new FileInputStream("src\\bestanden\\config.properties"));
             String artikelDBContext= properties.getProperty("Kassa");
             String loadSave= properties.getProperty("LoadSave");
             String file = properties.getProperty("File");
@@ -52,7 +55,38 @@ public class PropertiesLoadWrite {
 
     }
 
-    public static void write(String artikelDBContext,String loadSave,String file){
+
+    public static KortingStrategy readKorting() {
+        Properties properties = new Properties();
+
+        try {
+            properties.load(new FileInputStream("src\\bestanden\\config.properties"));
+            String korting = properties.getProperty("Korting");
+            String percentage = properties.getProperty("Percentage");
+            String kortingVar = properties.getProperty("KortingVar");
+
+
+            if (korting != null && !korting.trim().isEmpty() && !korting.equalsIgnoreCase("Geen korting")) {
+                KortingStrategy kortingStrategy;
+
+                try {
+                    kortingStrategy = KortingFactory.kortingStrategy(korting,Double.parseDouble(percentage),kortingVar);
+
+                } catch (IllegalArgumentException e) {
+                    throw new ModelException("Wrong context, not defined in Enum - KortingEnum");
+                }
+
+                return kortingStrategy;
+            }else return null;
+
+            }catch(IOException e){
+                    throw new ModelException(e);
+            }
+
+    }
+
+
+    public static void write(String artikelDBContext,String loadSave,String file,String korting,int percentage,String extra){
             if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
             if (loadSave == null || loadSave.trim().isEmpty() ||file == null|| file.trim().isEmpty()) throw new DatabaseException("Please select an option in each menu");
 
@@ -61,8 +95,12 @@ public class PropertiesLoadWrite {
                 properties.setProperty("Kassa", artikelDBContext);
                 properties.setProperty("LoadSave", loadSave);
                 properties.setProperty("File", file);
+                properties.setProperty("Korting",korting);
+                properties.setProperty("Percentage",percentage+"");
+                properties.setProperty("KortingVar",extra);
 
-                properties.store(new FileOutputStream("src\\bestanden\\config.propreties"), null);
+
+                properties.store(new FileOutputStream("src\\bestanden\\config.properties"), null);
 
             } catch (IOException e) {
                 throw new DatabaseException(e);
@@ -70,7 +108,7 @@ public class PropertiesLoadWrite {
 
 
     }
-    public static void write(String artikelDBContext){
+    public static void write(String artikelDBContext,String korting,int percentage,String extra){
         if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
 
         Properties properties = new Properties();
@@ -78,8 +116,12 @@ public class PropertiesLoadWrite {
             properties.setProperty("Kassa",artikelDBContext);
             properties.setProperty("LoadSave","");
             properties.setProperty("File","");
+            properties.setProperty("Korting",korting);
+            properties.setProperty("Percentage",percentage+"");
+            properties.setProperty("KortingVar",extra);
 
-            properties.store(new FileOutputStream("src\\bestanden\\config.propreties"),null);
+
+            properties.store(new FileOutputStream("src\\bestanden\\config.properties"),null);
 
         }catch (IOException e) {
             throw new DatabaseException(e);

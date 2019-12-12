@@ -64,12 +64,12 @@ public class KlantView implements Observer {
 
 
 
-	public void update(Object arg,String sumText) {
+	public void update(Object arg,Double sumText) {
 		map = (LinkedHashMap<Artikel,Integer>) arg;;
 		items = FXCollections.observableArrayList(map.entrySet());
 		table.setItems(items);
 		table.refresh();
-		sum.setText(sumText);
+		sum.setText("Totaal: €"+String.format("%.2f",sumText));
 	}
 
 	private void tableInit(){

@@ -20,13 +20,14 @@ import javax.swing.*;
  */
 public class InstellingPane extends GridPane {
     private GridPane gridPane= new GridPane();
-    private ComboBox comboBox1;
-    private ComboBox comboBox2;
-    private ComboBox comboBox3;
+    private ComboBox dbContextComboBox;
+    private ComboBox dbInMemoryComboBox;
+    private ComboBox kortingComboBox;
     private Label label1;
     private Label label2;
-    private TextField drempel;
+    private TextField extraVariable;
     private Button button;
+    private TextField procent;
 
     public InstellingPane() {
 
@@ -43,40 +44,41 @@ public class InstellingPane extends GridPane {
         gridPane.add(label1, 0, 0);
         
         ObservableList<String> artikelDBContexts = FXCollections.observableList(ArtikelDBEnum.valuesToString());
-        comboBox1 = new ComboBox();
-        comboBox1.setItems(artikelDBContexts);
+        dbContextComboBox = new ComboBox();
+        dbContextComboBox.setItems(artikelDBContexts);
 
-        gridPane.add(comboBox1,0,1);
+        gridPane.add(dbContextComboBox,0,1);
 
         label2 = new Label();
         label2.setText("Define discount");
         gridPane.add(label2, 0, 2);
 
         ObservableList<String> kortingDBContexts = FXCollections.observableList(KortingEnum.valuesToString());
-        comboBox3 = new ComboBox();
-        comboBox3.setItems(kortingDBContexts);
+        kortingComboBox = new ComboBox();
+        kortingDBContexts.add("Geen korting");
+        kortingComboBox.setItems(kortingDBContexts);
 
-        gridPane.add(comboBox3, 0,3);
+        gridPane.add(kortingComboBox, 0,3);
 
-        TextField procent = new TextField();
+        procent = new TextField();
         procent.setPromptText("Procent korting");
         gridPane.add(procent, 1, 3);
 
 
 
         button = new Button("Save");
-        gridPane.add(button,2,0);
+        gridPane.add(button,2,1);
 
-        comboBox1.setOnAction((optionselected)  ->{
-           comboBox1Selected();
+        dbContextComboBox.setOnAction((optionselected)  ->{
+           dbContextComboBoxSelected();
         });
 
         button.setOnAction((Save) ->{
            savePreferences();
         });
 
-        comboBox3.setOnAction((optionselected) ->{
-            comboBox3Selected();
+        kortingComboBox.setOnAction((optionselected) ->{
+            kortingComboBoxSelected();
         });
     }
 
@@ -84,47 +86,64 @@ public class InstellingPane extends GridPane {
         return gridPane;
     }
 
-    private void comboBox1Selected(){
-        if (comboBox1.getSelectionModel().getSelectedItem().toString().equals(ArtikelDBEnum.ARTIKEL_DB_MEM.toString())){
+    private void dbContextComboBoxSelected(){
+        if (dbContextComboBox.getSelectionModel().getSelectedItem().toString().equals(ArtikelDBEnum.ARTIKEL_DB_MEM.toString())){
             ObservableList<String> loadSaveContext = FXCollections.observableList(LoadSaveEnum.valuesToString());
-            comboBox2 = new ComboBox();
-            comboBox2.setItems(loadSaveContext);
-            gridPane.add(comboBox2,1,1);
+            dbInMemoryComboBox = new ComboBox();
+            dbInMemoryComboBox.setItems(loadSaveContext);
+            gridPane.add(dbInMemoryComboBox,1,1);
         }else{
-            gridPane.getChildren().remove(comboBox2);
+            gridPane.getChildren().remove(dbInMemoryComboBox);
         }
     }
 
-    private void comboBox3Selected(){
-        if(comboBox3.getSelectionModel().getSelectedItem().toString().equals(KortingEnum.Korting_Drempel.toString())){
-            drempel = new TextField();
-            drempel.setPromptText("Drempel waarde");
-            gridPane.add(drempel, 2,3);
-        }
-        else if (comboBox3.getSelectionModel().getSelectedItem().toString().equals(KortingEnum.Korting_Groep.toString())){
-                drempel = new TextField();
-                drempel.setPromptText("Groep");
-                gridPane.add(drempel, 2, 3);
-        }
-        else{
-            gridPane.getChildren().remove(drempel);
-        }
+    private void kortingComboBoxSelected(){
+        if (gridPane.getChildren().contains(extraVariable)) gridPane.getChildren().remove(extraVariable);
 
-
+        if(kortingComboBox.getSelectionModel().getSelectedItem().toString().equals(KortingEnum.Korting_Drempel.toString())){
+            extraVariable = new TextField();
+            extraVariable.setPromptText("drempel waarde");
+            gridPane.add(extraVariable, 2,3);
+        }
+        else if (kortingComboBox.getSelectionModel().getSelectedItem().toString().equals(KortingEnum.Korting_Groep.toString())){
+            extraVariable = new TextField();
+            extraVariable.setPromptText("Groep");
+           gridPane.add(extraVariable, 2, 3);
+        }
     }
 
     private void savePreferences(){
         try {
-            if (gridPane.getChildren().contains(comboBox2)) {
-                PropertiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString(), comboBox2.getSelectionModel().getSelectedItem().toString(), LoadSaveEnum.valueOf(comboBox2.getSelectionModel().getSelectedItem().toString()).getOmschrijving());
-            } else {
-                PropertiesLoadWrite.write(comboBox1.getSelectionModel().getSelectedItem().toString());
+            String dbContextSelection = dbContextComboBox.getSelectionModel().getSelectedItem().toString();
+            String kortingSelection = kortingComboBox.getSelectionModel().getSelectedItem().toString();
+            int p = Integer.parseInt(procent.getText());
+            String extraVar =null;
+
+            if (gridPane.getChildren().contains(extraVariable) && !extraVariable.getText().trim().isEmpty()) {
+                if (KortingEnum.Korting_Drempel.equals(KortingEnum.valueOf(kortingSelection))) {
+                    extraVar = extraVariable.getText();
+                    Double.parseDouble(extraVar);
+                }else if(KortingEnum.Korting_Groep.equals(KortingEnum.valueOf(kortingSelection))){
+                    extraVar = extraVariable.getText();
+                }
             }
+
+
+            if (gridPane.getChildren().contains(dbInMemoryComboBox)) {
+                String dbInMemorySelection = dbInMemoryComboBox.getSelectionModel().getSelectedItem().toString();
+                PropertiesLoadWrite.write(dbContextSelection,dbInMemorySelection,LoadSaveEnum.valueOf(dbInMemorySelection).getOmschrijving(),kortingSelection,p,extraVar);
+            } else {
+                PropertiesLoadWrite.write(dbContextSelection,kortingSelection,p,extraVar);
+            }
+
         }catch (DatabaseException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }catch (NullPointerException e){
-            JOptionPane.showMessageDialog(null, "Please fill out each menu",
+            JOptionPane.showMessageDialog(null, "Please fill out each menu/field",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Please fill percentage field with a number",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }

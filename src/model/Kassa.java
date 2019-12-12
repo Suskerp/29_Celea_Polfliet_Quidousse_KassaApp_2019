@@ -1,6 +1,8 @@
 package model;
 
 import database.DatabaseException;
+import database.PropertiesLoadWrite;
+import model.Discount.KortingStrategy;
 import view.Observer;
 
 import java.util.ArrayList;
@@ -21,22 +23,22 @@ public class Kassa {
     private ArrayList<Artikel> scannedItems;
     private LinkedHashMap<Artikel,Integer> klantMap;
     private ArrayList<Artikel> hold;
+    private KortingStrategy kortingStrategy;
 
-    public Kassa(ArrayList<Artikel> artikels) {
-        scan = new InScan(this);
-        afgesloten = new InAfsluit(this);
-        betaald = new InBetaal(this);
-        annuleer = new InAnnulering(this);
-
-        this.artikels = artikels;
+    public Kassa() {
+        this.artikels = PropertiesLoadWrite.readDBContext().load();
+        kortingStrategy = PropertiesLoadWrite.readKorting();
         this.scannedItems = new ArrayList<>();
         this.klantMap = new LinkedHashMap<>();
         this.hold = new ArrayList<>();
-        verkoopState = scan;
     }
 
     void setVerkoopState(VerkoopState verkoopState){
         this.verkoopState = verkoopState;
+    }
+
+    public void scannen(){
+        verkoopState.scan();
     }
 
     public VerkoopState getVerkoopState(){
@@ -54,7 +56,6 @@ public class Kassa {
     public void annuleren(boolean genoegGeld){
         verkoopState.annuleer(genoegGeld);
     }
-
     public ArrayList<Artikel> getArtikels() {
         return artikels;
     }
@@ -92,7 +93,9 @@ public class Kassa {
         return klantMap;
     }
 
-
+    public Double getKorting(){
+        return kortingStrategy.getKorting(artikels);
+    }
 
 
     public void placeOnHold(){
@@ -111,19 +114,23 @@ public class Kassa {
     }
 
 
-    public String getSum(){
+    public Double getSum(){
         double total = 0;
 
         for (Artikel artikel: getScannedItems()){
             total += artikel.getVerkoopprijs();
         }
 
-        return "Total: €"+String.format("%.2f", total);
+        return total;
     }
+
+    public Double getFinalSum(){
+        return getSum() - getKorting();
+    }
+
 
     public VerkoopState getScanbareState(){ return scan;}
     public VerkoopState getAfsluitbareState(){ return afgesloten;}
     public VerkoopState getBetaalbareState(){return betaald;}
     public VerkoopState getAnnuleerbareState(){return annuleer;}
-
 }

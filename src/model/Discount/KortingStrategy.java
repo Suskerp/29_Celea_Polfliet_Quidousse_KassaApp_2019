@@ -8,6 +8,6 @@ import java.util.ArrayList;
  * @author Jef Quidousse
  */
 
-public interface KortingInterface {
+public interface KortingStrategy {
     double getKorting(ArrayList<Artikel> a);
 }

@@ -34,7 +34,7 @@ public class KassaController implements Subject{
 
     public KassaController() {
 
-        kassa = new Kassa(PropertiesLoadWrite.read().load());
+        kassa = new Kassa();
 
         kassaView = new KassaView(this);
         klantView = new KlantView();
@@ -45,7 +45,9 @@ public class KassaController implements Subject{
         registerObserver(klantView);
     }
 
-
+    public double getKorting(){
+        return kassa.getKorting();
+    }
     public void scanItem(String id){
         kassa.scan(id);
         notifyObservers();
@@ -70,7 +72,7 @@ public class KassaController implements Subject{
         notifyObservers();
     }
 
-    public String getSum(){
+    public Double getSum(){
         return kassa.getSum();
     }
 
@@ -95,4 +97,7 @@ public class KassaController implements Subject{
         }
     }
 
+    public double getFinalSum(){
+        return kassa.getFinalSum();
+    }
 }
