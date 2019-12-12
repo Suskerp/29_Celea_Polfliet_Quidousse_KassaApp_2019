@@ -1,22 +1,13 @@
 package controller;
 
-import database.*;
-import database.Enum.ArtikelDBEnum;
-import database.Enum.LoadSaveEnum;
-import database.Strategy.ArtikelDBStrategy;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableMap;
 import model.Artikel;
-import model.Kassa;
+import model.Verkoop;
 import view.KassaView;
 import view.KlantView;
 import view.Observer;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * @author Rafael Polfliet
@@ -26,7 +17,7 @@ public class KassaController implements Subject{
 
     private KlantView klantView;
     private KassaView kassaView;
-    private Kassa kassa;
+    private Verkoop verkoop;
 
     private ArrayList<Observer> observers;
 
@@ -34,7 +25,7 @@ public class KassaController implements Subject{
 
     public KassaController() {
 
-        kassa = new Kassa();
+        verkoop = new Verkoop();
 
         kassaView = new KassaView(this);
         klantView = new KlantView();
@@ -46,38 +37,38 @@ public class KassaController implements Subject{
     }
 
     public double getKorting(){
-        return kassa.getKorting();
+        return verkoop.getKorting();
     }
     public void scanItem(String id){
-        kassa.scan(id);
+        verkoop.scan(id);
         notifyObservers();
     }
 
     public void verwijder(String id){
-        kassa.verwijderFromScannedItems(id);
+        verkoop.verwijderFromScannedItems(id);
         notifyObservers();
     }
 
     public ArrayList<Artikel> getScannedItems(){
-        return kassa.getScannedItems();
+        return verkoop.getScannedItems();
     }
 
     public void placeOnHold(){
-        kassa.placeOnHold();
+        verkoop.placeOnHold();
         notifyObservers();
     }
 
     public void returnFromHold(){
-        kassa.returnFromHold();
+        verkoop.returnFromHold();
         notifyObservers();
     }
 
     public Double getSum(){
-        return kassa.getSum();
+        return verkoop.getSum();
     }
 
     public ArrayList<Artikel> getArtikels(){
-       return kassa.getArtikels();
+       return verkoop.getArtikels();
     }
 
     @Override
@@ -93,11 +84,11 @@ public class KassaController implements Subject{
     @Override
     public void notifyObservers() {
         for (Observer observer:observers){
-            observer.update(kassa.getScannedForKlant(),kassa.getSum());
+            observer.update(verkoop.getScannedForKlant(), verkoop.getSum());
         }
     }
 
     public double getFinalSum(){
-        return kassa.getFinalSum();
+        return verkoop.getFinalSum();
     }
 }

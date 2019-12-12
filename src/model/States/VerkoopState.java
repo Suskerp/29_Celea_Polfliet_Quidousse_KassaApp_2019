@@ -1,4 +1,6 @@
-package model;
+package model.States;
+
+import model.States.StateException;
 
 /**
  * @author Jef Quidousse

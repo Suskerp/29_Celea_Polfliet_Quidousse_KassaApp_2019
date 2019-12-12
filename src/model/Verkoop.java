@@ -3,17 +3,17 @@ package model;
 import database.DatabaseException;
 import database.PropertiesLoadWrite;
 import model.Discount.KortingStrategy;
-import view.Observer;
+import model.States.VerkoopState;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 
 /**
- * @author Rafael
+ * @author Rafael Polfliet - Jef Quidousse
  */
 
-public class Kassa {
+public class Verkoop {
     private VerkoopState verkoopState;
     private VerkoopState scan;
     private VerkoopState afgesloten;
@@ -25,7 +25,7 @@ public class Kassa {
     private ArrayList<Artikel> hold;
     private KortingStrategy kortingStrategy;
 
-    public Kassa() {
+    public Verkoop() {
         this.artikels = PropertiesLoadWrite.readDBContext().load();
         kortingStrategy = PropertiesLoadWrite.readKorting();
         this.scannedItems = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Kassa {
         this.hold = new ArrayList<>();
     }
 
-    void setVerkoopState(VerkoopState verkoopState){
+    public void setVerkoopState(VerkoopState verkoopState){
         this.verkoopState = verkoopState;
     }
 

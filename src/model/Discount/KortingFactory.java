@@ -1,10 +1,5 @@
 package model.Discount;
 
-import model.DrempelKorting;
-import model.DuursteKorting;
-import model.GroepKorting;
-import model.ModelException;
-
 /**
  * @author Jef Quidousse
  */

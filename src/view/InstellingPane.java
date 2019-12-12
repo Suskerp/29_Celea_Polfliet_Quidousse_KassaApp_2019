@@ -45,6 +45,7 @@ public class InstellingPane extends GridPane {
         
         ObservableList<String> artikelDBContexts = FXCollections.observableList(ArtikelDBEnum.valuesToString());
         dbContextComboBox = new ComboBox();
+        dbContextComboBox.setValue("Selecteer");
         dbContextComboBox.setItems(artikelDBContexts);
 
         gridPane.add(dbContextComboBox,0,1);
@@ -55,6 +56,7 @@ public class InstellingPane extends GridPane {
 
         ObservableList<String> kortingDBContexts = FXCollections.observableList(KortingEnum.valuesToString());
         kortingComboBox = new ComboBox();
+        kortingComboBox.setValue("Selecteer");
         kortingDBContexts.add("Geen korting");
         kortingComboBox.setItems(kortingDBContexts);
 
@@ -90,6 +92,7 @@ public class InstellingPane extends GridPane {
         if (dbContextComboBox.getSelectionModel().getSelectedItem().toString().equals(ArtikelDBEnum.ARTIKEL_DB_MEM.toString())){
             ObservableList<String> loadSaveContext = FXCollections.observableList(LoadSaveEnum.valuesToString());
             dbInMemoryComboBox = new ComboBox();
+            dbInMemoryComboBox.setValue(loadSaveContext.get(0));
             dbInMemoryComboBox.setItems(loadSaveContext);
             gridPane.add(dbInMemoryComboBox,1,1);
         }else{

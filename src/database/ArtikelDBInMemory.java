@@ -7,7 +7,7 @@ import model.Artikel;
 import java.util.ArrayList;
 
 /**
- * @author Rafael
+ * @author Rafael Polfliet
  */
 
 public class ArtikelDBInMemory implements ArtikelDBStrategy {

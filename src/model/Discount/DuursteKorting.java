@@ -1,9 +1,10 @@
-package model;
+package model.Discount;
 
 /**
  * @author Jef Quidousse
  */
 
+import model.Artikel;
 import model.Discount.KortingStrategy;
 
 import java.util.ArrayList;

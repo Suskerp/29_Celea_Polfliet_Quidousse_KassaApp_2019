@@ -9,9 +9,9 @@ import java.util.List;
 
 public enum KortingEnum {
 
-    Korting_Drempel("DrempelKorting","model.DrempelKorting"),
-    Korting_Duurste("DuursteKorting","model.DuursteKorting"),
-    Korting_Groep("GroepsKorting","model.GroepKorting");
+    Korting_Drempel("DrempelKorting","model.Discount.DrempelKorting"),
+    Korting_Duurste("DuursteKorting","model.Discount.DuursteKorting"),
+    Korting_Groep("GroepsKorting","model.Discount.GroepKorting");
 
     private final String omschrijving;
     private final String Klassenaam;
