@@ -1,4 +1,7 @@
 package model;
+/**
+ * @author Jef Quidousse
+ */
 
 import java.io.FileNotFoundException;
 

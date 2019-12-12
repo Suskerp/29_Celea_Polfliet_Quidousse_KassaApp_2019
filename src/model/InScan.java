@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * @author Jef Quidousse
+ */
+
 public class InScan implements VerkoopState{
     Kassa kassa;
 

@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * @author Jef Quidousse
+ */
+
 public class InAnnulering implements VerkoopState{
     Kassa kassa;
 

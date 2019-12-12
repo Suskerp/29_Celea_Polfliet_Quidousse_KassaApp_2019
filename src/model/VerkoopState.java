@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * @author Jef Quidousse
+ */
+
 public interface VerkoopState {
 
     default void scan(){throw new StateException();}

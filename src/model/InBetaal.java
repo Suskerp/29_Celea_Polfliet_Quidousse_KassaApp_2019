@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * @author Jef Quidousse
+ */
+
 public class InBetaal implements  VerkoopState {
     Kassa kassa;
 
