@@ -3,7 +3,6 @@ package view;
  * @author Jef Quidousse
  * */
 
-import controller.ModelException;
 import database.*;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
@@ -12,6 +11,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import model.Artikel;
 import controller.KassaController;
+import model.ModelException;
 
 import javax.swing.*;
 
@@ -26,6 +26,7 @@ public class KassaPane{
     private KassaController kassaController;
     private Button holdButton;
     private Label holdstatus;
+    private Button afsluiten;
 
 
     public KassaPane(KassaController kassaController){

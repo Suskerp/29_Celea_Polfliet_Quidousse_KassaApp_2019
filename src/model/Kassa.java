@@ -1,6 +1,5 @@
 package model;
 
-import controller.ModelException;
 import database.DatabaseException;
 import view.Observer;
 
