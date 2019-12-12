@@ -73,16 +73,21 @@ public class KlantView implements Observer {
 	}
 
 	private void tableInit(){
-		TableColumn<Map.Entry<Artikel, Integer>, String> column1 = new TableColumn<>("Omschrijving");
-		column1.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getOmschrijving()));
 
-		TableColumn<Map.Entry<Artikel, Integer>, String> column2 = new TableColumn<>("Prijs");
-		column2.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getVerkoopprijs().toString()));
+		TableColumn<Map.Entry<Artikel, Integer>, String> column1 = new TableColumn<>("Naam");
+		column1.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getNaam()));
+		column1.setMinWidth(200);
+		
+		TableColumn<Map.Entry<Artikel, Integer>, String> column2 = new TableColumn<>("Omschrijving");
+		column2.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getOmschrijving()));
 
-		TableColumn<Map.Entry<Artikel, Integer>, String> column3 = new TableColumn<>("Aantal");
-		column3.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getValue().toString()));
+		TableColumn<Map.Entry<Artikel, Integer>, String> column3 = new TableColumn<>("Prijs");
+		column3.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getVerkoopprijs().toString()));
 
-		table.getColumns().setAll(column1,column2,column3);
+		TableColumn<Map.Entry<Artikel, Integer>, String> column4 = new TableColumn<>("Aantal");
+		column4.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getValue().toString()));
+
+		table.getColumns().setAll(column1,column2,column3,column4);
 
 		gridPane.add(table,0,0);
 	}

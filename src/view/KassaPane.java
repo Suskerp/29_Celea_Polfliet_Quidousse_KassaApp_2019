@@ -144,15 +144,21 @@ public class KassaPane{
     }
 
     private void tableInit(){
+
+        TableColumn<Artikel, String> colName = new TableColumn<>("Naam");
+        colName.setCellValueFactory(new PropertyValueFactory<>("Naam"));
+        colName.setMinWidth(200);
+        
         TableColumn<Artikel, String> colOmschrijving = new TableColumn<>("Omschrijving");
         colOmschrijving.setCellValueFactory(new PropertyValueFactory<>("omschrijving"));
         colOmschrijving.setMinWidth(200);
+        
 
         TableColumn<Artikel,Double> colVerkoopprijs = new TableColumn<>("Verkoopprijs");
         colVerkoopprijs.setCellValueFactory(new PropertyValueFactory<>("verkoopprijs") );
         colVerkoopprijs.setMinWidth(50);
 
-        table.getColumns().addAll(colOmschrijving,colVerkoopprijs);
+        table.getColumns().addAll(colName,colOmschrijving,colVerkoopprijs);
     }
 
     private void close(){

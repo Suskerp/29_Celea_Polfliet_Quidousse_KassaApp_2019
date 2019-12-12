@@ -94,7 +94,7 @@ public class Verkoop {
     }
 
     public Double getKorting(){
-        return kortingStrategy.getKorting(artikels);
+        return kortingStrategy.getKorting(getScannedItems());
     }
 
 
