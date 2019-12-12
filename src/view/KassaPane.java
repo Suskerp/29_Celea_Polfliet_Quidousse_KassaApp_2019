@@ -83,13 +83,7 @@ public class KassaPane{
     }
 
     private void getSum(){
-        double total = 0;
-
-        for (Artikel artikel: kassaController.getScannedItems()){
-            total += artikel.getVerkoopprijs();
-        }
-        
-        sum.setText("Total: €"+String.format("%.2f", total));
+       sum.setText(kassaController.getSum());
     }
 
 

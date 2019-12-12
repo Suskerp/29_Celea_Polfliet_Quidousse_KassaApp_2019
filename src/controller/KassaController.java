@@ -104,7 +104,7 @@ public class KassaController implements Subject{
     @Override
     public void notifyObservers() {
         for (Observer observer:observers){
-            observer.update(getScannedForKlant());
+            observer.update(getScannedForKlant(),getSum());
         }
     }
 
@@ -125,4 +125,16 @@ public class KassaController implements Subject{
         hold.clear();
         notifyObservers();
     }
+
+
+    public String getSum(){
+        double total = 0;
+
+        for (Artikel artikel: getScannedItems()){
+            total += artikel.getVerkoopprijs();
+        }
+
+        return "Total: €"+String.format("%.2f", total);
+    }
+
 }

@@ -63,21 +63,13 @@ public class KlantView implements Observer {
 
 
 
-	private String getSum(){
-		double sum = 0;
 
-		for (Map.Entry<Artikel,Integer> entry:map.entrySet()){
-			sum += entry.getKey().getVerkoopprijs() * entry.getValue();
-		}
-		return "Total: €"+ String.format("%.2f", sum);
-	}
-
-	public void update(Object arg) {
+	public void update(Object arg,String sumText) {
 		map = (LinkedHashMap<Artikel,Integer>) arg;;
 		items = FXCollections.observableArrayList(map.entrySet());
 		table.setItems(items);
 		table.refresh();
-		sum.setText(getSum());
+		sum.setText(sumText);
 	}
 
 	private void tableInit(){
