@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * @author Jef Quidousse
+ */
+
+import model.Discount.KortingInterface;
+
 import java.util.ArrayList;
 
 public class GroepKorting implements KortingInterface {
