@@ -12,18 +12,48 @@ import java.util.LinkedHashMap;
  */
 
 public class Kassa {
+    private VerkoopState verkoopState;
+    private VerkoopState scan;
+    private VerkoopState afgesloten;
+    private VerkoopState betaald;
+    private VerkoopState annuleer;
     private ArrayList<Artikel> artikels;
     private ArrayList<Artikel> scannedItems;
     private LinkedHashMap<Artikel,Integer> klantMap;
     private ArrayList<Artikel> hold;
 
     public Kassa(ArrayList<Artikel> artikels) {
+        scan = new InScan(this);
+        afgesloten = new InAfsluit(this);
+        betaald = new InBetaal(this);
+        annuleer = new InAnnulering(this);
+
         this.artikels = artikels;
         this.scannedItems = new ArrayList<>();
         this.klantMap = new LinkedHashMap<>();
         this.hold = new ArrayList<>();
+        verkoopState = scan;
     }
 
+    void setVerkoopState(VerkoopState verkoopState){
+        this.verkoopState = verkoopState;
+    }
+
+    public VerkoopState getVerkoopState(){
+        return this.verkoopState;
+    }
+
+    public void afsluiten(){
+        verkoopState.afgesloten();
+    }
+
+    public void betalen(boolean genoegGeld){
+        verkoopState.betaald(genoegGeld);
+    }
+
+    public void annuleren(boolean genoegGeld){
+        verkoopState.annuleer(genoegGeld);
+    }
 
     public ArrayList<Artikel> getArtikels() {
         return artikels;
@@ -90,5 +120,10 @@ public class Kassa {
 
         return "Total: €"+String.format("%.2f", total);
     }
+
+    public VerkoopState getScanbareState(){ return scan;}
+    public VerkoopState getAfsluitbareState(){ return afgesloten;}
+    public VerkoopState getBetaalbareState(){return betaald;}
+    public VerkoopState getAnnuleerbareState(){return annuleer;}
 
 }
