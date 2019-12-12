@@ -13,10 +13,10 @@ public class DrempelKorting implements KortingInterface {
     private int procent;
     private ArrayList<Artikel> artikels;
 
-    public DrempelKorting(double drempelWaarde, int procent, ArrayList<Artikel> artikels){
+    public DrempelKorting(double drempelWaarde, int procent){
         setDrempelWaarde(drempelWaarde);
         setProcent(procent);
-        this.artikels = artikels;
+        setArtikels(artikels);
     }
 
     private void setProcent(int p){
@@ -27,9 +27,13 @@ public class DrempelKorting implements KortingInterface {
         this.drempelWaarde = x;
     }
 
+    private void setArtikels(ArrayList artikels){
+        this.artikels = artikels;
+    }
+
 
     @Override
-    public double getKorting() {
+    public double getKorting(ArrayList<Artikel> artikels) {
         double r = 0;
         double p = procent/100;
         for (Artikel a : artikels){

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import model.Discount.KortingEnum;
@@ -24,6 +25,7 @@ public class InstellingPane extends GridPane {
     private ComboBox comboBox3;
     private Label label1;
     private Label label2;
+    private TextField drempel;
     private Button button;
 
     public InstellingPane() {
@@ -56,6 +58,12 @@ public class InstellingPane extends GridPane {
 
         gridPane.add(comboBox3, 0,3);
 
+        TextField procent = new TextField();
+        procent.setPromptText("Procent korting");
+        gridPane.add(procent, 1, 3);
+
+
+
         button = new Button("Save");
         gridPane.add(button,2,0);
 
@@ -65,6 +73,10 @@ public class InstellingPane extends GridPane {
 
         button.setOnAction((Save) ->{
            savePreferences();
+        });
+
+        comboBox3.setOnAction((optionselected) ->{
+            comboBox3Selected();
         });
     }
 
@@ -81,6 +93,24 @@ public class InstellingPane extends GridPane {
         }else{
             gridPane.getChildren().remove(comboBox2);
         }
+    }
+
+    private void comboBox3Selected(){
+        if(comboBox3.getSelectionModel().getSelectedItem().toString().equals(KortingEnum.Korting_Drempel.toString())){
+            drempel = new TextField();
+            drempel.setPromptText("Drempel waarde");
+            gridPane.add(drempel, 2,3);
+        }
+        else if (comboBox3.getSelectionModel().getSelectedItem().toString().equals(KortingEnum.Korting_Groep.toString())){
+                drempel = new TextField();
+                drempel.setPromptText("Groep");
+                gridPane.add(drempel, 2, 3);
+        }
+        else{
+            gridPane.getChildren().remove(drempel);
+        }
+
+
     }
 
     private void savePreferences(){

@@ -12,7 +12,7 @@ public class DuursteKorting implements KortingInterface {
     private int procent;
     private ArrayList<Artikel> artikels;
 
-    public DuursteKorting(int procent, ArrayList<Artikel> artikels){
+    public DuursteKorting(int procent){
         setProcent(procent);
         this.artikels = artikels;
     }
@@ -23,7 +23,7 @@ public class DuursteKorting implements KortingInterface {
 
 
     @Override
-    public double getKorting() {
+    public double getKorting(ArrayList<Artikel> artikels) {
         double r = procent/100;
 
         Artikel a = new Artikel("r", "r", "r", 0.0, 0);

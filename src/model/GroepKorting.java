@@ -14,7 +14,7 @@ public class GroepKorting implements KortingInterface {
     private String groep;
 
 
-    public GroepKorting(int procent, ArrayList<Artikel> artikels, String groep){
+    public GroepKorting(int procent, String groep){
         this.artikels = artikels;
         setProcent(procent);
         setGroep(groep);
@@ -29,7 +29,7 @@ public class GroepKorting implements KortingInterface {
     }
 
     @Override
-    public double getKorting() {
+    public double getKorting(ArrayList<Artikel> artikels) {
         double r = procent/100;
         double totaal = 0;
         for (Artikel a : artikels){
