@@ -12,4 +12,5 @@ public interface VerkoopState {
     default void afgesloten(){throw new StateException();}
     default void betaald(boolean genoegGeld){throw new StateException();}
     default void annuleer(boolean genoegGeld){throw new StateException();}
+    default void hold(){throw new StateException();}
 }

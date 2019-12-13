@@ -3,7 +3,7 @@ package model;
 import database.DatabaseException;
 import database.PropertiesLoadWrite;
 import model.Discount.KortingStrategy;
-import model.States.VerkoopState;
+import model.States.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,18 +19,27 @@ public class Verkoop {
     private VerkoopState afgesloten;
     private VerkoopState betaald;
     private VerkoopState annuleer;
+    private VerkoopState hold;
     private ArrayList<Artikel> artikels;
     private ArrayList<Artikel> scannedItems;
     private LinkedHashMap<Artikel,Integer> klantMap;
-    private ArrayList<Artikel> hold;
+
     private KortingStrategy kortingStrategy;
 
     public Verkoop() {
+        scan = new InScan(this);
+        afgesloten = new InAfsluit(this);
+        betaald = new InBetaal(this);
+        annuleer = new InAnnulering(this);
+        hold = new InHold(this);
+
+        verkoopState = scan;
+
         this.artikels = PropertiesLoadWrite.readDBContext().load();
         kortingStrategy = PropertiesLoadWrite.readKorting();
         this.scannedItems = new ArrayList<>();
         this.klantMap = new LinkedHashMap<>();
-        this.hold = new ArrayList<>();
+
     }
 
     public void setVerkoopState(VerkoopState verkoopState){
@@ -98,19 +107,19 @@ public class Verkoop {
     }
 
 
-    public void placeOnHold(){
-        if (scannedItems.size() == 0) throw new ModelException("Can't place an empty cart on hold");
+   public void placeOnHold(){
+        /*if (scannedItems.size() == 0) throw new ModelException("Can't place an empty cart on hold");
         if (hold.size() != 0) throw new ModelException("Already a cart on hold");
         hold.addAll(scannedItems);
         scannedItems.clear();
-        klantMap.clear();
+        klantMap.clear();*/
     }
 
     public void returnFromHold(){
-        if (scannedItems.size() != 0) throw new ModelException("Current shopping cart has to be empty before returning cart on hold");
+        /*if (scannedItems.size() != 0) throw new ModelException("Current shopping cart has to be empty before returning cart on hold");
         if (hold.size() == 0) throw new ModelException("There is no cart on hold that can be returned");
         scannedItems.addAll(hold);
-        hold.clear();
+        hold.clear();*/
     }
 
 
@@ -133,4 +142,5 @@ public class Verkoop {
     public VerkoopState getAfsluitbareState(){ return afgesloten;}
     public VerkoopState getBetaalbareState(){return betaald;}
     public VerkoopState getAnnuleerbareState(){return annuleer;}
+    public VerkoopState getHoldState(){return hold;}
 }

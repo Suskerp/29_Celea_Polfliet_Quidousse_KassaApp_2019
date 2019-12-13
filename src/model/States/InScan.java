@@ -12,4 +12,7 @@ public class InScan implements VerkoopState {
         verkoop.setVerkoopState(verkoop.getAfsluitbareState());
     }
 
+    @Override
+    public void hold(){verkoop.setVerkoopState(verkoop.getHoldState());}
+
 }
