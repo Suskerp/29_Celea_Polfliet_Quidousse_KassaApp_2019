@@ -9,14 +9,11 @@ import controller.KassaController;
  * @author Rafael Polfliet - Jef Quidousse
  */
 public class KassaMainPane extends BorderPane {
-    private KassaController kassaController;
 	public KassaMainPane(KassaController kassaController){
-		this.kassaController = kassaController;
-
-	    TabPane tabPane = new TabPane();
+		TabPane tabPane = new TabPane();
 	    KassaPane kassaPane = new KassaPane(kassaController);
         Tab kassaTab = new Tab("Kassa", kassaPane.getLayout());
-        ProductOverviewPane productOverviewPane = new ProductOverviewPane(kassaController);
+        ProductOverviewPane productOverviewPane = kassaController.getProductOverviewPane();
         Tab artikelTab = new Tab("Artikelen",productOverviewPane.getLayout());
         InstellingPane instellingPane = new InstellingPane();
         Tab instellingTab = new Tab("Instellingen",instellingPane.getLayout());

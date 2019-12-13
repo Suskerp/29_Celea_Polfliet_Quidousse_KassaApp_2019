@@ -15,5 +15,5 @@ public class InHold implements  VerkoopState{
     }
 
     @Override
-    public void annuleer(boolean genoegGeld){verkoop.setVerkoopState(verkoop.getAnnuleerbareState());}
+    public void annuleer(){verkoop.setVerkoopState(verkoop.getAnnuleerbareState());}
 }

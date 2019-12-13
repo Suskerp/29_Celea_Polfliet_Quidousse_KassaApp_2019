@@ -14,23 +14,14 @@ public class InAfsluit implements VerkoopState {
     }
 
     @Override
-    public void betaald(boolean genoegGeld) {
-        if(genoegGeld) {
-            verkoop.setVerkoopState(verkoop.getBetaalbareState());
-        }
-        else{
-            verkoop.setVerkoopState(verkoop.getAfsluitbareState());
-        }
+    public void betaald() {
+        verkoop.setVerkoopState(verkoop.getBetaalbareState());
     }
 
     @Override
-    public void annuleer(boolean genoegGeld){
-        if(!genoegGeld){
-            verkoop.setVerkoopState(verkoop.getAnnuleerbareState());
-        }
-        else{
-            verkoop.setVerkoopState(verkoop.getBetaalbareState());
-        }
+    public void annuleer(){
+        verkoop.setVerkoopState(verkoop.getAnnuleerbareState());
+
     }
 
 

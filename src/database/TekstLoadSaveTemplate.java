@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public abstract class TekstLoadSaveTemplate implements LoadSaveStrategy {
     private String fileNaam;
 
+
+    public TekstLoadSaveTemplate(String fileNaam) {
+        this.fileNaam = fileNaam;
+    }
+
     public abstract ArrayList<Artikel> load();
     public void save(ArrayList<Object> objects){
         try {

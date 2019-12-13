@@ -1,21 +1,15 @@
 package view;
 
-import database.ArtikelDBInMemory;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Artikel;
@@ -26,7 +20,7 @@ import java.util.*;
  * @author Jef Quidousse & Luca Celea
  * */
 
-public class KlantView implements Observer {
+public class KlantView implements ObserverShoppingCart {
 	private Stage stage = new Stage();
 	private	TableView<Map.Entry<Artikel,Integer>> table;
 	private Label sum;
@@ -67,6 +61,7 @@ public class KlantView implements Observer {
 	public void update(Object arg,Double sumText) {
 		map = (LinkedHashMap<Artikel,Integer>) arg;;
 		items = FXCollections.observableArrayList(map.entrySet());
+		table.getItems().clear();
 		table.setItems(items);
 		table.refresh();
 		sum.setText("Totaal: €"+String.format("%.2f",sumText));

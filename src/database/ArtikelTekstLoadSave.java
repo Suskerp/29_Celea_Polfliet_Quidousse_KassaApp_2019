@@ -14,7 +14,8 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
     private File file;
 
     public ArtikelTekstLoadSave(String fileNaam){
-        this.file =  new File(fileNaam);
+        super(fileNaam);
+        this.file = new File(fileNaam);
     }
 
     public File getFile() {

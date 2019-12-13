@@ -1,13 +1,16 @@
 package model;
 
 import database.DatabaseException;
+import database.Factory.DBInMemoryFactory;
 import database.PropertiesLoadWrite;
+import database.Strategy.ArtikelDBStrategy;
 import model.Discount.KortingStrategy;
 import model.States.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @author Rafael Polfliet - Jef Quidousse
@@ -23,7 +26,7 @@ public class Verkoop {
     private ArrayList<Artikel> artikels;
     private ArrayList<Artikel> scannedItems;
     private LinkedHashMap<Artikel,Integer> klantMap;
-
+    private ArtikelDBStrategy artikelDBStrategy;
     private KortingStrategy kortingStrategy;
 
     public Verkoop() {
@@ -34,8 +37,8 @@ public class Verkoop {
         hold = new InHold(this);
 
         verkoopState = scan;
-
-        this.artikels = PropertiesLoadWrite.readDBContext().load();
+        artikelDBStrategy = PropertiesLoadWrite.readDBContext();
+        this.artikels = artikelDBStrategy.load();
         kortingStrategy = PropertiesLoadWrite.readKorting();
         this.scannedItems = new ArrayList<>();
         this.klantMap = new LinkedHashMap<>();
@@ -46,8 +49,18 @@ public class Verkoop {
         this.verkoopState = verkoopState;
     }
 
-    public void scannen(){
-        verkoopState.scan();
+    public void scannen(String id){
+        if (verkoopState == scan) {
+            Boolean found = false;
+            for (Artikel artikel : artikels) {
+                if (artikel.getCode().equalsIgnoreCase(id)) {
+                    scannedItems.add(artikel);
+                    found = true;
+                }
+            }
+            if (!found) throw new DatabaseException("This item id doesn't exist");
+            verkoopState = scan;
+        }else throw new StateException("Kan nu geen artikel meer toevoegen");
     }
 
     public VerkoopState getVerkoopState(){
@@ -55,44 +68,51 @@ public class Verkoop {
     }
 
     public void afsluiten(){
-        verkoopState.afgesloten();
+        if (verkoopState != scan) throw new StateException("Verkoop al afgesloten");
+        verkoopState = afgesloten;
     }
 
-    public void betalen(boolean genoegGeld){
-        verkoopState.betaald(genoegGeld);
+    public void betalen(){
+        verkoopState = betaald;
+        save();
+    }
+    public void placeOnHold(){
+        if (verkoopState == scan){
+            this.verkoopState = hold;
+        }else throw new StateException("Kan de winkelwagen kan niet meer op hold zetten");
+
     }
 
-    public void annuleren(boolean genoegGeld){
-        verkoopState.annuleer(genoegGeld);
+    public void returnFromHold(){
+        this.verkoopState = scan;
+    }
+
+    public void annuleren(){
+        verkoopState = annuleer;
     }
     public ArrayList<Artikel> getArtikels() {
         return artikels;
     }
 
-    public void scan(String id) {
-        Boolean found = false;
-        for (Artikel artikel:artikels){
-            if (artikel.getCode().equalsIgnoreCase(id)){
-                scannedItems.add(artikel);
-                found = true;
-            }
-        }
-        if (!found) throw new DatabaseException("This item id doesn't exist");
-    }
+
 
     public ArrayList<Artikel> getScannedItems() {
-        return scannedItems;
+        ArrayList<Artikel> out = new ArrayList<>();
+        out.addAll(scannedItems);
+        return out;
     }
 
     public void verwijderFromScannedItems(String id) {
-        Artikel artikelTBRemoved = null;
-        for (Artikel artikel:scannedItems){
-            if (artikel.getCode().equalsIgnoreCase(id))  artikelTBRemoved = artikel;
-        }
-        if (artikelTBRemoved !=null) {
-            scannedItems.remove(artikelTBRemoved);
-            klantMap.clear();
-        }
+        if (verkoopState == scan || verkoopState == afgesloten) {
+            Artikel artikelTBRemoved = null;
+            for (Artikel artikel : scannedItems) {
+                if (artikel.getCode().equalsIgnoreCase(id)) artikelTBRemoved = artikel;
+            }
+            if (artikelTBRemoved != null) {
+                scannedItems.remove(artikelTBRemoved);
+                klantMap.clear();
+            }
+        }else throw new StateException("Kan nu geen artikel meer verwijderen");
     }
 
     public LinkedHashMap<Artikel,Integer> getScannedForKlant(){
@@ -103,23 +123,8 @@ public class Verkoop {
     }
 
     public Double getKorting(){
+        if (verkoopState != afgesloten) throw new StateException("Kan korting niet berekening terwijl er nog gescand wordt");
         return kortingStrategy.getKorting(getScannedItems());
-    }
-
-
-   public void placeOnHold(){
-        /*if (scannedItems.size() == 0) throw new ModelException("Can't place an empty cart on hold");
-        if (hold.size() != 0) throw new ModelException("Already a cart on hold");
-        hold.addAll(scannedItems);
-        scannedItems.clear();
-        klantMap.clear();*/
-    }
-
-    public void returnFromHold(){
-        /*if (scannedItems.size() != 0) throw new ModelException("Current shopping cart has to be empty before returning cart on hold");
-        if (hold.size() == 0) throw new ModelException("There is no cart on hold that can be returned");
-        scannedItems.addAll(hold);
-        hold.clear();*/
     }
 
 
@@ -134,7 +139,20 @@ public class Verkoop {
     }
 
     public Double getFinalSum(){
-        return getSum() - getKorting();
+        if (verkoopState == afgesloten) {
+            return getSum() - getKorting();
+        }else throw new StateException("Kan eindsom niet berekenen terwijl er nog gescand wordt");
+    }
+
+
+    private void save(){
+        if (this.verkoopState != betaald) throw new StateException("Kan niet saven als de lijst nog niet betaald is");
+        for (Map.Entry<Artikel,Integer> entry:getScannedForKlant().entrySet()){
+            artikels.get(artikels.indexOf(entry.getKey())).setStock(entry.getKey().getStock()-entry.getValue());
+        }
+        ArrayList<Object> out = new ArrayList<>();
+        out.addAll(artikels);
+        artikelDBStrategy.save(out);
     }
 
 

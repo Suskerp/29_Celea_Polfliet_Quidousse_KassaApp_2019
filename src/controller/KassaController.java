@@ -1,94 +1,177 @@
 package controller;
 
 import model.Artikel;
+import model.States.*;
 import model.Verkoop;
-import view.KassaView;
-import view.KlantView;
-import view.Observer;
+import view.*;
 
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
  * @author Rafael Polfliet
  */
 
-public class KassaController implements Subject{
+public class KassaController implements SubjectShoppingCart, SubjectInventory {
 
     private KlantView klantView;
     private KassaView kassaView;
-    private Verkoop verkoop;
-
-    private ArrayList<Observer> observers;
+    private ProductOverviewPane productOverviewPane;
+    private ArrayList<Verkoop> verkopen;
+    private int huidigeVerkoop;
+    private ArrayList<ObserverShoppingCart> observerShoppingCarts;
+    private ArrayList<ObserverInventory> observerInventories;
 
 
 
     public KassaController() {
 
-        verkoop = new Verkoop();
+        verkopen = new ArrayList<>();
 
+        verkopen.add(new Verkoop());
+        huidigeVerkoop = 0;
+
+        productOverviewPane = new ProductOverviewPane(this);
         kassaView = new KassaView(this);
         klantView = new KlantView();
 
-        observers = new ArrayList<>();
+        observerShoppingCarts = new ArrayList<>();
+        observerInventories = new ArrayList<>();
 
-
-        registerObserver(klantView);
+        registerObserverShoppingCart(klantView);
+        registerObserverInventory(productOverviewPane);
     }
 
+    private Verkoop getHuidigeVerkoop(){
+        return verkopen.get(huidigeVerkoop);
+    }
+
+    public VerkoopState getHuidigeVerkoopState(){
+        return getHuidigeVerkoop().getVerkoopState();
+    }
     public double getKorting(){
-        return verkoop.getKorting();
+        return getHuidigeVerkoop().getKorting();
     }
     public void scanItem(String id){
-        verkoop.scan(id);
-        notifyObservers();
+        try {
+            getHuidigeVerkoop().scannen(id);
+            notifyObserversShoppingCart();
+        }catch (StateException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void verwijder(String id){
-        verkoop.verwijderFromScannedItems(id);
-        notifyObservers();
+        getHuidigeVerkoop().verwijderFromScannedItems(id);
+        notifyObserversShoppingCart();
+    }
+    public void annuleren(){
+        getHuidigeVerkoop().annuleren();
+        holdCheck();
+        notifyObserversShoppingCart();
+    }
+    public void betalen(){
+       getHuidigeVerkoop().betalen();
+       holdCheck();
+       notifyObserversShoppingCart();
+       notifyObserversInventory();
     }
 
+    private void holdCheck() {
+        int holdIndex = getHoldIndex();
+        int huidigeIndex = verkopen.size()-1;
+        if (holdIndex >= 0) {
+            if (huidigeIndex - holdIndex >= 3) {
+                verkopen.get(holdIndex).annuleren();
+                verkopen.add(new Verkoop());
+                huidigeVerkoop = verkopen.size()-1;
+            } else {
+                verkopen.get(holdIndex).returnFromHold();
+                huidigeVerkoop = holdIndex;
+            }
+        } else {
+            verkopen.add(new Verkoop());
+            huidigeVerkoop = verkopen.size()-1;
+        }
+    }
+    public void afsluiten(){
+        getHuidigeVerkoop().afsluiten();
+    }
+
+
     public ArrayList<Artikel> getScannedItems(){
-        return verkoop.getScannedItems();
+        return getHuidigeVerkoop().getScannedItems();
+    }
+
+    private int getHoldIndex(){
+        for (Verkoop verkoop:verkopen){
+            if (verkoop.getVerkoopState() == verkoop.getHoldState()){
+                return verkopen.indexOf(verkoop);
+            }
+        }
+        return -1;
     }
 
     public void placeOnHold(){
-        verkoop.placeOnHold();
-        notifyObservers();
+        if (getHoldIndex() < 0) {
+            getHuidigeVerkoop().placeOnHold();
+            verkopen.add(new Verkoop());
+            huidigeVerkoop = verkopen.size()-1;
+            notifyObserversShoppingCart();
+        }else throw new StateException("Al een verkoop op hold");
     }
 
-    public void returnFromHold(){
-        verkoop.returnFromHold();
-        notifyObservers();
-    }
 
     public Double getSum(){
-        return verkoop.getSum();
+        return getHuidigeVerkoop().getSum();
     }
 
     public ArrayList<Artikel> getArtikels(){
-       return verkoop.getArtikels();
+       return getHuidigeVerkoop().getArtikels();
     }
 
     @Override
-    public void registerObserver(Observer e) {
-        observers.add(e);
+    public void registerObserverShoppingCart(ObserverShoppingCart e) {
+        observerShoppingCarts.add(e);
     }
 
     @Override
-    public void removeObserver(Observer e) {
-        observers.remove(e);
+    public void removeObserverShoppingCart(ObserverShoppingCart e) {
+        observerShoppingCarts.remove(e);
     }
 
     @Override
-    public void notifyObservers() {
-        for (Observer observer:observers){
-            observer.update(verkoop.getScannedForKlant(), verkoop.getSum());
+    public void notifyObserversShoppingCart() {
+        for (ObserverShoppingCart observerShoppingCart : observerShoppingCarts){
+            observerShoppingCart.update(getHuidigeVerkoop().getScannedForKlant(), getHuidigeVerkoop().getSum());
         }
     }
 
     public double getFinalSum(){
-        return verkoop.getFinalSum();
+        return getHuidigeVerkoop().getFinalSum();
+    }
+
+
+    @Override
+    public void registerObserverInventory(ObserverInventory e) {
+        observerInventories.add(e);
+    }
+
+    @Override
+    public void removeObserverInventory(ObserverInventory e) {
+        observerInventories.remove(e);
+    }
+
+    @Override
+    public void notifyObserversInventory() {
+        for (ObserverInventory observerInventory:observerInventories){
+            observerInventory.update(getHuidigeVerkoop().getArtikels());
+        }
+    }
+
+    public ProductOverviewPane getProductOverviewPane() {
+        return productOverviewPane;
     }
 }

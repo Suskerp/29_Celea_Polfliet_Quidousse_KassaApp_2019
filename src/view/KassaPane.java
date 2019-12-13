@@ -12,6 +12,8 @@ import javafx.scene.layout.GridPane;
 import model.Artikel;
 import controller.KassaController;
 import model.ModelException;
+import model.States.InAfsluit;
+import model.States.StateException;
 
 import javax.swing.*;
 
@@ -24,11 +26,13 @@ public class KassaPane{
     private Label sum;
     private TextField remove;
     private KassaController kassaController;
-    private Button holdButton;
-    private Label holdstatus;
     private Button afsluiten;
     private Label kortingLabel;
     private Label finalSumLabel;
+    private Button annuleren;
+    private Button hold;
+    private Button betaal;
+
 
 
     public KassaPane(KassaController kassaController){
@@ -36,14 +40,16 @@ public class KassaPane{
         this.kassaController = kassaController;
 
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(25);
+        col1.setPercentWidth(20);
         ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(25);
+        col2.setPercentWidth(20);
         ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(25);
+        col3.setPercentWidth(20);
         ColumnConstraints col4 = new ColumnConstraints();
-        col4.setPercentWidth(25);
-        gridPane.getColumnConstraints().addAll(col1,col2,col3,col4);
+        col4.setPercentWidth(20);
+        ColumnConstraints col5 = new ColumnConstraints();
+        col5.setPercentWidth(20);
+        gridPane.getColumnConstraints().addAll(col1,col2,col3,col4,col5);
 
 
         searchText = new TextField();
@@ -51,23 +57,25 @@ public class KassaPane{
         sum= new Label();
         remove = new TextField();
         remove.setPromptText("Remove a single product");
-        holdButton = new Button("Place cart on hold");
-        holdstatus = new Label("No cart on hold");
         afsluiten = new Button("Verkoop afsluiten");
         kortingLabel = new Label();
         finalSumLabel = new Label();
+        annuleren = new Button("Annuleer verkoop");
+        hold = new Button("Place on hold");
+        betaal = new Button("Betalen");
 
         tableInit();
 
         gridPane.add(sum,0,2);
-        gridPane.add(table,0, 1,4,1);
+        gridPane.add(table,0, 1,5,1);
         gridPane.add(remove,1,0);
-        gridPane.add(holdButton,2,0);
-        gridPane.add(holdstatus,3,0);
         gridPane.add(searchText,0,0);
         gridPane.add(afsluiten,3,2);
         gridPane.add(kortingLabel,1,2);
         gridPane.add(finalSumLabel,2,2);
+        gridPane.add(annuleren,3,0);
+        gridPane.add(hold,2,0);
+        gridPane.add(betaal,4,0);
 
 
         searchText.setOnAction((entered) ->{
@@ -78,14 +86,21 @@ public class KassaPane{
             remove();
         });
 
-        holdButton.setOnAction((pressed) ->{
-            hold();
-        });
         afsluiten.setOnAction((pressed) ->{
             close();
         });
 
+        annuleren.setOnAction((pressed) ->{
+            annuleren();
+        });
 
+        hold.setOnAction((pressed) ->{
+            hold();
+        });
+
+        betaal.setOnAction((pressed)->{
+            betaal();
+        });
 
     }
 
@@ -94,7 +109,7 @@ public class KassaPane{
     }
 
     private void getSum(){
-       sum.setText("Korting: €"+String.format("%.2f",kassaController.getSum()));
+       sum.setText("Totaal: €"+String.format("%.2f",kassaController.getSum()));
     }
 
 
@@ -105,9 +120,8 @@ public class KassaPane{
                 table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
                 getSum();
                 searchText.clear();
-                kassaController.notifyObservers();
             }
-        }catch (DatabaseException e){
+        }catch (DatabaseException | StateException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -118,28 +132,12 @@ public class KassaPane{
             kassaController.verwijder(remove.getText());
             table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
             remove.clear();
+            table.refresh();
             getSum();
-        }
-    }
 
-    private void hold(){
-        try {
-            if (holdButton.getText().equalsIgnoreCase("Place cart on hold")) {
-                kassaController.placeOnHold();
-                holdButton.setText("Remove cart from hold");
-                holdstatus.setText("A cart is on hold");
-                table.refresh();
-                getSum();
-            } else {
-                kassaController.returnFromHold();
-                holdButton.setText("Place cart on hold");
-                holdstatus.setText("No cart on hold");
-                table.refresh();
-                getSum();
+            if (kassaController.getHuidigeVerkoopState() instanceof InAfsluit){
+                kortingEnEindSom();
             }
-        }catch (ModelException e){
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -162,8 +160,61 @@ public class KassaPane{
     }
 
     private void close(){
-        kortingLabel.setText("Korting: €"+String.format("%.2f", kassaController.getKorting()));
-        finalSumLabel.setText("Eind bedrag: €"+String.format("%.2f", kassaController.getFinalSum()));
+        try {
+            kassaController.afsluiten();
+            kortingLabel.setText("Korting: €"+String.format("%.2f", kassaController.getKorting()));
+            finalSumLabel.setText("Eind bedrag: €"+String.format("%.2f", kassaController.getFinalSum()));
+        }catch (StateException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
+
+    private void annuleren(){
+        int reply = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u wilt annuleren?", "Annuleren", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+
+            kassaController.annuleren();
+            table.getItems().clear();
+            table.refresh();
+            table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
+            getSum();
+            kortingLabel.setText("");
+            finalSumLabel.setText("");
+        }
+    }
+
+    private void kortingEnEindSom(){
+        kortingLabel.setText("Korting: €"+String.format("%.2f",kassaController.getKorting()));
+        finalSumLabel.setText("Eindsom: €"+String.format("%.2f",kassaController.getFinalSum()));
+    }
+
+
+    private void hold(){
+        int reply = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u dit item op hold wilt zetten?", "Annuleren", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            kassaController.placeOnHold();
+            table.getItems().clear();
+            table.refresh();
+            getSum();
+            kortingLabel.setText("");
+            finalSumLabel.setText("");
+        }
+    }
+
+    private void betaal(){
+        try {
+            kassaController.betalen();
+            table.getItems().clear();
+            table.refresh();
+            table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
+            getSum();
+            kortingLabel.setText("");
+            finalSumLabel.setText("");
+        }catch (StateException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

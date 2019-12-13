@@ -72,7 +72,7 @@ public class Artikel implements Comparable<Artikel>{
 
     @Override
     public String toString(){
-        return this.getCode() + "," + this.getNaam() + "," + this.getOmschrijving() + "," + this.getVerkoopprijs() + "," + this.getStock();
+        return this.getCode() + ";" + this.getNaam() + ";" + this.getOmschrijving() + ";" + this.getVerkoopprijs() + ";" + this.getStock();
     }
 
     @Override
