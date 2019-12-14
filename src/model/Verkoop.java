@@ -76,6 +76,7 @@ public class Verkoop {
         verkoopState = betaald;
         save();
     }
+
     public void placeOnHold(){
         if (verkoopState == scan){
             this.verkoopState = hold;
@@ -115,7 +116,7 @@ public class Verkoop {
         }else throw new StateException("Kan nu geen artikel meer verwijderen");
     }
 
-    public LinkedHashMap<Artikel,Integer> getScannedForKlant(){
+    public LinkedHashMap<Artikel,Integer> getMapOfScannedItems(){
         for (Artikel artikel:scannedItems){
             klantMap.put(artikel, Collections.frequency(scannedItems,artikel));
         }
@@ -147,7 +148,7 @@ public class Verkoop {
 
     private void save(){
         if (this.verkoopState != betaald) throw new StateException("Kan niet saven als de lijst nog niet betaald is");
-        for (Map.Entry<Artikel,Integer> entry:getScannedForKlant().entrySet()){
+        for (Map.Entry<Artikel,Integer> entry:getMapOfScannedItems().entrySet()){
             artikels.get(artikels.indexOf(entry.getKey())).setStock(entry.getKey().getStock()-entry.getValue());
         }
         ArrayList<Object> out = new ArrayList<>();

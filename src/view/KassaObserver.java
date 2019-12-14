@@ -1,5 +1,5 @@
 package view;
 
-public interface ObserverInventory {
+public interface KassaObserver {
     void update(Object o);
 }

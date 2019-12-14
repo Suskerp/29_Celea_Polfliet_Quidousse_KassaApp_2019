@@ -1,6 +1,6 @@
-42;Appetizer - Tarragon Chicken;gr0;15.36;12
+42;Appetizer - Tarragon Chicken;gr0;15.36;5
 39;Apple - Northern Spy;gr9;8.99;9
-12;Bacardi Mojito;gr0;9.79;20
+12;Bacardi Mojito;gr0;9.79;17
 21;Bacon Strip Precooked;gr6;1.02;17
 15;Bagel - Ched Chs Presliced;gr0;23.59;2
 66;Bagel - Everything Presliced;gr3;15.65;4
@@ -14,21 +14,21 @@
 76;Broom Handle;gr4;15.01;10
 48;Cabbage - Savoy;gr6;11.25;3
 4;Carrots - Mini, Stem On;gr0;14.75;17
-2;Cheese - Brie,danish;gr8;7.13;7
+2;Cheese - Brie,danish;gr8;7.13;5
 56;Cheese - Cottage Cheese;gr1;10.84;2
 30;Cheese - Goat;gr9;2.02;16
 28;Coffee - French Vanilla Frothy;gr3;8.57;12
 36;Compound - Rum;gr7;17.95;9
-99;Containter - 3oz Microwave Rect.;gr1;2.61;5
+99;Containter - 3oz Microwave Rect.;gr1;2.61;4
 72;Contreau;gr0;3.2;16
 50;Cookie Dough - Double;gr2;15.92;5
-100;Crab Brie In Phyllo;gr7;15.72;6
+100;Crab Brie In Phyllo;gr7;15.72;5
 41;Cup - 8oz Coffee Perforated;gr3;2.7;18
-3;Dried Peach;gr8;15.56;16
+3;Dried Peach;gr8;15.56;15
 78;Ecolab Crystal Fusion;gr1;17.07;11
 16;Edible Flower - Mixed;gr1;19.23;3
 97;Eggplant - Baby;gr8;22.79;8
-1;Energy Drink - Redbull 355ml;gr4;24.73;8
+1;Energy Drink - Redbull 355ml;gr4;24.73;-13
 11;Fish - Halibut, Cold Smoked;gr7;2.54;17
 63;Flavouring - Orange;gr4;3.98;20
 83;Flour - Masa De Harina Mexican;gr5;9.68;6
@@ -37,8 +37,8 @@
 93;Flower - Dish Garden;gr8;8.2;4
 34;Foil Wrap;gr0;18.53;12
 75;Garlic - Peeled;gr0;24.51;17
-40;Hipnotiq Liquor;gr1;21.47;5
 96;Hipnotiq Liquor;gr5;24.01;18
+40;Hipnotiq Liquor;gr1;21.47;5
 68;Jerusalem Artichoke;gr5;20.72;3
 44;Lamb Shoulder Boneless Nz;gr3;7.13;4
 70;Lettuce - Green Leaf;gr2;18.71;10
@@ -53,8 +53,8 @@
 33;Olives - Kalamata;gr6;4.1;3
 17;Pants Custom Dry Clean;gr0;21.05;20
 43;Pastry - Choclate Baked;gr2;1.45;19
-6;Persimmons;gr9;21.28;20
 77;Persimmons;gr3;16.36;12
+6;Persimmons;gr9;21.28;20
 95;Petite Baguette;gr3;1.58;1
 13;Pie Pecan;gr5;1.46;1
 32;Plate Pie Foil;gr1;17.98;15
@@ -70,7 +70,7 @@
 74;Puree - Mango;gr1;9.29;19
 23;Quiche Assorted;gr9;6.93;9
 27;Rum - Spiced, Captain Morgan;gr9;7.41;5
-10;Sage - Fresh;gr2;20.59;6
+10;Sage - Fresh;gr2;20.59;4
 71;Salmon - Canned;gr4;13.82;10
 52;Sauce - Demi Glace;gr1;1.08;3
 65;Scallops 60/80 Iqf;gr3;10.56;2

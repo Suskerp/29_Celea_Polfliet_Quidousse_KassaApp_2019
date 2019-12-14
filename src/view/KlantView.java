@@ -13,20 +13,22 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Artikel;
+import model.Verkoop;
 
 import java.util.*;
 
 /**
- * @author Jef Quidousse & Luca Celea
+ * @author Rafael Polfliet & Jef Quidousse & Luca Celea
  * */
 
-public class KlantView implements ObserverShoppingCart {
+public class KlantView implements KassaObserver {
 	private Stage stage = new Stage();
 	private	TableView<Map.Entry<Artikel,Integer>> table;
 	private Label sum;
 	private GridPane gridPane = new GridPane();
 	private ObservableList<Map.Entry<Artikel, Integer>> items;
 	private Map<Artikel, Integer> map;
+	private ArrayList<Artikel> artikels;
 
 	public KlantView(){
 		stage.setTitle("KLANT VIEW");
@@ -38,7 +40,8 @@ public class KlantView implements ObserverShoppingCart {
 		map = new LinkedHashMap<>();
 		table = new TableView<>();
 		sum = new Label();
-
+		artikels = new ArrayList<>();
+		items = FXCollections.observableArrayList(new ArrayList<>());
 		tableInit();
 
 		gridPane.add(sum,0,1);
@@ -55,16 +58,30 @@ public class KlantView implements ObserverShoppingCart {
 		} );
 	}
 
+	private double calcSum(){
+		Double sum = 0.0;
+
+		for (Artikel artikel:artikels){
+			sum += artikel.getVerkoopprijs();
+		}
+		return sum;
+	}
 
 
 
-	public void update(Object arg,Double sumText) {
-		map = (LinkedHashMap<Artikel,Integer>) arg;;
+	public void update(Object arg) {
+		artikels = (ArrayList<Artikel>) arg;
+		map.clear();
+		for (Artikel artikel:artikels){
+			map.put(artikel, Collections.frequency(artikels,artikel));
+		}
+
+
 		items = FXCollections.observableArrayList(map.entrySet());
 		table.getItems().clear();
 		table.setItems(items);
 		table.refresh();
-		sum.setText("Totaal: €"+String.format("%.2f",sumText));
+		sum.setText("Totaal: €"+String.format("%.2f",calcSum()));
 	}
 
 	private void tableInit(){

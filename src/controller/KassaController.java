@@ -13,15 +13,17 @@ import java.util.ArrayList;
  * @author Rafael Polfliet
  */
 
-public class KassaController implements SubjectShoppingCart, SubjectInventory {
+public class KassaController implements KassaObservable {
 
     private KlantView klantView;
     private KassaView kassaView;
     private ProductOverviewPane productOverviewPane;
+    private LogPane logPane;
     private ArrayList<Verkoop> verkopen;
     private int huidigeVerkoop;
-    private ArrayList<ObserverShoppingCart> observerShoppingCarts;
-    private ArrayList<ObserverInventory> observerInventories;
+    private ArrayList<KassaObserver> observersKlant;
+    private ArrayList<KassaObserver> observersInventories;
+    private ArrayList<KassaObserver> observersLog;
 
 
 
@@ -32,15 +34,20 @@ public class KassaController implements SubjectShoppingCart, SubjectInventory {
         verkopen.add(new Verkoop());
         huidigeVerkoop = 0;
 
+
+
         productOverviewPane = new ProductOverviewPane(this);
+        logPane = new LogPane();
         kassaView = new KassaView(this);
         klantView = new KlantView();
 
-        observerShoppingCarts = new ArrayList<>();
-        observerInventories = new ArrayList<>();
+        observersKlant = new ArrayList<>();
+        observersInventories = new ArrayList<>();
+        observersLog = new ArrayList<>();
 
-        registerObserverShoppingCart(klantView);
+        registerObserverKlant(klantView);
         registerObserverInventory(productOverviewPane);
+        registerObserverLog(logPane);
     }
 
     private Verkoop getHuidigeVerkoop(){
@@ -56,7 +63,7 @@ public class KassaController implements SubjectShoppingCart, SubjectInventory {
     public void scanItem(String id){
         try {
             getHuidigeVerkoop().scannen(id);
-            notifyObserversShoppingCart();
+            notifyObserversKlant();
         }catch (StateException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -65,17 +72,18 @@ public class KassaController implements SubjectShoppingCart, SubjectInventory {
 
     public void verwijder(String id){
         getHuidigeVerkoop().verwijderFromScannedItems(id);
-        notifyObserversShoppingCart();
+        notifyObserversKlant();
     }
     public void annuleren(){
         getHuidigeVerkoop().annuleren();
         holdCheck();
-        notifyObserversShoppingCart();
+        notifyObserversKlant();
     }
     public void betalen(){
+       notifyObserversLog();
        getHuidigeVerkoop().betalen();
        holdCheck();
-       notifyObserversShoppingCart();
+       notifyObserversKlant();
        notifyObserversInventory();
     }
 
@@ -119,7 +127,7 @@ public class KassaController implements SubjectShoppingCart, SubjectInventory {
             getHuidigeVerkoop().placeOnHold();
             verkopen.add(new Verkoop());
             huidigeVerkoop = verkopen.size()-1;
-            notifyObserversShoppingCart();
+            notifyObserversKlant();
         }else throw new StateException("Al een verkoop op hold");
     }
 
@@ -132,46 +140,68 @@ public class KassaController implements SubjectShoppingCart, SubjectInventory {
        return getHuidigeVerkoop().getArtikels();
     }
 
-    @Override
-    public void registerObserverShoppingCart(ObserverShoppingCart e) {
-        observerShoppingCarts.add(e);
-    }
-
-    @Override
-    public void removeObserverShoppingCart(ObserverShoppingCart e) {
-        observerShoppingCarts.remove(e);
-    }
-
-    @Override
-    public void notifyObserversShoppingCart() {
-        for (ObserverShoppingCart observerShoppingCart : observerShoppingCarts){
-            observerShoppingCart.update(getHuidigeVerkoop().getScannedForKlant(), getHuidigeVerkoop().getSum());
-        }
-    }
-
     public double getFinalSum(){
         return getHuidigeVerkoop().getFinalSum();
     }
 
 
     @Override
-    public void registerObserverInventory(ObserverInventory e) {
-        observerInventories.add(e);
+    public void registerObserverInventory(KassaObserver e) {
+        observersInventories.add(e);
     }
 
     @Override
-    public void removeObserverInventory(ObserverInventory e) {
-        observerInventories.remove(e);
+    public void removeObserverInventory(KassaObserver e) {
+        observersInventories.remove(e);
     }
 
     @Override
     public void notifyObserversInventory() {
-        for (ObserverInventory observerInventory:observerInventories){
-            observerInventory.update(getHuidigeVerkoop().getArtikels());
+        for (KassaObserver kassaObserver :observersInventories){
+            kassaObserver.update(getHuidigeVerkoop().getArtikels());
+        }
+    }
+
+    @Override
+    public void registerObserverKlant(KassaObserver e) {
+        observersKlant.add(e);
+    }
+
+    @Override
+    public void removeObserverKlant(KassaObserver e) {
+        observersKlant.remove(e);
+    }
+
+    @Override
+    public void notifyObserversKlant() {
+        for (KassaObserver kassaObserver : observersKlant){
+            kassaObserver.update(getHuidigeVerkoop().getScannedItems());
+        }
+    }
+
+    @Override
+    public void registerObserverLog(KassaObserver e) {
+        observersLog.add(e);
+    }
+
+    @Override
+    public void removeObserverLog(KassaObserver e) {
+        observersLog.remove(e);
+    }
+
+
+    @Override
+    public void notifyObserversLog() {
+        for (KassaObserver kassaObserver: observersLog){
+            kassaObserver.update(getHuidigeVerkoop().getScannedItems());
         }
     }
 
     public ProductOverviewPane getProductOverviewPane() {
         return productOverviewPane;
+    }
+
+    public LogPane getLogPane() {
+        return logPane;
     }
 }

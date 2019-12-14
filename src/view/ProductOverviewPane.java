@@ -12,13 +12,12 @@ import java.util.ArrayList;
  * @author Rafael Polfliet - Jef Quidousse
  */
 
-public class ProductOverviewPane extends TableView implements ObserverInventory {
+public class ProductOverviewPane extends TableView implements KassaObserver {
 
     private TableView<Artikel> table = new TableView<>();
-    private KassaController kassa;
+
 
     public ProductOverviewPane(KassaController kassaController) {
-        this.kassa = kassaController;
         TableColumn<Artikel,String> colCode = new TableColumn<>("Code");
         colCode.setCellValueFactory(new PropertyValueFactory<>("Code") );
         colCode.setMinWidth(50);

@@ -120,7 +120,7 @@ public class InstellingPane extends GridPane {
             String dbContextSelection = dbContextComboBox.getSelectionModel().getSelectedItem().toString();
             String kortingSelection = kortingComboBox.getSelectionModel().getSelectedItem().toString();
             int p = Integer.parseInt(procent.getText());
-            String extraVar =null;
+            String extraVar = "";
 
             if (gridPane.getChildren().contains(extraVariable) && !extraVariable.getText().trim().isEmpty()) {
                 if (KortingEnum.Korting_Drempel.equals(KortingEnum.valueOf(kortingSelection))) {
