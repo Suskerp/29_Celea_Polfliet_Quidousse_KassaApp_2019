@@ -1,24 +1,36 @@
 package database;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import database.Enum.ArtikelDBEnum;
 import database.Factory.ArtikelDBFactory;
 import database.Factory.DBInMemoryFactory;
 import database.Strategy.ArtikelDBStrategy;
+import model.Decorator.BillEnum;
+import model.Decorator.BillFactory;
+import model.Decorator.BillPrinter;
 import model.Discount.KortingFactory;
 import model.Discount.KortingStrategy;
-import model.ModelException;
+import view.ProductOverviewPane;
+
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Properties;
 
 /**
  * @author Rafael Polfliet
  */
-public class PropertiesLoadWrite {
-    public static ArtikelDBStrategy readDBContext(){
-        Properties properties = new Properties();
+public final class PropertiesLoadWrite {
+    private static PropertiesLoadWrite INSTANCE;
+    private Properties properties = new Properties();
+
+
+    private PropertiesLoadWrite() {};
+
+    public ArtikelDBStrategy readDBContext(){
 
         try {
             properties.load(new FileInputStream("src\\bestanden\\config.properties"));
@@ -56,9 +68,7 @@ public class PropertiesLoadWrite {
     }
 
 
-    public static KortingStrategy readKorting() {
-        Properties properties = new Properties();
-
+    public KortingStrategy readKorting() {
         try {
             properties.load(new FileInputStream("src\\bestanden\\config.properties"));
             String korting = properties.getProperty("Korting");
@@ -73,32 +83,51 @@ public class PropertiesLoadWrite {
                     kortingStrategy = KortingFactory.kortingStrategy(korting,Double.parseDouble(percentage),kortingVar);
 
                 } catch (IllegalArgumentException e) {
-                    throw new ModelException("Wrong context, not defined in Enum - KortingEnum");
+                    throw new DatabaseException("Wrong context, not defined in Enum - KortingEnum");
                 }
 
                 return kortingStrategy;
             }else return null;
 
             }catch(IOException e){
-                    throw new ModelException(e);
+                    throw new DatabaseException(e);
             }
 
     }
+    
+    public BillPrinter readBill(){
+        HashMap<BillEnum,Boolean> map = new HashMap<>();
+        try {
+            properties.load(new FileInputStream("src\\bestanden\\config.properties"));
+            boolean headerGeneral = Boolean.parseBoolean(properties.getProperty("headerGeneral"));
+            String headerGeneralValue = properties.getProperty("headerGeneralValue");
+            boolean headerDateTime = Boolean.parseBoolean(properties.getProperty("headerDateTime"));
+            boolean footerExclKorting = Boolean.parseBoolean(properties.getProperty("footerExclKorting"));
+            boolean footerExclBTW = Boolean.parseBoolean(properties.getProperty("footerExclBTW"));
+            boolean footerGeneral = Boolean.parseBoolean(properties.getProperty("footerGeneral"));
+
+            map.put(BillEnum.HEADER_GENERAL,headerGeneral);
+            map.put(BillEnum.HEADER_DATETIME,headerDateTime);
+            map.put(BillEnum.FOOTER_KORTING,footerExclKorting);
+            map.put(BillEnum.FOOTER_BTW,footerExclBTW);
+            map.put(BillEnum.FOOTER_GENERAL,footerGeneral);
+
+            return BillFactory.createBill(map,headerGeneralValue);
+
+        }catch (IOException e){
+            throw new DatabaseException(e);
+        }
+    }
 
 
-    public static void write(String artikelDBContext,String loadSave,String file,String korting,int percentage,String extra){
+    public void writeDBContext(String artikelDBContext,String loadSave,String file){
             if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
             if (loadSave == null || loadSave.trim().isEmpty() ||file == null|| file.trim().isEmpty()) throw new DatabaseException("Please select an option in each menu");
 
-            Properties properties = new Properties();
             try {
                 properties.setProperty("Kassa", artikelDBContext);
                 properties.setProperty("LoadSave", loadSave);
                 properties.setProperty("File", file);
-                properties.setProperty("Korting",korting);
-                properties.setProperty("Percentage",percentage+"");
-                properties.setProperty("KortingVar",extra);
-
 
                 properties.store(new FileOutputStream("src\\bestanden\\config.properties"), null);
 
@@ -108,18 +137,13 @@ public class PropertiesLoadWrite {
 
 
     }
-    public static void write(String artikelDBContext,String korting,int percentage,String extra){
+    public void writeDBContext(String artikelDBContext){
         if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
 
-        Properties properties = new Properties();
         try {
             properties.setProperty("Kassa",artikelDBContext);
             properties.setProperty("LoadSave","");
             properties.setProperty("File","");
-            properties.setProperty("Korting",korting);
-            properties.setProperty("Percentage",percentage+"");
-            properties.setProperty("KortingVar",extra);
-
 
             properties.store(new FileOutputStream("src\\bestanden\\config.properties"),null);
 
@@ -130,4 +154,43 @@ public class PropertiesLoadWrite {
 
     }
 
+    public void writeKorting(String korting,String percentage,String extra){
+
+        try {
+            properties.setProperty("Korting",korting);
+            properties.setProperty("Percentage",percentage+"");
+            properties.setProperty("KortingVar",extra);
+            properties.store(new FileOutputStream("src\\bestanden\\config.properties"),null);
+
+        }catch (IOException e) {
+            throw new DatabaseException(e);
+        }
+    }
+
+    public void writeBillProperties(boolean headerGeneral,String headerGeneralValue,boolean headerDateTime, boolean footerExclKorting,boolean footerExclBTW, boolean footerGeneral){
+        try {
+            properties.setProperty("headerGeneral", String.valueOf(headerGeneral));
+            properties.setProperty("headerGeneralValue",headerGeneralValue);
+            properties.setProperty("headerDateTime", String.valueOf(headerDateTime));
+            properties.setProperty("footerExclKorting", String.valueOf(footerExclKorting));
+            properties.setProperty("footerExclBTW", String.valueOf(footerExclBTW));
+            properties.setProperty("footerGeneral", String.valueOf(footerGeneral));
+
+
+            properties.store(new FileOutputStream("src\\bestanden\\config.properties"),null);
+
+        }catch (IOException e) {
+            throw new DatabaseException(e);
+        }
+    }
+
+
+
+    public static PropertiesLoadWrite getInstance() {
+        if (INSTANCE == null){
+            INSTANCE = new PropertiesLoadWrite();
+        }
+
+        return INSTANCE;
+    }
 }

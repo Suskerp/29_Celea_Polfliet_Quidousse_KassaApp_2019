@@ -40,16 +40,18 @@ public class KassaPane{
         this.kassaController = kassaController;
 
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(20);
+        col1.setPercentWidth(16.66666666666666);
         ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(20);
+        col2.setPercentWidth(16.66666666666666);
         ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(20);
+        col3.setPercentWidth(16.66666666666666);
         ColumnConstraints col4 = new ColumnConstraints();
-        col4.setPercentWidth(20);
+        col4.setPercentWidth(16.66666666666666);
         ColumnConstraints col5 = new ColumnConstraints();
-        col5.setPercentWidth(20);
-        gridPane.getColumnConstraints().addAll(col1,col2,col3,col4,col5);
+        col5.setPercentWidth(16.66666666666666);
+        ColumnConstraints col6 = new ColumnConstraints();
+        col6.setPercentWidth(16.66666666666666);
+        gridPane.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6);
 
 
         searchText = new TextField();
@@ -63,19 +65,20 @@ public class KassaPane{
         annuleren = new Button("Annuleer verkoop");
         hold = new Button("Place on hold");
         betaal = new Button("Betalen");
+        betaal.setDisable(true);
 
         tableInit();
 
         gridPane.add(sum,0,2);
-        gridPane.add(table,0, 1,5,1);
+        gridPane.add(table,0, 1,6,1);
         gridPane.add(remove,1,0);
         gridPane.add(searchText,0,0);
-        gridPane.add(afsluiten,3,2);
+        gridPane.add(afsluiten,3,0);
         gridPane.add(kortingLabel,1,2);
         gridPane.add(finalSumLabel,2,2);
-        gridPane.add(annuleren,3,0);
+        gridPane.add(annuleren,4,0);
         gridPane.add(hold,2,0);
-        gridPane.add(betaal,4,0);
+        gridPane.add(betaal,5,0);
 
 
         searchText.setOnAction((entered) ->{
@@ -164,6 +167,8 @@ public class KassaPane{
             kassaController.afsluiten();
             kortingLabel.setText("Korting: €"+String.format("%.2f", kassaController.getKorting()));
             finalSumLabel.setText("Eind bedrag: €"+String.format("%.2f", kassaController.getFinalSum()));
+
+            betaal.setDisable(false);
         }catch (StateException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -182,6 +187,7 @@ public class KassaPane{
             getSum();
             kortingLabel.setText("");
             finalSumLabel.setText("");
+            betaal.setDisable(true);
         }
     }
 
@@ -200,6 +206,7 @@ public class KassaPane{
             getSum();
             kortingLabel.setText("");
             finalSumLabel.setText("");
+            betaal.setDisable(true);
         }
     }
 
@@ -212,6 +219,7 @@ public class KassaPane{
             getSum();
             kortingLabel.setText("");
             finalSumLabel.setText("");
+            betaal.setDisable(true);
         }catch (StateException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);

@@ -7,10 +7,7 @@ import database.Strategy.ArtikelDBStrategy;
 import model.Discount.KortingStrategy;
 import model.States.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Rafael Polfliet - Jef Quidousse
@@ -37,9 +34,9 @@ public class Verkoop {
         hold = new InHold(this);
 
         verkoopState = scan;
-        artikelDBStrategy = PropertiesLoadWrite.readDBContext();
+        artikelDBStrategy = PropertiesLoadWrite.getInstance().readDBContext();
         this.artikels = artikelDBStrategy.load();
-        kortingStrategy = PropertiesLoadWrite.readKorting();
+        kortingStrategy = PropertiesLoadWrite.getInstance().readKorting();
         this.scannedItems = new ArrayList<>();
         this.klantMap = new LinkedHashMap<>();
 
@@ -51,7 +48,7 @@ public class Verkoop {
 
     public void scannen(String id){
         if (verkoopState == scan) {
-            Boolean found = false;
+            boolean found = false;
             for (Artikel artikel : artikels) {
                 if (artikel.getCode().equalsIgnoreCase(id)) {
                     scannedItems.add(artikel);
@@ -124,8 +121,9 @@ public class Verkoop {
     }
 
     public Double getKorting(){
-        if (verkoopState != afgesloten) throw new StateException("Kan korting niet berekening terwijl er nog gescand wordt");
-        return kortingStrategy.getKorting(getScannedItems());
+        if (verkoopState == afgesloten || verkoopState == betaald) {
+            return kortingStrategy.getKorting(getScannedItems());
+        }else throw new StateException("Kan korting niet berekening terwijl er nog gescand wordt");
     }
 
 
@@ -140,7 +138,7 @@ public class Verkoop {
     }
 
     public Double getFinalSum(){
-        if (verkoopState == afgesloten) {
+        if (verkoopState == afgesloten || verkoopState == betaald) {
             return getSum() - getKorting();
         }else throw new StateException("Kan eindsom niet berekenen terwijl er nog gescand wordt");
     }

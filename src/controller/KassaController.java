@@ -1,5 +1,6 @@
 package controller;
 
+import database.PropertiesLoadWrite;
 import model.Artikel;
 import model.States.*;
 import model.Verkoop;
@@ -80,8 +81,9 @@ public class KassaController implements KassaObservable {
         notifyObserversKlant();
     }
     public void betalen(){
-       notifyObserversLog();
+       PropertiesLoadWrite.getInstance().readBill().print(getHuidigeVerkoop());
        getHuidigeVerkoop().betalen();
+       notifyObserversLog();
        holdCheck();
        notifyObserversKlant();
        notifyObserversInventory();
@@ -193,7 +195,7 @@ public class KassaController implements KassaObservable {
     @Override
     public void notifyObserversLog() {
         for (KassaObserver kassaObserver: observersLog){
-            kassaObserver.update(getHuidigeVerkoop().getScannedItems());
+            kassaObserver.update(verkopen);
         }
     }
 

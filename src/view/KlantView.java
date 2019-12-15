@@ -88,16 +88,19 @@ public class KlantView implements KassaObserver {
 
 		TableColumn<Map.Entry<Artikel, Integer>, String> column1 = new TableColumn<>("Naam");
 		column1.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getNaam()));
-		column1.setMinWidth(200);
+		column1.setMinWidth(250);
 		
 		TableColumn<Map.Entry<Artikel, Integer>, String> column2 = new TableColumn<>("Omschrijving");
 		column2.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getOmschrijving()));
+		column2.setMinWidth(83.33333);
 
 		TableColumn<Map.Entry<Artikel, Integer>, String> column3 = new TableColumn<>("Prijs");
 		column3.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getVerkoopprijs().toString()));
+		column3.setMinWidth(83.33333);
 
 		TableColumn<Map.Entry<Artikel, Integer>, String> column4 = new TableColumn<>("Aantal");
 		column4.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getValue().toString()));
+		column4.setMinWidth(83.33333);
 
 		table.getColumns().setAll(column1,column2,column3,column4);
 

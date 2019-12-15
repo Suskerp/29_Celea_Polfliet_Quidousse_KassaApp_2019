@@ -35,7 +35,7 @@ public class ArtikelXLLoadSave implements LoadSaveStrategy {
             Collections.sort(output);
             return output;
         }catch (IOException | BiffException e){
-            throw new DatabaseException(e);
+            throw new DatabaseException(e + " "+file.getPath());
         }
 
     }
@@ -49,6 +49,7 @@ public class ArtikelXLLoadSave implements LoadSaveStrategy {
             ArrayList<String> line =  new ArrayList<String>();
             line.add(artikel.getCode());
             line.add(artikel.getNaam());
+            line.add(artikel.getOmschrijving());
             line.add("" +artikel.getVerkoopprijs());
             line.add("" +artikel.getStock());
             output.add(line);

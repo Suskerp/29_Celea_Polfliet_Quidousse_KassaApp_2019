@@ -5,10 +5,7 @@ import database.Enum.ArtikelDBEnum;
 import database.Enum.LoadSaveEnum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import model.Discount.KortingEnum;
@@ -28,15 +25,26 @@ public class InstellingPane extends GridPane {
     private TextField extraVariable;
     private Button button;
     private TextField procent;
+    private Label headerGeneralLabel;
+    private CheckBox headerGeneral;
+    private TextField headerGeneralValue;
+    private Label headerDateTimeLabel;
+    private CheckBox headerDateTime;
+    private Label footerExclKortingLabel;
+    private CheckBox footerExclKorting;
+    private Label footerExclBTWLabel;
+    private CheckBox footerExclBTW;
+    private Label footerGeneralLabel;
+    private CheckBox footerGeneral;
 
     public InstellingPane() {
 
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(25);
         ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(25);
+        col2.setPercentWidth(10);
         ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(25);
+        col3.setPercentWidth(10);
         gridPane.getColumnConstraints().addAll(col1,col2,col3);
 
         label1 = new Label();
@@ -63,13 +71,43 @@ public class InstellingPane extends GridPane {
         gridPane.add(kortingComboBox, 0,3);
 
         procent = new TextField();
-        procent.setPromptText("Procent korting");
+        procent.setPromptText("%");
         gridPane.add(procent, 1, 3);
 
 
 
         button = new Button("Save");
-        gridPane.add(button,2,1);
+        gridPane.add(button,0,99,3,1);
+        button.setMaxWidth(Double.MAX_VALUE);
+
+        headerGeneral = new CheckBox();
+        headerGeneralLabel = new Label("Algemene kop");
+        headerGeneralValue = new TextField();
+        headerDateTimeLabel = new Label("Datum en tijd weergeven");
+        headerDateTime = new CheckBox();
+        footerExclKortingLabel = new Label("Exclusief korting weergeven");
+        footerExclKorting= new CheckBox();
+        footerExclBTWLabel = new Label("Exlusief BTW weergeven");
+        footerExclBTW = new CheckBox();
+        footerGeneralLabel = new Label("Algemene voetregel");
+        footerGeneral = new CheckBox();
+
+        gridPane.add(headerGeneralLabel,0,4);
+        gridPane.add(headerGeneral,1,4);
+        gridPane.add(headerGeneralValue,2,4,2,1);
+
+        gridPane.add(headerDateTimeLabel,0,5);
+        gridPane.add(headerDateTime,1,5);
+
+        gridPane.add(footerExclKortingLabel,0,6);
+        gridPane.add(footerExclKorting,1,6);
+
+        gridPane.add(footerExclBTWLabel,0,7);
+        gridPane.add(footerExclBTW,1,7);
+
+        gridPane.add(footerGeneralLabel,0,8);
+        gridPane.add(footerGeneral,1,8);
+
 
         dbContextComboBox.setOnAction((optionselected)  ->{
            dbContextComboBoxSelected();
@@ -105,7 +143,7 @@ public class InstellingPane extends GridPane {
 
         if(kortingComboBox.getSelectionModel().getSelectedItem().toString().equals(KortingEnum.Korting_Drempel.toString())){
             extraVariable = new TextField();
-            extraVariable.setPromptText("drempel waarde");
+            extraVariable.setPromptText("drempel");
             gridPane.add(extraVariable, 2,3);
         }
         else if (kortingComboBox.getSelectionModel().getSelectedItem().toString().equals(KortingEnum.Korting_Groep.toString())){
@@ -119,7 +157,7 @@ public class InstellingPane extends GridPane {
         try {
             String dbContextSelection = dbContextComboBox.getSelectionModel().getSelectedItem().toString();
             String kortingSelection = kortingComboBox.getSelectionModel().getSelectedItem().toString();
-            int p = Integer.parseInt(procent.getText());
+            Double p = Double.parseDouble(procent.getText());
             String extraVar = "";
 
             if (gridPane.getChildren().contains(extraVariable) && !extraVariable.getText().trim().isEmpty()) {
@@ -134,10 +172,15 @@ public class InstellingPane extends GridPane {
 
             if (gridPane.getChildren().contains(dbInMemoryComboBox)) {
                 String dbInMemorySelection = dbInMemoryComboBox.getSelectionModel().getSelectedItem().toString();
-                PropertiesLoadWrite.write(dbContextSelection,dbInMemorySelection,LoadSaveEnum.valueOf(dbInMemorySelection).getOmschrijving(),kortingSelection,p,extraVar);
+                PropertiesLoadWrite.getInstance().writeDBContext(dbContextSelection,dbInMemorySelection,LoadSaveEnum.valueOf(dbInMemorySelection).getOmschrijving());
             } else {
-                PropertiesLoadWrite.write(dbContextSelection,kortingSelection,p,extraVar);
+                PropertiesLoadWrite.getInstance().writeDBContext(dbContextSelection);
             }
+
+            PropertiesLoadWrite.getInstance().writeKorting(kortingSelection,p+"",extraVar);
+
+            PropertiesLoadWrite.getInstance().writeBillProperties(headerGeneral.isSelected(),(headerGeneral.isSelected()? headerGeneralValue.getText(): ""),headerDateTime.isSelected(),footerExclKorting.isSelected(),footerExclBTW.isSelected(),footerGeneral.isSelected());
+
 
         }catch (DatabaseException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),

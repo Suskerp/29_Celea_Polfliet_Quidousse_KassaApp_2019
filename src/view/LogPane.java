@@ -1,12 +1,23 @@
 package view;
 
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
-import model.Artikel;
+import model.States.InBetaal;
+import model.Verkoop;
+import model.Verkoop;
 
 import java.time.LocalDateTime;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
@@ -15,28 +26,80 @@ import java.util.ArrayList;
 
 public class LogPane implements KassaObserver {
     private GridPane gridPane= new GridPane();
-    private javafx.scene.control.Label log;
+    private TableView<Map.Entry<Verkoop,String>> table;
+    private Map<Verkoop, String> map;
+    private ObservableList<Map.Entry<Verkoop, String>> items;
+    private ArrayList<Verkoop> verkopen;
 
 
 
     public LogPane() {
-        log = new Label();
 
-        gridPane.add(log,0,0);
+        map = new LinkedHashMap<>();
+        table = new TableView<>();
+        verkopen = new ArrayList<>();
+        items = FXCollections.observableArrayList(new ArrayList<>());
+        tableInit();
     }
 
 
     @Override
-    public void update(Object o) {
-        ArrayList<Artikel> items = (ArrayList<Artikel>) o;
-        String out = log.getText();
-        for (Artikel artikel:items){
-            out += artikel.getCode() + " " + artikel.getNaam() + " " + artikel.getOmschrijving() + " " + artikel.getVerkoopprijs() + "\t\t\t\t\t\t\tTijdstip van verkoop: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))+ "\n\n";
+    public void update(Object arg) {
+        ArrayList<Verkoop> nieuw = new ArrayList<>();
+        for (Verkoop verkoop:(ArrayList<Verkoop>)arg){
+            if (!verkopen.contains(verkoop)){
+                nieuw.add(verkoop);
+                verkopen.add(verkoop);
+            }
         }
-        log.setText(out);
+
+        
+        for (Verkoop verkoop:nieuw){
+            if (verkoop.getVerkoopState() instanceof InBetaal) {
+                map.put(verkoop, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+            }
+        }
+
+
+        items = FXCollections.observableArrayList(map.entrySet());
+        table.getItems().clear();
+        table.setItems(items);
+        table.refresh();
+        
     }
 
+    private void tableInit(){
+
+
+        TableColumn<Map.Entry<Verkoop, String>, String> column1 = new TableColumn<>("Tijdstip");
+        column1.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getValue()));
+        column1.setMinWidth(187.5);
+
+
+        TableColumn<Map.Entry<Verkoop, String>, String> column2 = new TableColumn<>("Totaal bedrag");
+        column2.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getSum().toString()));
+        column2.setMinWidth(187.5);
+
+
+        TableColumn<Map.Entry<Verkoop, String>, String> column3 = new TableColumn<>("Korting");
+        column3.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getKorting().toString()));
+        column3.setMinWidth(187.5);
+
+
+        TableColumn<Map.Entry<Verkoop, String>, String> column4 = new TableColumn<>("Te betalen bedrag");
+        column4.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getFinalSum().toString()));
+        column4.setMinWidth(187.5);
+
+
+
+        table.getColumns().setAll(column1,column2,column3,column4);
+
+        gridPane.add(table,0,0);
+    }
+    
+    
     public GridPane getLayout() {
         return gridPane;
     }
 }
+
