@@ -82,6 +82,7 @@ public class Verkoop {
     }
 
     public void returnFromHold(){
+        this.artikels = artikelDBStrategy.load();
         this.verkoopState = scan;
     }
 

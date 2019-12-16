@@ -76,17 +76,21 @@ public class KassaController implements KassaObservable {
         notifyObserversKlant();
     }
     public void annuleren(){
-        getHuidigeVerkoop().annuleren();
-        holdCheck();
-        notifyObserversKlant();
+        if(getHuidigeVerkoop().getScannedItems().size()!=0) {
+            getHuidigeVerkoop().annuleren();
+            holdCheck();
+            notifyObserversKlant();
+        }
     }
     public void betalen(){
-       PropertiesLoadWrite.getInstance().readBill().print(getHuidigeVerkoop());
-       getHuidigeVerkoop().betalen();
-       notifyObserversLog();
-       holdCheck();
-       notifyObserversKlant();
-       notifyObserversInventory();
+        if(getHuidigeVerkoop().getScannedItems().size()!=0) {
+                PropertiesLoadWrite.getInstance().readBill().print(getHuidigeVerkoop());
+                getHuidigeVerkoop().betalen();
+                notifyObserversInventory();
+                notifyObserversLog();
+                holdCheck();
+                notifyObserversKlant();
+        }
     }
 
     private void holdCheck() {
@@ -107,7 +111,9 @@ public class KassaController implements KassaObservable {
         }
     }
     public void afsluiten(){
-        getHuidigeVerkoop().afsluiten();
+        if(getHuidigeVerkoop().getScannedItems().size()!=0) {
+            getHuidigeVerkoop().afsluiten();
+        }
     }
 
 
@@ -125,12 +131,14 @@ public class KassaController implements KassaObservable {
     }
 
     public void placeOnHold(){
-        if (getHoldIndex() < 0) {
-            getHuidigeVerkoop().placeOnHold();
-            verkopen.add(new Verkoop());
-            huidigeVerkoop = verkopen.size()-1;
-            notifyObserversKlant();
-        }else throw new StateException("Al een verkoop op hold");
+        if(getHuidigeVerkoop().getScannedItems().size()!=0) {
+            if (getHoldIndex() < 0) {
+                getHuidigeVerkoop().placeOnHold();
+                verkopen.add(new Verkoop());
+                huidigeVerkoop = verkopen.size() - 1;
+                notifyObserversKlant();
+            } else throw new StateException("Al een verkoop op hold");
+        }
     }
 
 
