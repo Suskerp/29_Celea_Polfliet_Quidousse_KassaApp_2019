@@ -5,6 +5,10 @@ import model.Verkoop;
 
 import java.util.ArrayList;
 
+/**
+ * @author Rafael Polfliet
+ */
+
 public abstract class BillDecorator implements BillPrinter{
     private BillPrinter billPrinter;
 

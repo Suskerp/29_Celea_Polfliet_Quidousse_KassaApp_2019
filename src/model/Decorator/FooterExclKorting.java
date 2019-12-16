@@ -1,6 +1,9 @@
 package model.Decorator;
 
 import model.Verkoop;
+/**
+ * @auther Rafael Polfliet
+ */
 
 public class FooterExclKorting extends BillDecorator {
 

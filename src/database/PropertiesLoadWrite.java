@@ -23,7 +23,7 @@ import java.util.Properties;
 /**
  * @author Rafael Polfliet
  */
-public final class PropertiesLoadWrite {
+public class PropertiesLoadWrite {
     private static PropertiesLoadWrite INSTANCE;
     private Properties properties = new Properties();
 
@@ -41,7 +41,7 @@ public final class PropertiesLoadWrite {
             ArtikelDBStrategy artikelDBStrategy;
 
             try {
-                artikelDBStrategy =  ArtikelDBFactory.artikelDBStrategy(artikelDBContext);
+                artikelDBStrategy =  ArtikelDBFactory.getInstance().artikelDBStrategy(artikelDBContext);
 
             }catch (IllegalArgumentException e){
                 throw new DatabaseException("Wrong context, not defined in Enum - ArtikelDBEnum");
@@ -52,7 +52,7 @@ public final class PropertiesLoadWrite {
                 ArtikelDBInMemory artikelDBInMemory = new ArtikelDBInMemory();
 
                 try {
-                    artikelDBInMemory.setLoadSaveStrategy(DBInMemoryFactory.createStrategy(loadSave,file));
+                    artikelDBInMemory.setLoadSaveStrategy(DBInMemoryFactory.getInstance().createStrategy(loadSave,file));
                 }catch (IllegalArgumentException e){
                     throw new DatabaseException("Wrong context, not defined in Enum - LoadSaveEnum");
                 }
@@ -80,7 +80,7 @@ public final class PropertiesLoadWrite {
                 KortingStrategy kortingStrategy;
 
                 try {
-                    kortingStrategy = KortingFactory.kortingStrategy(korting,Double.parseDouble(percentage),kortingVar);
+                    kortingStrategy = KortingFactory.getInstance().kortingStrategy(korting,Double.parseDouble(percentage),kortingVar);
 
                 } catch (IllegalArgumentException e) {
                     throw new DatabaseException("Wrong context, not defined in Enum - KortingEnum");
@@ -112,7 +112,7 @@ public final class PropertiesLoadWrite {
             map.put(BillEnum.FOOTER_BTW,footerExclBTW);
             map.put(BillEnum.FOOTER_GENERAL,footerGeneral);
 
-            return BillFactory.createBill(map,headerGeneralValue);
+            return BillFactory.getInstance().createBill(map,headerGeneralValue);
 
         }catch (IOException e){
             throw new DatabaseException(e);
@@ -124,51 +124,26 @@ public final class PropertiesLoadWrite {
             if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
             if (loadSave == null || loadSave.trim().isEmpty() ||file == null|| file.trim().isEmpty()) throw new DatabaseException("Please select an option in each menu");
 
-            try {
                 properties.setProperty("Kassa", artikelDBContext);
                 properties.setProperty("LoadSave", loadSave);
                 properties.setProperty("File", file);
 
-                properties.store(new FileOutputStream("src\\bestanden\\config.properties"), null);
-
-            } catch (IOException e) {
-                throw new DatabaseException(e);
-            }
-
-
     }
     public void writeDBContext(String artikelDBContext){
-        if (artikelDBContext == "ARTIKEL_DB_MYSQL") throw new DatabaseException("This is not available yet");
-
-        try {
             properties.setProperty("Kassa",artikelDBContext);
             properties.setProperty("LoadSave","");
             properties.setProperty("File","");
-
-            properties.store(new FileOutputStream("src\\bestanden\\config.properties"),null);
-
-        }catch (IOException e) {
-            throw new DatabaseException(e);
-        }
-
 
     }
 
     public void writeKorting(String korting,String percentage,String extra){
 
-        try {
             properties.setProperty("Korting",korting);
             properties.setProperty("Percentage",percentage+"");
             properties.setProperty("KortingVar",extra);
-            properties.store(new FileOutputStream("src\\bestanden\\config.properties"),null);
-
-        }catch (IOException e) {
-            throw new DatabaseException(e);
-        }
     }
 
     public void writeBillProperties(boolean headerGeneral,String headerGeneralValue,boolean headerDateTime, boolean footerExclKorting,boolean footerExclBTW, boolean footerGeneral){
-        try {
             properties.setProperty("headerGeneral", String.valueOf(headerGeneral));
             properties.setProperty("headerGeneralValue",headerGeneralValue);
             properties.setProperty("headerDateTime", String.valueOf(headerDateTime));
@@ -176,14 +151,16 @@ public final class PropertiesLoadWrite {
             properties.setProperty("footerExclBTW", String.valueOf(footerExclBTW));
             properties.setProperty("footerGeneral", String.valueOf(footerGeneral));
 
-
-            properties.store(new FileOutputStream("src\\bestanden\\config.properties"),null);
-
-        }catch (IOException e) {
-            throw new DatabaseException(e);
-        }
     }
 
+
+    public void saveProperties(){
+        try {
+            properties.store(new FileOutputStream("src\\bestanden\\config.properties"), null);
+        }catch (IOException e){
+            throw new DatabaseException("There was a problem saving the properties file" + e);
+        }
+    }
 
 
     public static PropertiesLoadWrite getInstance() {

@@ -8,10 +8,11 @@ import database.Strategy.LoadSaveStrategy;
  * @author Rafael Polfliet
  */
 public class DBInMemoryFactory {
+    private static DBInMemoryFactory INSTANCE;
     private DBInMemoryFactory() {
     }
 
-    public static LoadSaveStrategy createStrategy(String strategyCode, String bestand){
+    public LoadSaveStrategy createStrategy(String strategyCode, String bestand){
         LoadSaveEnum loadSaveEnum = LoadSaveEnum.valueOf(strategyCode);
         String klasseNaam = loadSaveEnum.getKlassenaam();
         LoadSaveStrategy loadSaveStrategy = null;
@@ -23,5 +24,12 @@ public class DBInMemoryFactory {
             throw new DatabaseException(e);
         }
         return loadSaveStrategy;
+    }
+
+    public static DBInMemoryFactory getInstance(){
+        if (INSTANCE == null){
+            INSTANCE = new DBInMemoryFactory();
+        }
+        return INSTANCE;
     }
 }

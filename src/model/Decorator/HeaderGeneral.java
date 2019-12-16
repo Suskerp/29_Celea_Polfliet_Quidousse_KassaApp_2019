@@ -4,6 +4,9 @@ import model.Artikel;
 import model.Verkoop;
 
 import java.util.ArrayList;
+/**
+ * @auther Rafael Polfliet
+ */
 
 public class HeaderGeneral extends  BillDecorator {
     private String header;

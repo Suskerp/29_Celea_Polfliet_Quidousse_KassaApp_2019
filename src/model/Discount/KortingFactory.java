@@ -5,9 +5,11 @@ package model.Discount;
  */
 
 public class KortingFactory {
+    private static KortingFactory INSTANCE;
+
     private KortingFactory(){}
 
-    public static KortingStrategy kortingStrategy(String kortingCode, double percentage, String extra){
+    public KortingStrategy kortingStrategy(String kortingCode, double percentage, String extra){
         KortingEnum kortingEnum = KortingEnum.valueOf(kortingCode);
         KortingStrategy kortingStrategy = null;
         if (kortingEnum.equals(KortingEnum.Korting_Duurste)){
@@ -19,5 +21,12 @@ public class KortingFactory {
         }
 
         return kortingStrategy;
+    }
+
+    public static KortingFactory getInstance(){
+        if (INSTANCE == null){
+            INSTANCE = new KortingFactory();
+        }
+        return INSTANCE;
     }
 }

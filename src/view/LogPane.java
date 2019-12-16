@@ -47,7 +47,7 @@ public class LogPane implements KassaObserver {
     public void update(Object arg) {
         ArrayList<Verkoop> nieuw = new ArrayList<>();
         for (Verkoop verkoop:(ArrayList<Verkoop>)arg){
-            if (!verkopen.contains(verkoop)){
+            if (!verkopen.contains(verkoop) && verkoop.getVerkoopState() instanceof InBetaal){
                 nieuw.add(verkoop);
                 verkopen.add(verkoop);
             }
@@ -77,17 +77,17 @@ public class LogPane implements KassaObserver {
 
 
         TableColumn<Map.Entry<Verkoop, String>, String> column2 = new TableColumn<>("Totaal bedrag");
-        column2.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getSum().toString()));
+        column2.setCellValueFactory(cd -> Bindings.createStringBinding(() -> String.format("%.2f",cd.getValue().getKey().getSum())));
         column2.setMinWidth(187.5);
 
 
         TableColumn<Map.Entry<Verkoop, String>, String> column3 = new TableColumn<>("Korting");
-        column3.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getKorting().toString()));
+        column3.setCellValueFactory(cd -> Bindings.createStringBinding(() -> String.format("%.2f", cd.getValue().getKey().getKorting())));
         column3.setMinWidth(187.5);
 
 
         TableColumn<Map.Entry<Verkoop, String>, String> column4 = new TableColumn<>("Te betalen bedrag");
-        column4.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getKey().getFinalSum().toString()));
+        column4.setCellValueFactory(cd -> Bindings.createStringBinding(() -> String.format("%.2f",cd.getValue().getKey().getFinalSum())));
         column4.setMinWidth(187.5);
 
 

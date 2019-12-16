@@ -6,6 +6,9 @@ import model.Verkoop;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+/**
+ * @auther Rafael Polfliet
+ */
 
 public class HeaderDateTime extends  BillDecorator {
     public HeaderDateTime(BillPrinter billPrinter) {

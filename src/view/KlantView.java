@@ -1,5 +1,6 @@
 package view;
 
+import database.PropertiesLoadWrite;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -53,7 +54,9 @@ public class KlantView implements KassaObserver {
 		stage.sizeToScene();
 		stage.show();
 		stage.getIcons().add(new Image("bestanden/icon.png"));
+
 		stage.setOnHiding((event) -> {
+			PropertiesLoadWrite.getInstance().saveProperties();
 			Platform.exit();
 		} );
 	}

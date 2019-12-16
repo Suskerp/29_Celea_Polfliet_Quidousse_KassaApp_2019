@@ -5,6 +5,10 @@ import model.Discount.KortingEnum;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @auther Rafael Polfliet
+ */
+
 public enum BillEnum {
 
     FOOTER_GENERAL("General footer","model.Decorator.FooterGeneral"),

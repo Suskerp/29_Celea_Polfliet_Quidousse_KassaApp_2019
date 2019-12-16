@@ -1,5 +1,6 @@
 package view;
 
+import database.PropertiesLoadWrite;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -28,6 +29,7 @@ public class KassaView {
 
 		stage.getIcons().add(new Image("bestanden/icon.png"));
 		stage.setOnHiding((event) -> {
+			PropertiesLoadWrite.getInstance().saveProperties();
 			Platform.exit();
 		} );
 
