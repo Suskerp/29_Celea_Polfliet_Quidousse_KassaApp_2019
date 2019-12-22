@@ -32,8 +32,6 @@ public class KassaController implements KassaObservable {
         this.observersKlant = new ArrayList<>();
         this.observersInventories = new ArrayList<>();
         this.observersLog = new ArrayList<>();
-
-        notifyObserversInventory();
     }
 
     private Verkoop getHuidigeVerkoop(){
@@ -143,6 +141,7 @@ public class KassaController implements KassaObservable {
     @Override
     public void registerObserverInventory(KassaObserver e) {
         observersInventories.add(e);
+        notifyObserversInventory();
     }
 
     @Override
