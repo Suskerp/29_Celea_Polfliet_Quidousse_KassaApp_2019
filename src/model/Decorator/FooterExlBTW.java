@@ -13,6 +13,6 @@ public class FooterExlBTW extends BillDecorator {
     @Override
     public void print(Verkoop verkoop) {
         super.print(verkoop);
-        System.out.println("Betaalde prijs exl. BTW: " + String.format("%.2f", verkoop.getFinalSum()-(verkoop.getFinalSum() * 0.06)) +" Euro\nBTW: " + String.format("%.2f", verkoop.getSum()*0.06)+" Euro\n");
+        System.out.println("Betaalde prijs exl. BTW: " + String.format("%.2f", verkoop.getVerkoopState().finalSum()-(verkoop.getVerkoopState().finalSum() * 0.06)) +" Euro\nBTW: " + String.format("%.2f", verkoop.getSum()*0.06)+" Euro\n");
     }
 }

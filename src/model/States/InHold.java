@@ -11,9 +11,11 @@ public class InHold implements  VerkoopState{
 
     @Override
     public void scan(){
-        verkoop.setVerkoopState(verkoop.getScanbareState());
+        verkoop.setVerkoopState(new InScan(verkoop));
     }
 
     @Override
-    public void annuleer(){verkoop.setVerkoopState(verkoop.getAnnuleerbareState());}
+    public void annuleer(){
+        verkoop.setVerkoopState(new InAnnulering(verkoop));
+    }
 }

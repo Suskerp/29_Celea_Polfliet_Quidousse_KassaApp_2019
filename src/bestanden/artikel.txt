@@ -1,4 +1,4 @@
-42;Appetizer - Tarragon Chicken;gr0;15.36;5
+42;Appetizer - Tarragon Chicken;gr0;15.36;0
 39;Apple - Northern Spy;gr9;8.99;9
 12;Bacardi Mojito;gr0;9.79;16
 21;Bacon Strip Precooked;gr6;1.02;17
@@ -25,10 +25,10 @@
 100;Crab Brie In Phyllo;gr7;15.72;5
 41;Cup - 8oz Coffee Perforated;gr3;2.7;18
 3;Dried Peach;gr8;15.56;14
-78;Ecolab Crystal Fusion;gr1;17.07;11
+78;Ecolab Crystal Fusion;gr1;17.07;7
 16;Edible Flower - Mixed;gr1;19.23;3
 97;Eggplant - Baby;gr8;22.79;7
-1;Energy Drink - Redbull 355ml;gr4;24.73;-29
+1;Energy Drink - Redbull 355ml;gr4;24.73;-33
 11;Fish - Halibut, Cold Smoked;gr7;2.54;17
 63;Flavouring - Orange;gr4;3.98;20
 83;Flour - Masa De Harina Mexican;gr5;9.68;6
@@ -46,7 +46,7 @@
 5;Milk - 2%;gr6;13.55;2
 51;Muffin - Bran Ind Wrpd;gr3;6.54;8
 58;Muffin Batt - Blueberry Passion;gr5;2.37;6
-14;Nantucket Cranberry Juice;gr6;14.69;6
+14;Nantucket Cranberry Juice;gr6;14.69;5
 47;Napkin White;gr3;20.98;16
 79;Nut - Cashews, Whole, Raw;gr7;0.98;4
 49;Oil - Canola;gr1;23.14;20
@@ -66,7 +66,7 @@
 64;Pork - Chop, Frenched;gr9;20.3;5
 18;Potatoes - Fingerling 4 Oz;gr3;16.17;15
 86;Potatoes - Idaho 80 Count;gr8;20.39;1
-9;Propel Sport Drink;gr2;0.95;7
+9;Propel Sport Drink;gr2;0.95;6
 74;Puree - Mango;gr1;9.29;19
 23;Quiche Assorted;gr9;6.93;9
 27;Rum - Spiced, Captain Morgan;gr9;7.41;5
@@ -75,7 +75,7 @@
 52;Sauce - Demi Glace;gr1;1.08;3
 65;Scallops 60/80 Iqf;gr3;10.56;2
 73;Shortbread - Cookie Crumbs;gr1;14.47;17
-8;Shrimp - Baby, Cold Water;gr1;4.62;-29
+8;Shrimp - Baby, Cold Water;gr1;4.62;-30
 88;Snapple - Mango Maddness;gr2;5.32;4
 22;Soap - Pine Sol Floor Cleaner;gr8;9.13;2
 62;Soup - Campbells, Creamy;gr8;15.53;6
@@ -96,5 +96,5 @@
 81;Wine - Lou Black Shiraz;gr9;20.76;4
 92;Wine - Niagara,vqa Reisling;gr2;20.36;2
 94;Wine - Redchard Merritt;gr9;17.53;13
-89;Wine - Saint Emilion Calvet;gr5;12.93;20
+89;Wine - Saint Emilion Calvet;gr5;12.93;19
 24;Wooden Mop Handle;gr1;13.06;7

@@ -53,7 +53,6 @@ public class ProductOverviewPane extends TableView implements KassaObserver {
     @Override
     public void update(Object o) {
         ArrayList<Artikel> artikels = (ArrayList<Artikel>) o;
-        table.getItems().clear();
         table.setItems(FXCollections.observableList(artikels));
         table.refresh();
     }

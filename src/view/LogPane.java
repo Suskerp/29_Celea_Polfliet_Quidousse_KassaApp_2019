@@ -87,7 +87,7 @@ public class LogPane implements KassaObserver {
 
 
         TableColumn<Map.Entry<Verkoop, String>, String> column4 = new TableColumn<>("Te betalen bedrag");
-        column4.setCellValueFactory(cd -> Bindings.createStringBinding(() -> String.format("%.2f",cd.getValue().getKey().getFinalSum())));
+        column4.setCellValueFactory(cd -> Bindings.createStringBinding(() -> String.format("%.2f",cd.getValue().getKey().getVerkoopState().finalSum())));
         column4.setMinWidth(187.5);
 
 

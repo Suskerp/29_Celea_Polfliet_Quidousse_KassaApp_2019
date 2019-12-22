@@ -30,6 +30,6 @@ public class Bill implements BillPrinter {
        }
 
        System.out.println(string);
-       System.out.println("Betaald (inclusief korting) : " + String.format("%.2f", verkoop.getFinalSum()) + " Euro\n");
+       System.out.println("Betaald (inclusief korting) : " + String.format("%.2f", verkoop.getVerkoopState().finalSum()) + " Euro\n");
    }
 }
