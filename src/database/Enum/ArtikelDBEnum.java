@@ -17,7 +17,7 @@ public enum ArtikelDBEnum {
 
     ArtikelDBEnum(String omschrijving, String klassenaam) {
         this.omschrijving = omschrijving;
-        Klassenaam = klassenaam;
+        this.Klassenaam = klassenaam;
     }
 
     public static List<String> valuesToString(){

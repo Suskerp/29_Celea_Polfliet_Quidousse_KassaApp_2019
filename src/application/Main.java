@@ -9,7 +9,7 @@ import view.KlantView;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		KassaController kassaController = new KassaController();
+		new KassaController();
 	}
 	
 	public static void main(String[] args) {

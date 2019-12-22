@@ -26,25 +26,21 @@ public class KassaController implements KassaObservable {
     private ArrayList<KassaObserver> observersInventories;
     private ArrayList<KassaObserver> observersLog;
 
-
-
     public KassaController() {
 
-        verkopen = new ArrayList<>();
+        this.verkopen = new ArrayList<>();
+        this.verkopen.add(new Verkoop());
 
-        verkopen.add(new Verkoop());
-        huidigeVerkoop = 0;
+        this.huidigeVerkoop = 0;
 
+        this.productOverviewPane = new ProductOverviewPane(this);
+        this.logPane = new LogPane();
+        this.kassaView = new KassaView(this);
+        this.klantView = new KlantView();
 
-
-        productOverviewPane = new ProductOverviewPane(this);
-        logPane = new LogPane();
-        kassaView = new KassaView(this);
-        klantView = new KlantView();
-
-        observersKlant = new ArrayList<>();
-        observersInventories = new ArrayList<>();
-        observersLog = new ArrayList<>();
+        this.observersKlant = new ArrayList<>();
+        this.observersInventories = new ArrayList<>();
+        this.observersLog = new ArrayList<>();
 
         registerObserverKlant(klantView);
         registerObserverInventory(productOverviewPane);
@@ -95,8 +91,8 @@ public class KassaController implements KassaObservable {
 
     private void holdCheck() {
         int holdIndex = getHoldIndex();
-        int huidigeIndex = verkopen.size()-1;
         if (holdIndex >= 0) {
+            int huidigeIndex = verkopen.size()-1;
             if (huidigeIndex - holdIndex >= 3) {
                 verkopen.get(holdIndex).annuleren();
                 verkopen.add(new Verkoop());
@@ -115,7 +111,6 @@ public class KassaController implements KassaObservable {
             getHuidigeVerkoop().afsluiten();
         }
     }
-
 
     public ArrayList<Artikel> getScannedItems(){
         return getHuidigeVerkoop().getScannedItems();
@@ -141,7 +136,6 @@ public class KassaController implements KassaObservable {
         }
     }
 
-
     public Double getSum(){
         return getHuidigeVerkoop().getSum();
     }
@@ -153,7 +147,6 @@ public class KassaController implements KassaObservable {
     public double getFinalSum(){
         return getHuidigeVerkoop().getFinalSum();
     }
-
 
     @Override
     public void registerObserverInventory(KassaObserver e) {
@@ -198,7 +191,6 @@ public class KassaController implements KassaObservable {
     public void removeObserverLog(KassaObserver e) {
         observersLog.remove(e);
     }
-
 
     @Override
     public void notifyObserversLog() {
