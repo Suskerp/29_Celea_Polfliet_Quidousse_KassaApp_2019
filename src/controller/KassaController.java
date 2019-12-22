@@ -16,10 +16,7 @@ import java.util.ArrayList;
 
 public class KassaController implements KassaObservable {
 
-    private KlantView klantView;
-    private KassaView kassaView;
-    private ProductOverviewPane productOverviewPane;
-    private LogPane logPane;
+
     private ArrayList<Verkoop> verkopen;
     private int huidigeVerkoop;
     private ArrayList<KassaObserver> observersKlant;
@@ -27,24 +24,16 @@ public class KassaController implements KassaObservable {
     private ArrayList<KassaObserver> observersLog;
 
     public KassaController() {
-
         this.verkopen = new ArrayList<>();
         this.verkopen.add(new Verkoop());
 
         this.huidigeVerkoop = 0;
 
-        this.productOverviewPane = new ProductOverviewPane(this);
-        this.logPane = new LogPane();
-        this.kassaView = new KassaView(this);
-        this.klantView = new KlantView();
-
         this.observersKlant = new ArrayList<>();
         this.observersInventories = new ArrayList<>();
         this.observersLog = new ArrayList<>();
 
-        registerObserverKlant(klantView);
-        registerObserverInventory(productOverviewPane);
-        registerObserverLog(logPane);
+        notifyObserversInventory();
     }
 
     private Verkoop getHuidigeVerkoop(){
@@ -59,8 +48,7 @@ public class KassaController implements KassaObservable {
     }
     public void scanItem(String id){
         try {
-            getHuidigeVerkoop().setCurrentScannedItem(id);
-            getHuidigeVerkoop().getVerkoopState().scan();
+            getHuidigeVerkoop().getVerkoopState().scanItem(id);
             notifyObserversKlant();
         }catch (StateException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
@@ -72,6 +60,7 @@ public class KassaController implements KassaObservable {
         getHuidigeVerkoop().getVerkoopState().verwijder(id);
         notifyObserversKlant();
     }
+
     public void annuleren(){
         if(getHuidigeVerkoop().getScannedItems().size()!=0) {
             getHuidigeVerkoop().getVerkoopState().annuleer();
@@ -79,6 +68,7 @@ public class KassaController implements KassaObservable {
             notifyObserversKlant();
         }
     }
+
     public void betalen(){
         if(getHuidigeVerkoop().getScannedItems().size()!=0) {
                 PropertiesLoadWrite.getInstance().readBill().print(getHuidigeVerkoop());
@@ -107,6 +97,7 @@ public class KassaController implements KassaObservable {
             huidigeVerkoop = verkopen.size()-1;
         }
     }
+
     public void afsluiten(){
         if(getHuidigeVerkoop().getScannedItems().size()!=0) {
             getHuidigeVerkoop().getVerkoopState().afgesloten();
@@ -200,11 +191,4 @@ public class KassaController implements KassaObservable {
         }
     }
 
-    public ProductOverviewPane getProductOverviewPane() {
-        return productOverviewPane;
-    }
-
-    public LogPane getLogPane() {
-        return logPane;
-    }
 }

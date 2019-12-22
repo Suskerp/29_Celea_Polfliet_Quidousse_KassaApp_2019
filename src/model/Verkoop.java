@@ -20,7 +20,6 @@ public class Verkoop {
     private LinkedHashMap<Artikel,Integer> klantMap;
     private ArtikelDBStrategy artikelDBStrategy;
     private KortingStrategy kortingStrategy;
-    private String currentScannedItem;
 
     public Verkoop() {
 
@@ -33,23 +32,13 @@ public class Verkoop {
 
     }
 
-    public String getCurrentScannedItem() {
-        return currentScannedItem;
-    }
-
-    public void setCurrentScannedItem(String currentScannedItem) {
-        this.currentScannedItem = currentScannedItem;
-    }
-
     public void setVerkoopState(VerkoopState verkoopState){
         this.verkoopState = verkoopState;
     }
 
-
     public VerkoopState getVerkoopState(){
         return this.verkoopState;
     }
-
 
     public ArrayList<Artikel> getArtikels() {
         return artikels;
@@ -64,7 +53,6 @@ public class Verkoop {
         out.addAll(scannedItems);
         return out;
     }
-
 
     public LinkedHashMap<Artikel,Integer> getMapOfScannedItems(){
         for (Artikel artikel:scannedItems){
@@ -93,7 +81,6 @@ public class Verkoop {
 
         return total;
     }
-
 
     public ArtikelDBStrategy getArtikelDBStrategy() {
         return artikelDBStrategy;

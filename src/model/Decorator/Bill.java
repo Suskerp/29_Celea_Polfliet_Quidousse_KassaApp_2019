@@ -13,9 +13,6 @@ import java.util.Map;
  */
 
 public class Bill implements BillPrinter {
-
-
-
    public void print(Verkoop verkoop){
        String string = "";
 

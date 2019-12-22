@@ -17,7 +17,7 @@ public class ProductOverviewPane extends TableView implements KassaObserver {
     private TableView<Artikel> table = new TableView<>();
 
 
-    public ProductOverviewPane(KassaController kassaController) {
+    public ProductOverviewPane() {
         TableColumn<Artikel,String> colCode = new TableColumn<>("Code");
         colCode.setCellValueFactory(new PropertyValueFactory<>("Code") );
         colCode.setMinWidth(50);
@@ -38,13 +38,9 @@ public class ProductOverviewPane extends TableView implements KassaObserver {
         colStock.setCellValueFactory(new PropertyValueFactory<>("Stock") );
         colStock.setMinWidth(50);
 
-        table.setItems(FXCollections.observableList(kassaController.getArtikels()));
 
         table.getColumns().addAll(colCode,colNaam,colOmschrijving,colVerkoopprijs,colStock);
     }
-
-
-
 
     public TableView<Artikel> getLayout() {
         return table;

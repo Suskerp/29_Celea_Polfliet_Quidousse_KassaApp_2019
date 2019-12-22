@@ -12,14 +12,14 @@ import controller.KassaController;
 public class KassaView {
 	private Stage stage = new Stage();		
 		
-	public KassaView(KassaController kassaController){
+	public KassaView(KassaController kassaController,ProductOverviewPane productOverviewPane,LogPane logPane){
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);		
 		stage.setX(20);
 		stage.setY(20);
 		Group root = new Group();
 		Scene scene = new Scene(root, 750, 500);
-		BorderPane borderPane = new KassaMainPane(kassaController);
+		BorderPane borderPane = new KassaMainPane(kassaController,productOverviewPane,logPane);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);

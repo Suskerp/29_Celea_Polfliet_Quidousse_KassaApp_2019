@@ -13,7 +13,7 @@ public enum BillEnum {
 
     FOOTER_GENERAL("General footer","model.Decorator.FooterGeneral"),
     FOOTER_KORTING("Excl Korting footer","model.Decorator.FooterExclKorting"),
-   FOOTER_BTW("Btw footer","model.Decorator.FooterExlBTW"),
+    FOOTER_BTW("Btw footer","model.Decorator.FooterExlBTW"),
     HEADER_DATETIME("Header date time","model.Decorator.HeaderDateTime"),
     HEADER_GENERAL("Header general","model.Decorator.HeaderGeneral");
 

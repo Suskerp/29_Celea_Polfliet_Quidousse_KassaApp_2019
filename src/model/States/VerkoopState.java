@@ -17,4 +17,5 @@ public interface VerkoopState {
     default double korting(){throw new StateException("Onmogelijk om momenteel de korting te berekenen");}
     default double finalSum(){throw new StateException("Onmogelijk om de eindsom momenteel te berekenen");}
     default void save(){throw new StateException("Onmogelijk om de artikelen op te slaan");}
+    default void scanItem(String id){throw new StateException("Onmogelijk om nu nog items te scannen");}
 }

@@ -10,19 +10,6 @@ public class InScan implements VerkoopState {
     public InScan(Verkoop newVerkoop){ verkoop = newVerkoop;}
 
     @Override
-    public void scan(){
-        boolean found = false;
-        for (Artikel artikel : verkoop.getArtikels()) {
-            if (artikel.getCode().equalsIgnoreCase(verkoop.getCurrentScannedItem())) {
-                verkoop.addToScannedItems(artikel);
-                found = true;
-                break;
-            }
-        }
-        if (!found) throw new DatabaseException("This item id doesn't exist");
-    }
-
-    @Override
     public void hold(){
         verkoop.setArtikels();
         verkoop.setVerkoopState(new InHold(verkoop));
@@ -52,4 +39,16 @@ public class InScan implements VerkoopState {
         }
     }
 
+    @Override
+    public void scanItem(String id) {
+        boolean found = false;
+        for (Artikel artikel : verkoop.getArtikels()) {
+            if (artikel.getCode().equalsIgnoreCase(id)) {
+                verkoop.addToScannedItems(artikel);
+                found = true;
+                break;
+            }
+        }
+        if (!found) throw new DatabaseException("This item id doesn't exist");
+    }
 }
