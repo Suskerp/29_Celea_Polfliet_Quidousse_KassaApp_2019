@@ -208,13 +208,18 @@ public class KassaPane{
     private void hold(){
         int reply = JOptionPane.showConfirmDialog(null, "Weet u zeker dat u dit item op hold wilt zetten?", "Annuleren", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            kassaController.placeOnHold();
-            table.getItems().clear();
-            table.refresh();
-            getSum();
-            kortingLabel.setText("");
-            finalSumLabel.setText("");
-            betaal.setDisable(true);
+            try {
+                kassaController.placeOnHold();
+                table.getItems().clear();
+                table.refresh();
+                getSum();
+                kortingLabel.setText("");
+                finalSumLabel.setText("");
+                betaal.setDisable(true);
+            }catch (StateException e){
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

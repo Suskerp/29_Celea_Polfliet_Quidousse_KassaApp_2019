@@ -1,10 +1,10 @@
-1;Energy Drink - Redbull 355ml;gr4;24.73;0
+1;Energy Drink - Redbull 355ml;gr4;24.73;-1
 2;Cheese - Brie,danish;gr8;7.13;-5
 3;Dried Peach;gr8;15.56;14
-4;Carrots - Mini, Stem On;gr0;14.75;12
+4;Carrots - Mini, Stem On;gr0;14.75;11
 5;Milk - 2%;gr6;13.55;2
 6;Persimmons;gr9;21.28;0
-7;Basil - Pesto Sauce;gr8;13.89;-7
+7;Basil - Pesto Sauce;gr8;13.89;-8
 8;Shrimp - Baby, Cold Water;gr1;4.62;0
 9;Propel Sport Drink;gr2;0.95;3
 10;Sage - Fresh;gr2;20.59;4
@@ -39,7 +39,7 @@
 39;Apple - Northern Spy;gr9;8.99;0
 40;Hipnotiq Liquor;gr1;21.47;5
 41;Cup - 8oz Coffee Perforated;gr3;2.7;18
-42;Appetizer - Tarragon Chicken;gr0;15.36;-1
+42;Appetizer - Tarragon Chicken;gr0;15.36;-2
 43;Pastry - Choclate Baked;gr2;1.45;19
 44;Lamb Shoulder Boneless Nz;gr3;7.13;4
 45;Beef Wellington;gr4;22.37;18
