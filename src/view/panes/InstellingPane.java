@@ -64,7 +64,7 @@ public class InstellingPane extends GridPane {
 
         ObservableList<String> kortingDBContexts = FXCollections.observableList(KortingEnum.valuesToString());
         kortingComboBox = new ComboBox();
-        kortingComboBox.setValue("Selecteer");
+        kortingComboBox.setValue("Geen korting");
         kortingDBContexts.add("Geen korting");
         kortingComboBox.setItems(kortingDBContexts);
 
@@ -157,7 +157,6 @@ public class InstellingPane extends GridPane {
         try {
             String dbContextSelection = dbContextComboBox.getSelectionModel().getSelectedItem().toString();
             String kortingSelection = kortingComboBox.getSelectionModel().getSelectedItem().toString();
-            Double p = Double.parseDouble(procent.getText());
             String extraVar = "";
 
             if (gridPane.getChildren().contains(extraVariable) && !extraVariable.getText().trim().isEmpty()) {
@@ -177,7 +176,12 @@ public class InstellingPane extends GridPane {
                 PropertiesLoadWrite.getInstance().writeDBContext(dbContextSelection);
             }
 
-            PropertiesLoadWrite.getInstance().writeKorting(kortingSelection,p+"",extraVar);
+            if (!kortingSelection.equalsIgnoreCase("geen korting")) {
+                Double p = Double.parseDouble(procent.getText());
+                PropertiesLoadWrite.getInstance().writeKorting(kortingSelection, p + "", extraVar);
+            }else{
+                PropertiesLoadWrite.getInstance().writeKorting("", 0 + "", "");
+            }
 
             PropertiesLoadWrite.getInstance().writeBillProperties(headerGeneral.isSelected(),(headerGeneral.isSelected()? headerGeneralValue.getText(): ""),headerDateTime.isSelected(),footerExclKorting.isSelected(),footerExclBTW.isSelected(),footerGeneral.isSelected());
 

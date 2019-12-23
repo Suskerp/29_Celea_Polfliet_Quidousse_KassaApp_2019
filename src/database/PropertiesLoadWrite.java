@@ -134,9 +134,8 @@ public class PropertiesLoadWrite {
     }
 
     public void writeKorting(String korting,String percentage,String extra){
-
             properties.setProperty("Korting",korting);
-            properties.setProperty("Percentage",percentage+"");
+            properties.setProperty("Percentage",percentage);
             properties.setProperty("KortingVar",extra);
     }
 
