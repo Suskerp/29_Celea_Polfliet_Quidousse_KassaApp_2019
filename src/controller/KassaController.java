@@ -17,8 +17,6 @@ import java.util.HashMap;
  */
 
 public class KassaController implements KassaObservable {
-
-
     private ArrayList<Verkoop> verkopen;
     private int huidigeVerkoop;
     private ArrayList<KassaObserver> observersKlant;
@@ -44,11 +42,11 @@ public class KassaController implements KassaObservable {
         return getHuidigeVerkoop().getVerkoopState();
     }
     public double getKorting(){
-        return getHuidigeVerkoop().getVerkoopState().korting();
+        return getHuidigeVerkoop().korting();
     }
     public void scanItem(int id){
         try {
-            getHuidigeVerkoop().getVerkoopState().scanItem(id);
+            getHuidigeVerkoop().scanItem(id);
             notifyObserversKlant();
         }catch (StateException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
@@ -57,13 +55,13 @@ public class KassaController implements KassaObservable {
     }
 
     public void verwijder(int id){
-        getHuidigeVerkoop().getVerkoopState().verwijder(id);
+        getHuidigeVerkoop().verwijder(id);
         notifyObserversKlant();
     }
 
     public void annuleren(){
         if(getHuidigeVerkoop().getScannedItems().size()!=0) {
-            getHuidigeVerkoop().getVerkoopState().annuleer();
+            getHuidigeVerkoop().annuleer();
             holdCheck();
             notifyObserversKlant();
         }
@@ -72,7 +70,7 @@ public class KassaController implements KassaObservable {
     public void betalen(){
         if(getHuidigeVerkoop().getScannedItems().size()!=0) {
                 PropertiesLoadWrite.getInstance().readBill().print(getHuidigeVerkoop());
-                getHuidigeVerkoop().getVerkoopState().betaald();
+                getHuidigeVerkoop().betaald();
                 notifyObserversInventory();
                 notifyObserversLog();
                 holdCheck();
@@ -85,11 +83,11 @@ public class KassaController implements KassaObservable {
         if (holdIndex >= 0) {
             int huidigeIndex = verkopen.size()-1;
             if (huidigeIndex - holdIndex >= 3) {
-                verkopen.get(holdIndex).getVerkoopState().annuleer();
+                verkopen.get(holdIndex).annuleer();
                 verkopen.add(new Verkoop());
                 huidigeVerkoop = verkopen.size()-1;
             } else {
-                verkopen.get(holdIndex).getVerkoopState().scan();
+                verkopen.get(holdIndex).scan();
                 huidigeVerkoop = holdIndex;
             }
         } else {
@@ -100,7 +98,7 @@ public class KassaController implements KassaObservable {
 
     public void afsluiten(){
         if(getHuidigeVerkoop().getScannedItems().size()!=0) {
-            getHuidigeVerkoop().getVerkoopState().afgesloten();
+            getHuidigeVerkoop().afgesloten();
         }
     }
 
@@ -120,7 +118,7 @@ public class KassaController implements KassaObservable {
     public void placeOnHold(){
         if(getHuidigeVerkoop().getScannedItems().size()!=0) {
             if (getHoldIndex() < 0) {
-                getHuidigeVerkoop().getVerkoopState().hold();
+                getHuidigeVerkoop().hold();
                 verkopen.add(new Verkoop());
                 huidigeVerkoop = verkopen.size() - 1;
                 notifyObserversKlant();
@@ -137,7 +135,7 @@ public class KassaController implements KassaObservable {
     }
 
     public double getFinalSum(){
-        return getHuidigeVerkoop().getVerkoopState().finalSum();
+        return getHuidigeVerkoop().finalSum();
     }
 
     @Override

@@ -32,12 +32,43 @@ public class Verkoop {
 
     }
 
-    public void setVerkoopState(VerkoopState verkoopState){
+    public void setVerkoopState(VerkoopState verkoopState) {
         this.verkoopState = verkoopState;
     }
 
-    public VerkoopState getVerkoopState(){
-        return this.verkoopState;
+    public VerkoopState getVerkoopState() {
+        return verkoopState;
+    }
+
+    public void scan(){
+        verkoopState.scan();
+    }
+    public void betaald(){
+        verkoopState.betaald();
+    }
+    public void afgesloten(){
+        verkoopState.afgesloten();
+    }
+    public void annuleer(){
+        verkoopState.annuleer();
+    }
+    public void hold(){
+        verkoopState.hold();
+    }
+    public void verwijder(int id){
+        verkoopState.verwijder(id);
+    }
+    public double korting(){
+        return verkoopState.korting();
+    }
+    public double finalSum(){
+        return verkoopState.finalSum();
+    }
+    public void save(){
+        verkoopState.save();
+    }
+    public void scanItem(int id){
+        verkoopState.scanItem(id);
     }
 
     public HashMap<Integer, Artikel> getArtikels() {

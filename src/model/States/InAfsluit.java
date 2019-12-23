@@ -17,7 +17,7 @@ public class InAfsluit implements VerkoopState {
     @Override
     public void betaald() {
         verkoop.setVerkoopState(new InBetaal(verkoop));
-        verkoop.getVerkoopState().save();
+        verkoop.save();
     }
 
     @Override
