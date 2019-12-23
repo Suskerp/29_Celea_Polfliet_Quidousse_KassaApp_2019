@@ -168,6 +168,7 @@ public class InstellingPane extends GridPane {
                 }
             }
 
+            if (dbContextSelection.equalsIgnoreCase("selecteer")) throw new IllegalArgumentException("Gelieve een database selectie te maken");
 
             if (gridPane.getChildren().contains(dbInMemoryComboBox)) {
                 String dbInMemorySelection = dbInMemoryComboBox.getSelectionModel().getSelectedItem().toString();
@@ -186,14 +187,14 @@ public class InstellingPane extends GridPane {
             PropertiesLoadWrite.getInstance().writeBillProperties(headerGeneral.isSelected(),(headerGeneral.isSelected()? headerGeneralValue.getText(): ""),headerDateTime.isSelected(),footerExclKorting.isSelected(),footerExclBTW.isSelected(),footerGeneral.isSelected());
 
 
-        }catch (DatabaseException e){
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e){
             JOptionPane.showMessageDialog(null, "Please fill out each menu/field",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }catch (NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Please fill percentage field with a number",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (DatabaseException | IllegalArgumentException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
