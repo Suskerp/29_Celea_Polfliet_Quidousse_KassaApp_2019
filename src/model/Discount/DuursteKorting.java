@@ -25,7 +25,7 @@ public class DuursteKorting implements KortingStrategy {
     public double getKorting(ArrayList<Artikel> artikels) {
         double r = procent/100;
 
-        Artikel a = new Artikel("r", "r", "r", 0.0, 0);
+        Artikel a = artikels.get(0);
         for (Artikel b : artikels){
             if (b.getVerkoopprijs() > a.getVerkoopprijs()){
                 a = b;

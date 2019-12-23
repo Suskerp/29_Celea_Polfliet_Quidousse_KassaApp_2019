@@ -4,6 +4,7 @@ import database.Strategy.ArtikelDBStrategy;
 import model.Artikel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Rafael Polfliet
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class ArtikelDBMySQL implements ArtikelDBStrategy {
 
     @Override
-    public ArrayList<Artikel> load() {
+    public HashMap<Integer,Artikel> load() {
         return null;
     }
 

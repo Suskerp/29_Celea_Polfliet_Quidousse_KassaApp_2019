@@ -1,10 +1,12 @@
 package database;
 
 import model.Artikel;
+import model.SortByName;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
 /**
  * @author Luca Celea
@@ -18,21 +20,16 @@ public class ArtikelTekstLoadSave extends TekstLoadSaveTemplate {
         this.file = new File(fileNaam);
     }
 
-    public File getFile() {
-        return file;
-    }
-
-
     @Override
-    public ArrayList<Artikel> load() {
+    public HashMap<Integer,Artikel> load(){
         try {
-            ArrayList<Artikel> artikels = new ArrayList<>();
+            HashMap<Integer,Artikel> artikels = new HashMap<>();
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 tekst = scanner.nextLine().split(";");
-                artikels.add(new Artikel(tekst[0], tekst[1], tekst[2], Double.parseDouble(tekst[3]), Integer.parseInt(tekst[4])));
+                Artikel artikel = new Artikel(Integer.parseInt(tekst[0]), tekst[1], tekst[2], Double.parseDouble(tekst[3]), Integer.parseInt(tekst[4]));
+                artikels.put(artikel.getCode(),artikel);
             }
-            Collections.sort(artikels);
             return artikels;
         }catch (FileNotFoundException e){
             throw new DatabaseException(e);

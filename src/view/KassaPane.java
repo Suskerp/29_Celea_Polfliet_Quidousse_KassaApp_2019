@@ -119,7 +119,7 @@ public class KassaPane{
     private void scan(){
         try {
             if (searchText.getText() != null) {
-                kassaController.scanItem(searchText.getText());
+                kassaController.scanItem(Integer.parseInt(searchText.getText()));
                 table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
                 getSum();
                 searchText.clear();
@@ -132,7 +132,7 @@ public class KassaPane{
 
     private void remove(){
         if (!remove.getText().trim().isEmpty()) {
-            kassaController.verwijder(remove.getText());
+            kassaController.verwijder(Integer.parseInt(remove.getText()));
             table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
             remove.clear();
             table.refresh();

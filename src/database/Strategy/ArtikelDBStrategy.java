@@ -3,11 +3,13 @@ package database.Strategy;
 import model.Artikel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * @author Rafael Polfliet
  */
 
 public interface ArtikelDBStrategy {
-    ArrayList<Artikel> load();
+    HashMap<Integer,Artikel> load();
     void save(ArrayList<Object> artikels);
 }

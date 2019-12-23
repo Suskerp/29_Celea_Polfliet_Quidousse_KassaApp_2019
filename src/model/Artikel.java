@@ -7,14 +7,14 @@ import java.util.Objects;
 /**
  * @author Luca Celea
  */
-public class Artikel implements Comparable<Artikel>{
-    private String code;
+public class Artikel{
+    private int code;
     private String naam;
     private String omschrijving;
     private Double verkoopprijs;
     private int stock;
 
-    public Artikel(String code,String naam, String omschrijving, Double verkoopprijs, int stock) {
+    public Artikel(int code,String naam, String omschrijving, Double verkoopprijs, int stock) {
         setCode(code);
         setNaam(naam);
         setOmschrijving(omschrijving);
@@ -22,12 +22,12 @@ public class Artikel implements Comparable<Artikel>{
         setStock(stock);
     }
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        if (code != null && !code.trim().isEmpty()) {
+    public void setCode(Integer code) {
+        if (code != null) {
             this.code = code;
         } else throw new DatabaseException("Ogeldige code");
     }
@@ -75,11 +75,6 @@ public class Artikel implements Comparable<Artikel>{
         return this.getCode() + ";" + this.getNaam() + ";" + this.getOmschrijving() + ";" + this.getVerkoopprijs() + ";" + this.getStock();
     }
 
-    @Override
-    public int compareTo(Artikel o) {
-        return this.getNaam().compareTo(o.getNaam());
-    }
-
     public void verkoop(int aantal){
         this.stock = this.stock-aantal;
     }
@@ -89,7 +84,7 @@ public class Artikel implements Comparable<Artikel>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artikel artikel = (Artikel) o;
-        return code.equals(artikel.code);
+        return code == artikel.code;
     }
 
     @Override

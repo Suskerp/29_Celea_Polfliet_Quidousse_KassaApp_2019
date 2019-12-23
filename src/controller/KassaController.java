@@ -2,6 +2,7 @@ package controller;
 
 import database.PropertiesLoadWrite;
 import model.Artikel;
+import model.SortByName;
 import model.States.*;
 import model.Verkoop;
 import view.*;
@@ -9,6 +10,7 @@ import view.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Rafael Polfliet
@@ -44,7 +46,7 @@ public class KassaController implements KassaObservable {
     public double getKorting(){
         return getHuidigeVerkoop().getKorting();
     }
-    public void scanItem(String id){
+    public void scanItem(int id){
         try {
             getHuidigeVerkoop().getVerkoopState().scanItem(id);
             notifyObserversKlant();
@@ -54,7 +56,7 @@ public class KassaController implements KassaObservable {
         }
     }
 
-    public void verwijder(String id){
+    public void verwijder(int id){
         getHuidigeVerkoop().getVerkoopState().verwijder(id);
         notifyObserversKlant();
     }
@@ -130,7 +132,7 @@ public class KassaController implements KassaObservable {
         return getHuidigeVerkoop().getSum();
     }
 
-    public ArrayList<Artikel> getArtikels(){
+    public HashMap<Integer, Artikel> getArtikels(){
        return getHuidigeVerkoop().getArtikels();
     }
 
@@ -151,8 +153,10 @@ public class KassaController implements KassaObservable {
 
     @Override
     public void notifyObserversInventory() {
+        ArrayList<Artikel> artikels = new ArrayList<>(getHuidigeVerkoop().getArtikels().values());
+        artikels.sort(new SortByName());
         for (KassaObserver kassaObserver :observersInventories){
-            kassaObserver.update(getHuidigeVerkoop().getArtikels());
+            kassaObserver.update(artikels);
         }
     }
 

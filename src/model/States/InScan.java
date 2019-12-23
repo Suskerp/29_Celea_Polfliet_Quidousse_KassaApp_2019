@@ -26,10 +26,10 @@ public class InScan implements VerkoopState {
     }
 
     @Override
-    public void verwijder(String id) {
+    public void verwijder(int id) {
         Artikel artikelTBRemoved = null;
         for (Artikel artikel : verkoop.getScannedItems()) {
-            if (artikel.getCode().equalsIgnoreCase(id)) {
+            if (artikel.getCode() == id) {
                 artikelTBRemoved = artikel;
                 break;
             }
@@ -40,15 +40,12 @@ public class InScan implements VerkoopState {
     }
 
     @Override
-    public void scanItem(String id) {
-        boolean found = false;
-        for (Artikel artikel : verkoop.getArtikels()) {
-            if (artikel.getCode().equalsIgnoreCase(id)) {
-                verkoop.addToScannedItems(artikel);
-                found = true;
-                break;
-            }
+    public void scanItem(int id) {
+        Artikel artikel = verkoop.getArtikels().get(id);
+        if (artikel != null){
+            verkoop.addToScannedItems(artikel);
+        }else{
+            throw new DatabaseException("Id not found");
         }
-        if (!found) throw new DatabaseException("This item id doesn't exist");
     }
 }

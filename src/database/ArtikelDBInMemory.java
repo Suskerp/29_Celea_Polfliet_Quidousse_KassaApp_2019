@@ -5,6 +5,7 @@ import database.Strategy.LoadSaveStrategy;
 import model.Artikel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Rafael Polfliet
@@ -23,7 +24,7 @@ public class ArtikelDBInMemory implements ArtikelDBStrategy {
 
 
     @Override
-    public ArrayList<Artikel> load() {
+    public HashMap<Integer, Artikel> load() {
         return loadSaveStrategy.load();
     }
 

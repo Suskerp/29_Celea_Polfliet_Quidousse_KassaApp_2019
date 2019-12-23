@@ -15,7 +15,7 @@ import java.util.*;
 
 public class Verkoop {
     private VerkoopState verkoopState;
-    private ArrayList<Artikel> artikels;
+    private HashMap<Integer,Artikel> artikels;
     private ArrayList<Artikel> scannedItems;
     private LinkedHashMap<Artikel,Integer> klantMap;
     private ArtikelDBStrategy artikelDBStrategy;
@@ -40,7 +40,7 @@ public class Verkoop {
         return this.verkoopState;
     }
 
-    public ArrayList<Artikel> getArtikels() {
+    public HashMap<Integer, Artikel> getArtikels() {
         return artikels;
     }
 

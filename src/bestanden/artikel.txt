@@ -1,8 +1,15 @@
-1;Energy Drink - Redbull 355ml;gr4;24.73;-34
+1;Energy Drink - Redbull 355ml;gr4;24.73;0
+2;Cheese - Brie,danish;gr8;7.13;-5
+3;Dried Peach;gr8;15.56;14
+4;Carrots - Mini, Stem On;gr0;14.75;12
+5;Milk - 2%;gr6;13.55;2
+6;Persimmons;gr9;21.28;0
+7;Basil - Pesto Sauce;gr8;13.89;-7
+8;Shrimp - Baby, Cold Water;gr1;4.62;0
+9;Propel Sport Drink;gr2;0.95;3
 10;Sage - Fresh;gr2;20.59;4
-100;Crab Brie In Phyllo;gr7;15.72;5
 11;Fish - Halibut, Cold Smoked;gr7;2.54;17
-12;Bacardi Mojito;gr0;9.79;16
+12;Bacardi Mojito;gr0;9.79;0
 13;Pie Pecan;gr5;1.46;1
 14;Nantucket Cranberry Juice;gr6;14.69;5
 15;Bagel - Ched Chs Presliced;gr0;23.59;2
@@ -10,9 +17,8 @@
 17;Pants Custom Dry Clean;gr0;21.05;20
 18;Potatoes - Fingerling 4 Oz;gr3;16.17;15
 19;Bread - Ciabatta Buns;gr1;6.04;3
-2;Cheese - Brie,danish;gr8;7.13;-5
 20;Veal - Eye Of Round;gr1;24.01;17
-21;Bacon Strip Precooked;gr6;1.02;17
+21;Bacon Strip Precooked;gr6;1.02;16
 22;Soap - Pine Sol Floor Cleaner;gr8;9.13;2
 23;Quiche Assorted;gr9;6.93;9
 24;Wooden Mop Handle;gr1;13.06;7
@@ -21,7 +27,6 @@
 27;Rum - Spiced, Captain Morgan;gr9;7.41;5
 28;Coffee - French Vanilla Frothy;gr3;8.57;12
 29;Pork - Caul Fat;gr1;5.19;8
-3;Dried Peach;gr8;15.56;14
 30;Cheese - Goat;gr9;2.02;16
 31;Plums - Red;gr4;10.52;10
 32;Plate Pie Foil;gr1;17.98;15
@@ -31,11 +36,10 @@
 36;Compound - Rum;gr7;17.95;9
 37;Marsala - Sperone, Fine, D.o.c.;gr9;5.38;19
 38;Soup - Campbells, Minestrone;gr1;16.91;6
-39;Apple - Northern Spy;gr9;8.99;9
-4;Carrots - Mini, Stem On;gr0;14.75;12
+39;Apple - Northern Spy;gr9;8.99;0
 40;Hipnotiq Liquor;gr1;21.47;5
 41;Cup - 8oz Coffee Perforated;gr3;2.7;18
-42;Appetizer - Tarragon Chicken;gr0;15.36;0
+42;Appetizer - Tarragon Chicken;gr0;15.36;-1
 43;Pastry - Choclate Baked;gr2;1.45;19
 44;Lamb Shoulder Boneless Nz;gr3;7.13;4
 45;Beef Wellington;gr4;22.37;18
@@ -43,7 +47,6 @@
 47;Napkin White;gr3;20.98;16
 48;Cabbage - Savoy;gr6;11.25;3
 49;Oil - Canola;gr1;23.14;20
-5;Milk - 2%;gr6;13.55;2
 50;Cookie Dough - Double;gr2;15.92;5
 51;Muffin - Bran Ind Wrpd;gr3;6.54;8
 52;Sauce - Demi Glace;gr1;1.08;3
@@ -54,7 +57,6 @@
 57;Pork - Back, Short Cut, Boneless;gr1;24.09;17
 58;Muffin Batt - Blueberry Passion;gr5;2.37;6
 59;Flower - Carnations;gr7;19.49;20
-6;Persimmons;gr9;21.28;18
 60;Spice - Paprika;gr7;15.44;8
 61;Soup Campbells Beef With Veg;gr4;24.67;2
 62;Soup - Campbells, Creamy;gr8;15.53;6
@@ -65,7 +67,6 @@
 67;Sparkling Wine - Rose, Freixenet;gr7;11.84;3
 68;Jerusalem Artichoke;gr5;20.72;3
 69;Veal - Brisket, Provimi, Bone - In;gr3;1.92;9
-7;Basil - Pesto Sauce;gr8;13.89;-7
 70;Lettuce - Green Leaf;gr2;18.71;10
 71;Salmon - Canned;gr4;13.82;10
 72;Contreau;gr0;3.2;16
@@ -74,9 +75,8 @@
 75;Garlic - Peeled;gr0;24.51;17
 76;Broom Handle;gr4;15.01;10
 77;Persimmons;gr3;16.36;12
-78;Ecolab Crystal Fusion;gr1;17.07;7
+78;Ecolab Crystal Fusion;gr1;17.07;6
 79;Nut - Cashews, Whole, Raw;gr7;0.98;4
-8;Shrimp - Baby, Cold Water;gr1;4.62;-30
 80;Pork - Bacon Cooked Slcd;gr9;6.41;19
 81;Wine - Lou Black Shiraz;gr9;20.76;4
 82;Wine - Clavet Saint Emilion;gr6;13.14;9
@@ -87,7 +87,6 @@
 87;Brandy - Orange, Mc Guiness;gr1;16.77;16
 88;Snapple - Mango Maddness;gr2;5.32;4
 89;Wine - Saint Emilion Calvet;gr5;12.93;19
-9;Propel Sport Drink;gr2;0.95;6
 90;Wine - German Riesling;gr7;13.61;1
 91;Veal - Kidney;gr8;12.22;11
 92;Wine - Niagara,vqa Reisling;gr2;20.36;2
@@ -97,4 +96,5 @@
 96;Hipnotiq Liquor;gr5;24.01;17
 97;Eggplant - Baby;gr8;22.79;7
 98;Stainless Steel Cleaner Vision;gr0;23.03;1
-99;Containter - 3oz Microwave Rect.;gr1;2.61;3
+99;Containter - 3oz Microwave Rect.;gr1;2.61;2
+100;Crab Brie In Phyllo;gr7;15.72;5

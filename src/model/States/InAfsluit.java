@@ -36,10 +36,10 @@ public class InAfsluit implements VerkoopState {
     }
 
     @Override
-    public void verwijder(String id) {
+    public void verwijder(int id) {
         Artikel artikelTBRemoved = null;
         for (Artikel artikel : verkoop.getScannedItems()) {
-            if (artikel.getCode().equalsIgnoreCase(id)) {
+            if (artikel.getCode() == id) {
                 artikelTBRemoved = artikel;
                 break;
             }

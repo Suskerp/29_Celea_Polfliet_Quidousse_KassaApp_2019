@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Luca Celea
@@ -19,7 +20,7 @@ public abstract class TekstLoadSaveTemplate implements LoadSaveStrategy {
         this.fileNaam = fileNaam;
     }
 
-    public abstract ArrayList<Artikel> load();
+    public abstract HashMap<Integer,Artikel> load();
     public void save(ArrayList<Object> objects){
         try {
             FileWriter fileWriter = new FileWriter(fileNaam);
