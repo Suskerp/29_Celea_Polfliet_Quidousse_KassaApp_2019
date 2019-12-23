@@ -18,7 +18,7 @@
 18;Potatoes - Fingerling 4 Oz;gr3;16.17;15
 19;Bread - Ciabatta Buns;gr1;6.04;3
 20;Veal - Eye Of Round;gr1;24.01;17
-21;Bacon Strip Precooked;gr6;1.02;17
+21;Bacon Strip Precooked;gr6;1.02;16
 22;Soap - Pine Sol Floor Cleaner;gr8;9.13;2
 23;Quiche Assorted;gr9;6.93;9
 24;Wooden Mop Handle;gr1;13.06;7
@@ -39,7 +39,7 @@
 39;Apple - Northern Spy;gr9;8.99;0
 40;Hipnotiq Liquor;gr1;21.47;5
 41;Cup - 8oz Coffee Perforated;gr3;2.7;18
-42;Appetizer - Tarragon Chicken;gr0;15.36;0
+42;Appetizer - Tarragon Chicken;gr0;15.36;-1
 43;Pastry - Choclate Baked;gr2;1.45;19
 44;Lamb Shoulder Boneless Nz;gr3;7.13;4
 45;Beef Wellington;gr4;22.37;18

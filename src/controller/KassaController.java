@@ -44,7 +44,7 @@ public class KassaController implements KassaObservable {
         return getHuidigeVerkoop().getVerkoopState();
     }
     public double getKorting(){
-        return getHuidigeVerkoop().getKorting();
+        return getHuidigeVerkoop().getVerkoopState().korting();
     }
     public void scanItem(int id){
         try {

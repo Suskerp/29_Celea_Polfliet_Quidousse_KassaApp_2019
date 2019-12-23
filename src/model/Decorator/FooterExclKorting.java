@@ -14,7 +14,7 @@ public class FooterExclKorting extends BillDecorator {
     @Override
     public void print(Verkoop verkoop) {
         super.print(verkoop);
-        System.out.println("Totale prijs zonder korting: " + String.format("%.2f", verkoop.getSum()) +" Euro\nTotale korting: " + String.format("%.2f", verkoop.getKorting())+" Euro\n");
+        System.out.println("Totale prijs zonder korting: " + String.format("%.2f", verkoop.getSum()) +" Euro\nTotale korting: " + String.format("%.2f", verkoop.getVerkoopState().korting())+" Euro\n");
     }
 
 }

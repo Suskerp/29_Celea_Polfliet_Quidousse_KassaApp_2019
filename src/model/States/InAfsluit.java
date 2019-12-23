@@ -27,12 +27,12 @@ public class InAfsluit implements VerkoopState {
 
     @Override
     public double korting() {
-        return verkoop.getKorting();
+        return verkoop.getKortingStrategy().getKorting(verkoop.getScannedItems());
     }
 
     @Override
     public double finalSum() {
-        return verkoop.getSum() - verkoop.getKorting();
+        return verkoop.getSum() - korting();
     }
 
     @Override

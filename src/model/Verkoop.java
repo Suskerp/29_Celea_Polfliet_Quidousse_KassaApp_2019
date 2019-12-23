@@ -61,11 +61,10 @@ public class Verkoop {
         return klantMap;
     }
 
-    public Double getKorting(){
-        if (this.verkoopState instanceof InAfsluit || this.verkoopState instanceof InBetaal) {
-            return kortingStrategy.getKorting(getScannedItems());
-        }else throw new StateException("Kan korting niet berekening terwijl er nog gescand wordt");
+    public KortingStrategy getKortingStrategy() {
+        return kortingStrategy;
     }
+
 
     public void removeFromScanned(Artikel artikel){
         scannedItems.remove(artikel);

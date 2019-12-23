@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Artikel;
-import controller.KassaController;
 
 import java.util.ArrayList;
 
