@@ -127,20 +127,28 @@ public class KassaPane{
         }catch (DatabaseException | StateException e){
             JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Gelieve een cijfer als code in te voeren",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void remove(){
-        if (!remove.getText().trim().isEmpty()) {
-            kassaController.verwijder(Integer.parseInt(remove.getText()));
-            table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
-            remove.clear();
-            table.refresh();
-            getSum();
+        try {
+            if (!remove.getText().trim().isEmpty()) {
+                kassaController.verwijder(Integer.parseInt(remove.getText()));
+                table.setItems(FXCollections.observableList(kassaController.getScannedItems()));
+                remove.clear();
+                table.refresh();
+                getSum();
 
-            if (kassaController.getHuidigeVerkoopState() instanceof InAfsluit){
-                kortingEnEindSom();
+                if (kassaController.getHuidigeVerkoopState() instanceof InAfsluit) {
+                    kortingEnEindSom();
+                }
             }
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Gelieve een cijfer als code in te voeren",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
