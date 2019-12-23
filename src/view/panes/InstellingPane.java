@@ -1,4 +1,4 @@
-package view;
+package view.panes;
 
 import database.*;
 import database.Enum.ArtikelDBEnum;

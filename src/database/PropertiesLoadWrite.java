@@ -1,6 +1,5 @@
 package database;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import database.Enum.ArtikelDBEnum;
 import database.Factory.ArtikelDBFactory;
 import database.Factory.DBInMemoryFactory;
@@ -10,11 +9,9 @@ import model.Decorator.BillFactory;
 import model.Decorator.BillPrinter;
 import model.Discount.KortingFactory;
 import model.Discount.KortingStrategy;
-import view.ProductOverviewPane;
 
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;

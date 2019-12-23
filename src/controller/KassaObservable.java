@@ -1,6 +1,6 @@
 package controller;
 
-import view.KassaObserver;
+import view.panes.KassaObserver;
 
 public interface KassaObservable {
     void registerObserverInventory(KassaObserver e);

@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Artikel;
-import model.Verkoop;
+import view.panes.KassaObserver;
 
 import java.util.*;
 

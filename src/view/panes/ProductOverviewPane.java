@@ -1,4 +1,4 @@
-package view;
+package view.panes;
 
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;

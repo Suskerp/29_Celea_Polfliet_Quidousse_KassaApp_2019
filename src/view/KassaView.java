@@ -8,11 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import controller.KassaController;
+import view.panes.KassaMainPane;
+import view.panes.LogPane;
+import view.panes.ProductOverviewPane;
 
 public class KassaView {
 	private Stage stage = new Stage();		
 		
-	public KassaView(KassaController kassaController,ProductOverviewPane productOverviewPane,LogPane logPane){
+	public KassaView(KassaController kassaController, ProductOverviewPane productOverviewPane, LogPane logPane){
 		stage.setTitle("KASSA VIEW");
 		stage.setResizable(false);		
 		stage.setX(20);

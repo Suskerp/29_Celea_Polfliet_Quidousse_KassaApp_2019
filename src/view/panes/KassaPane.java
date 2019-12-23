@@ -1,4 +1,4 @@
-package view;
+package view.panes;
 /**
  * @author Jef Quidousse
  * */

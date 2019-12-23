@@ -5,8 +5,8 @@ import javafx.stage.Stage;
 import controller.KassaController;
 import view.KassaView;
 import view.KlantView;
-import view.LogPane;
-import view.ProductOverviewPane;
+import view.panes.LogPane;
+import view.panes.ProductOverviewPane;
 
 public class Main extends Application {
 	@Override

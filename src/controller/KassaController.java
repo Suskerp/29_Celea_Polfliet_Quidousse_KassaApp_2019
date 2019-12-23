@@ -5,7 +5,7 @@ import model.Artikel;
 import model.SortByName;
 import model.States.*;
 import model.Verkoop;
-import view.*;
+import view.panes.KassaObserver;
 
 
 import javax.swing.*;
